@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Port_Folio</title>
+    <link rel="stylesheet" href="../Static/CSS/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div id="header">
+        <div class="container">
+            <nav>
+                <img src="../Static/Images/logo2.png" class="logo">
+                <ul>    
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Projects</a></li>
+                    <li><a href="#">Feedback</a></li>
+                    <li><a href="#">Contact</a></li>
+                       
+                </ul>
+            </nav>
+            <div class="header_text">
+                <h1>Hi, I'm <span>Subham</span> Pathak from India.</h1>
+                <p>A Computer Science student passionate about Frontend + Backend Development, <br> AI / ML.</p>
+               
+            </div>
+        </div>
+    </div>
+
+    <!-- ----------about----------- -->
+
+    <div id="about">
+        <div class="container2">
+            <div class="row">
+                <div class="col-1">
+                    <img src="../Static\Images\me.png">
+                </div>
+                <div class="col-2">
+                    <h1 class="subtitle">About me</h1>
+
+                    <p>Hii, My name is Subham Pathak I'm a Computer Science Engineering student driven by a deep curiosity for Artificial Intelligence and Machine Learning. <br><br> My primary focus is understanding how machines interpret data, learn patterns, and make decisions. I enjoy studying algorithms, training models, and exploring how AI can be applied to create meaningful and practical solutions. <br><br>
+                    In addition to AI/ML, I also work on frontend + backend development and enjoy building structured, logic-oriented systems that power applications. I'm committed to continuous learning, improving my coding skills, and developing projects that help me grow as an AI-focused developer..</p>
+
+                    <div class="about-skills">
+                        <p class="links skill1 active-link" onclick="opentab('skills', event)">Skills</p>
+                        <p class="links" onclick="opentab('experience', event)">Experiences</p>
+                        <p class="links" onclick="opentab('goal', event)">Goals</p> 
+                        <p class="links" onclick="opentab('Project', event)">My Projects</p> 
+                    </div>
+                    <div class="contents active-tab" id="skills">
+                        <ul>
+                            <li><span>AI/ML Student</span><br>Aspiring Machine Learning Engineer. <br></li>
+                            <li><span>Web Development</span><br>Designing Webpages.<br>
+                            </li>
+                            <li><span>Linux</span><br>Comfortable with terminals, commands, and system workflows.<br></li>
+                        </ul>
+                    </div>
+                    <div class="contents" id="experience">
+                        <ul>
+                            <li><span>ML Basics</span><br>Learning Python, ML concepts and small projects.<br></li>
+                            <li><span>Backend Development</span><br>Exploring Flask and API Building.<br>
+                            </li>
+                            <li><span>Coding Practices</span><br>Improving logic through daily coding.<br></li>
+                        </ul>
+                    </div>
+                    <div class="contents" id="goal">
+                        <ul>
+                            <li><span>AI/ML Engineer</span><br>Build real-world ML models.<br></li>
+                            <li><span>Master the ML Stack</span><br>From data preprocessing to model deployment.<br>
+                            </li>
+                            <li><span>Projects</span><br>Create impactful AI/ML projects.<br></li>
+                        </ul>
+                    </div>
+                    <div class="contents" id="Project">
+                        <ul>
+                            <li><span>Breast Cancer Prediction System</span><br><a href="">Click here.</a><br></li>
+                            <li><span>Diabetes Prediction System</span><br><a href="">Click here.</a><br></li>
+                            <li><span>Placement Prediction System</span><br><a href="">Click here.</a><br></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>    
+        </div>
+    </div>
+
+
+    <!-- ---------------skills----------------- -->
+
+    <div class="skills">
+        <div class="skill-heading">
+            <h1>My Skills</h1>
+        </div>
+        <div class="skill-list">
+            <div class="s1">
+                <i class="fa-solid fa-code"></i>
+                <h2>Programming Languages</h2>
+                <ul>
+                    <li>Python, C, JavaScript</li>
+                    <li>HTML & CSS</li>
+                    <li>SQL</li>
+                </ul>
+            </div>
+            <div class="s1">
+                <i class="fa-solid fa-crop"></i>
+                <h2>Web Development</h2>
+                <ul>
+                    <li>Frontend: HTML, CSS, JavaScript</li>
+                    <li>Backend: Flask (Beginner)</li>
+                    <li>Basic UI/UX Understanding</li>
+                </ul>
+                
+            </div>
+            <div class="s1">
+                <i class="fa-solid fa-star"></i>
+                <h2>Tools & Technologies</h2>
+                <ul>
+                    <li>Git & GitHub.</li>
+                    <li>Flask.</li>
+                    <li>Linux (Basic).</li>
+                </ul>  
+            </div>
+            
+        </div>
+    </div>
+    <div id="skill2">
+        <div class="skill-list">
+            <div class="s1">
+                <i class="fa-solid fa-code"></i>
+                <h2>Machine Learning / AI <br>(Beginner)</h2>
+                <ul>
+                    <li>Numpy.</li>
+                    <li>Pandas.</li>
+                    <li>Scikit-learn basics.</li>
+                </ul>
+            </div>
+            <div class="s1">
+                <i class="fa-solid fa-crop"></i>
+                <h2>Soft Skills</h2>
+                <ul>
+                    <li>Teamwork</li>
+                    <li>Time Management</li>
+                    <li>Quick Learner</li>
+                </ul>
+                
+            </div>
+            <div class="s1">
+                <i class="fa-solid fa-star"></i>
+                <h2>Interests & Hobbies.</h2>
+                <ul>
+                    <li>Sketching & Art</li>
+                    <li>Fitness Training.</li>
+                    <li>Gaming.</li>
+                </ul>  
+            </div>
+            
+        </div>
+    </div>
+
+
+
+<!-- --------------project------------- -->
+
+
+    <div id="project">
+        <div class="project-heading">
+            <h1>My Projects</h1>
+        </div>
+        <div class="project-list">
+            <div class="p1">
+                <img id = "image1" src="../Static/Images/image.png" alt="">
+                <div class="layer">
+                    <h3>Cancer Prediction System</h3>
+                    <p>This is a Breast Cancer Prediction System, <br> which used Random Forest Classifier to <br>predict the labels.</p>
+                    <a href=""><i class="fa-solid fa-link"></i>Click me.</a>
+                </div>
+            </div>
+            <div class="p1">
+                <img src="..\Static\Images\image copy 2.png" alt="">
+                <div class="layer">
+                    <h3>Diabetes Prediction System</h3>
+                    <p>This is a Diabetes Prediction System, <br> which used Random Forest Classifier to<br>predict the labels.</p>
+                    <a href=""><i class="fa-solid fa-link"></i>Click me.</a>
+                </div>
+            </div>
+            <div class="p1">
+                <img src="../Static\Images\image copy 3.png" alt="">
+                <div class="layer">
+                    <h3>Placements Prediction System</h3>
+                    <p>This is a Placement Prediction System, <br> which used Random Forest Classifier to<br>predict the labels.</p>
+                    <a href=""><i class="fa-solid fa-link"></i>Click me.</a>
+                </div>
+            </div>
+
+
+            <!-- <div class="p1">
+                <i class="fa-solid fa-crop"></i>
+                <h2>Diabetes Prediction</h2>
+                <p>This is a breast cancer Prediction System. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quas</p>
+                <a href="#">Click here</a>
+            </div>
+            <div class="p1">
+                <i class="fa-solid fa-star"></i>
+                <h2>Placement Prediction</h2>
+                <p>This is a breast cancer Prediction System. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quas</p>
+                <a href="#">Click here</a>
+            </div> -->
+        </div>
+    </div>
+
+
+
+    <script src="../Static/JS/script.js"></script>
+</body>
+</html>
