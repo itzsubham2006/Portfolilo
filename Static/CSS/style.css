@@ -323,11 +323,12 @@ nav ul li a:hover::after{
     transform: translateY(-15px)
 }
 
+*/
 
 
 .project-heading h1{
     font-size: 60px;
-    } */
+    } 
     
     
     
@@ -367,14 +368,37 @@ nav ul li a:hover::after{
 }
 
 .layer{
-    width: 100%;
+    width: 400px;
     height: 100%;
     background: linear-gradient(rgba(0,0,0.6), #2974ba );
-    border-radius: 10px;
+    border-radius: 15px;
     position: absolute;
     left: 0;
     bottom: 0;
     overflow: hidden;
+}
 
+#image1{
+    height: 266.48px;
+}
+
+.layer h3{
+    padding: 10px 80px;
+}
+
+.layer p{
+    padding: auto;
+    margin-left: 60px;
+    margin-bottom: 10px;
+}
+
+.layer i{
+    font-size: 12px;
+    margin-left: 20px;
+}
+
+.layer a{
+    margin-top: 20px;
+    margin-left: 150px;
 
 }
