@@ -14,3 +14,17 @@ function opentab(tabname, event){
     event.currentTarget.classList.add("active-link");
     document.getElementById(tabname).classList.add("active-tab");
 }
+
+
+var menuu = document.getElementById("menu");
+
+function openmenu(){
+    menuu.style.right = "0";
+  
+}
+
+
+function closemenu(){
+     menuu.style.right = "-200px";
+
+}

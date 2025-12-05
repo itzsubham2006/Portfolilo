@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Port_Folio</title>
+    <link rel="stylesheet" href="../Static/CSS/style2.css">
     <link rel="stylesheet" href="../Static/CSS/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
@@ -13,14 +14,15 @@
         <div class="container">
             <nav>
                 <img src="../Static/Images/logo2.png" class="logo">
-                <ul>    
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Projects</a></li>
-                    <li><a href="#">Feedback</a></li>
-                    <li><a href="#">Contact</a></li>
-                       
+                <ul id="menu">    
+                    <li><a href="#header">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#project">Projects</a></li>
+                    <li><a href="#feedback">Feedback</a></li>
+                    <li><a href="#footer">Contact</a></li>    
+                    <i class="fa-solid fa-xmark" onclick="closemenu()"></i>    
                 </ul>
+                <i class="fa-solid fa-bars" onclick="openmenu()"></i>
             </nav>
             <div class="header_text">
                 <h1>Hi, I'm <span>Subham</span> Pathak from India.</h1>
@@ -40,10 +42,10 @@
                 </div>
                 <div class="col-2">
                     <h1 class="subtitle">About me</h1>
-
+                    <div class="paragraph">
                     <p>Hii, My name is Subham Pathak I'm a Computer Science Engineering student driven by a deep curiosity for Artificial Intelligence and Machine Learning. <br><br> My primary focus is understanding how machines interpret data, learn patterns, and make decisions. I enjoy studying algorithms, training models, and exploring how AI can be applied to create meaningful and practical solutions. <br><br>
                     In addition to AI/ML, I also work on frontend + backend development and enjoy building structured, logic-oriented systems that power applications. I'm committed to continuous learning, improving my coding skills, and developing projects that help me grow as an AI-focused developer..</p>
-
+                    </div>
                     <div class="about-skills">
                         <p class="links skill1 active-link" onclick="opentab('skills', event)">Skills</p>
                         <p class="links" onclick="opentab('experience', event)">Experiences</p>
@@ -87,7 +89,7 @@
     </div>
 
 
-    <!-- ---------------skills----------------- -->
+                                                                <!-- ---------------skills----------------- -->
 
     <div class="skills">
         <div class="skill-heading">
@@ -126,7 +128,7 @@
         </div>
     </div>
     <div id="skill2">
-        <div class="skill-list">
+        <div class="skill-list list2">
             <div class="s1">
                <i class="fa-brands fa-centos"></i>
                 <h2>Machine Learning / AI <br>(Beginner)</h2>
@@ -160,46 +162,59 @@
 
 
 
-<!-- -------------------------Goals-------------------------------------->
+                                            <!-- -------------------------Goals-------------------------------------->
 
-    <div id="project">
-        <div class="project-heading">
+    <div id="goals">
+        <div class="goal-heading">
             <h1>My Goals</h1>
         </div>
-        <div class="project-list">
+        <div class="goal-list">
+
             <div class="p1">
                 <img id = "image1" src="../Static\Images\AI_tools.jpeg" alt="">
-                <div class="layer">
+                
+                <div class="layer1">
                     <h3>To master AI</h3>
                     <p>To master Artificial Intelligence and Machine Learning focusing on building strong foundations in modern AI technologies.</p>
+                    <a href="">More</a>
                 </div>
-            </div>
+            </div>   
+
             <div class="p1">
-                <img src="../Static\Images\AI.jpeg" alt="">
-                <div class="layer">
-                    <h3>Create impactful and meaningful projects</h3>
-                    <p>To create impactful projects that solve real-world problems and showcase practical innovation..</p>
+                <img id = "image1" src="../Static\Images\AI.jpeg" alt="">
+                <div class="layer1">
+                    <h3>Impactful projects</h3>
+                    <p>To create real-life impactful projects that helps millions of people by saving time in various field..</p>
+                    <a href="">More</a>
+
                 </div>
-            </div>
+            </div> 
+
             <div class="p1">
-                <img src="../Static\Images\genai.jpeg" alt="">
-                <div class="layer">
-                    <h3>Develop expertise in Generative AI,</h3>
-                    <p>To work with models that can create content, automate tasks, and enhance human creativity..</p>                    
+                <img id = "image1" src="../Static\Images\genai.jpeg" alt="">
+                <div class="layer1">
+                    <h3>To master AI</h3>
+                    <p>To master Artificial Intelligence and Machine Learning focusing on building strong foundations in modern AI technologies.</p>
+                    <a href="">More</a>
+
                 </div>
-            </div>
+            </div>   
+        
+
+            
         </div>
     </div>
 
-    <!-- ----------------------------Projects------------------- -->
 
 
+                                            <!------------------------------Projects--------------------------------->
 
-      <div id="goals">
+
+      <div id="project">
         <div class="container">
-            <h1 class="goal-heading">My Projects</h1>
-            <div class="goal-list">
-                <div class="goal">
+            <h1 class="project-heading">My Projects</h1>
+            <div class="project-list">
+                <div class="project">
                     <img src="../Static/Images/image.png" alt="">
                     <div class="layer">
                         <h3>Cancer Prediction System</h3>
@@ -207,7 +222,7 @@
                         <a href="#"><i class="fa-solid fa-link"></i>Click me</a>
                     </div>
                 </div>
-                <div class="goal">
+                <div class="project">
                     <img src="..\Static\Images\image copy 2.png" alt="">
                     <div class="layer">
                         <h3>Diabetes Prediction System</h3>
@@ -215,11 +230,11 @@
                         <a href="#"><i class="fa-solid fa-link"></i>Click me</a>
                     </div>
                 </div>
-                <div class="goal">
+                <div class="project">
                     <img src="../Static\Images\image copy 3.png" alt="">
                     <div class="layer">
                         <h3>Placements Prediction System</h3>
-                    <p>This is a Placement Prediction System, <br> which used Random Forest Classifier to<br>predict the labels.</p>
+                        <p>This is a Placement Prediction System, <br> which used Random Forest Classifier to<br>predict the labels.</p>
                     <a href="#"><i class="fa-solid fa-link"></i>Click me</a>
                     </div>
                 </div>
@@ -229,7 +244,7 @@
 
 
 
-    <!-- ---------------------------feedbackform--------------------->
+                                                <!-- ------------------------------feedbackform------------------------------>
 
     <div id="feedback">
         <div class="feedback-heading">
@@ -250,7 +265,7 @@
             </div>
 
             <label class="lbl">
-                Fullname    
+                Full name    
                 <input class="input" type="text" placeholder="Enter your name">
             </label>
 
@@ -264,22 +279,23 @@
                <textarea class="input message-lvl" placeholder="Write Message..."></textarea>
             </label>
 
-            <label class="Submit">        
-                <input class="input-submit" type="Submit">
-            </label>
+            <div class="submit-container">
+                <button type="submit" class="input-submit">Submit</button>
+            </div>
+
             
         </div>
 
     </div>
 
 
-    <!-- --------------------------footer(contact)---------------------- -->
+                                                    <!-- --------------------------footer(contact)---------------------- -->
    
-    <footer class="footer">
+    <footer id="footer">
     <div class="footer-container">
 
         <div class="footer-section brand">
-            <h2>Shubh.io</h2>
+            <h2>Shub</h2>
             <p>Building modern web experiences with clean code & creativity.</p>
         </div>
 
