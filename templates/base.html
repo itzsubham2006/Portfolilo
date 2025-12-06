@@ -18,11 +18,11 @@
                 <img src="{{ url_for('static', filename='Images/logo2.png') }}" class="logo">
 
                 <ul id="menu">    
-                    <li><a href="#header">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#project">Projects</a></li>
-                    <li><a href="#feedback">Feedback</a></li>
-                    <li><a href="#footer">Contact</a></li>    
+                    <li><a href="{{ url_for('home') }}">Home</a></li>
+                    <li><a href="{{ url_for('home') }}#about">About</a></li>
+                    <li><a href="{{ url_for('home') }}#project">Projects</a></li>
+                    <li><a href="{{ url_for('home') }}#feedback">Feedback</a></li>
+                    <li><a href="{{ url_for('home') }}#footer">Contact</a></li>    
                     <i class="fa-solid fa-xmark" onclick="closemenu()"></i>    
                 </ul>
                 <i class="fa-solid fa-bars" onclick="openmenu()"></i>
@@ -81,9 +81,8 @@
                     </div>
                     <div class="contents" id="Project">
                         <ul>
-                            <li><span>Breast Cancer Prediction System</span><br><a href="">Click here.</a><br></li>
-                            <li><span>Diabetes Prediction System</span><br><a href="">Click here.</a><br></li>
-                            <li><span>Placement Prediction System</span><br><a href="">Click here.</a><br></li>
+                            <li><span>Multiple Prediction System.</span><br><a href="#project">Click here.</a><br></li>
+                            <li><span>My Portfolio.</span><br><a href="#header">Click here.</a><br></li>
                         </ul>
                     </div>
                 </div>
@@ -222,15 +221,15 @@
                     <div class="layer">
                         <h3>Cancer Prediction System</h3>
                         <p>This is a Breast Cancer Prediction System, <br> which used Random Forest Classifier to <br>predict the labels.</p>
-                        <a href="#"><i class="fa-solid fa-link"></i>Click me</a>
+                        <a href="{{ url_for('system') }}"><i class="fa-solid fa-link"></i>Click me</a>
                     </div>
                 </div>
                 <div class="project">
                     <img src="{{ url_for('static', filename = 'Images/image copy 2.png')}}" alt="">
                     <div class="layer">
-                        <h3>Diabetes Prediction System</h3>
-                        <p>This is a Diabetes Prediction System, <br> which used Random Forest Classifier to<br>predict the labels.</p>
-                        <a href="#"><i class="fa-solid fa-link"></i>Click me</a>
+                        <h3>Heart Disease Prediction System</h3>
+                        <p>This is a Heart Disease Prediction System, <br> which used Random Forest Classifier to<br>predict the labels.</p>
+                        <a href="{{ url_for('heart') }}"><i class="fa-solid fa-link"></i>Click me</a>
                     </div>
                 </div>
                 <div class="project">
@@ -238,7 +237,7 @@
                     <div class="layer">
                         <h3>Placements Prediction System</h3>
                         <p>This is a Placement Prediction System, <br> which used Random Forest Classifier to<br>predict the labels.</p>
-                    <a href="#"><i class="fa-solid fa-link"></i>Click me</a>
+                    <a href="{{ url_for('system') }}"><i class="fa-solid fa-link"></i>Click me</a>
                     </div>
                 </div>
             </div>
@@ -287,11 +286,9 @@
             </div>
 
             </form>
-
-            
         </div>
-
     </div>
+    
     {% endblock %}
 
 

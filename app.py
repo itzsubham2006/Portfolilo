@@ -6,8 +6,13 @@ app = Flask(__name__)
 app.secret_key = "You-are-My-key"
 
 
+@app.route("/home")
+def home():
+    return render_template('base.html')
+
+
 @app.route("/", methods = ["GET", "POST"])
-def feedback():   
+def feedback(): 
     if request.method == "POST":
         username = request.form.get("username")
         email = request.form.get("email")
@@ -26,6 +31,10 @@ def thankyou():
 @app.route("/system")
 def system():
     return render_template("system.html")
+
+@app.route("/heart")
+def heart():
+    return render_template("heart_disease.html")
 
 
 if __name__ == "__main__":
