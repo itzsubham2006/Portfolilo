@@ -4,7 +4,7 @@
 {% block css_link%}
 <link rel="stylesheet" href="{{ url_for('static', filename='style2.css') }}">
 {% endblock %}
-{% block title %}Cancer Prediction{% endblock %}
+{% block title %}Heart Disease Prediction{% endblock %}
 
 
 {% block heading%}
@@ -18,7 +18,7 @@
 
 {% block content %}
  
-    <form method="POST" action="/heart">
+    <form method="POST" action="/predict">
         <div class="input-grid">
             
             <div class="input-group">
@@ -72,12 +72,13 @@
                 <label for="ca">Number of major vessels (0-3) colored by flourosopy</label>
                 <input type="number" id="ca" name="ca" required min="0" max="3">
             </div>
+            <div class="input-group">
+                <label for="thal">thal 0 = normal, 1 = fixed defect, 2 = reversible defect</label>
+                <input type="number" id="thal" name="thal" required min="0" max="2">
+            </div>
 
         </div>
         
-        <div class="notes">
-            <p>thal: (1 - normal), 2 - fixed defect, 3 - reversible defect</p>
-        </div>
 
         <button type="submit" class="btn-predict">Predict</button>
     </form>

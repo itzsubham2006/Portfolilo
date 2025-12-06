@@ -8,7 +8,7 @@
 
 
 {% block heading%}
-<h1>Multiple Prediction System</h1>
+<h1>Multi-Model Prediction Suite</h1>
 {% endblock %}
 
 
@@ -30,17 +30,17 @@
                     <div class="layer">
                         <h3>Cancer Prediction System</h3>
                         <p>This is a Breast Cancer Prediction System, <br> which used Random Forest Classifier to <br>predict the labels.</p>
-                        <a href="#"><i class="fa-solid fa-link"></i>Click me</a>
+                        <a href="{{url_for('cancer')}}"><i class="fa-solid fa-link"></i>Click me</a>
                     </div>
                 </div>
                 <div class="project">
-                    <img src="{{ url_for('static', filename = 'Images/image copy 2.png')}}" alt="">
+                    <img src="{{ url_for('static', filename = 'Images/heart.jpeg')}}" alt="">
                     <!-- <img src="../static/Images/image copy 2.png"> -->
 
                     <div class="layer">
-                        <h3>Diabetes Prediction System</h3>
-                        <p>This is a Diabetes Prediction System, <br> which used Random Forest Classifier to<br>predict the labels.</p>
-                        <a href="#"><i class="fa-solid fa-link"></i>Click me</a>
+                        <h3>Heart Disease Prediction System</h3>
+                        <p>This is a Heart Disease Prediction System, <br> which used Random Forest Classifier to<br>predict the labels.</p>
+                        <a href="{{url_for('heart')}}"><i class="fa-solid fa-link"></i>Click me</a>
                     </div>
                 </div>
                 <div class="project">
@@ -48,9 +48,7 @@
                     <!-- <img src="../static/Images/image copy 3.png"> -->
 
                     <div class="layer">
-                        <h3>Placements Prediction System</h3>
-                        <p>This is a Placement Prediction System, <br> which used Random Forest Classifier to<br>predict the labels.</p>
-                    <a href="#"><i class="fa-solid fa-link"></i>Click me</a>
+                        <h3>Coming soon</h3> 
                     </div>
                 </div>
             </div>

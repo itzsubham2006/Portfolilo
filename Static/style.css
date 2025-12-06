@@ -456,7 +456,7 @@ color: #ababab;
 #project {
     padding: 50px 5%;
     padding-top: 0px;
-    color: #ababab;
+    color: rgba(255, 255, 255, 0.796);
     margin: 30px auto 0 auto; 
 }
 
@@ -488,7 +488,10 @@ color: #ababab;
     height: 100%;
     object-fit: cover;
     transition: 0.5s ease;
-    opacity: 0.6;
+    opacity: 0.5;
+}
+.project.coming{
+    opacity: 0.5;
 }
 
 .project:hover img {
@@ -681,6 +684,12 @@ textarea.input.message-lvl{
     
     .input-submit {
         float: right;
+    }
+
+
+
+    #footer{
+        height: 80vh;
     }
 }
 

@@ -197,7 +197,7 @@ nav ul li a:hover::after{
 #project {
     padding: 50px 5%;
     padding-top: 0px;
-    color: #d9d5d5;
+    color:rgba(255, 255, 255, 0.796);
     margin: 30px auto 0 auto;
     margin-bottom: 10% ; 
 }
@@ -230,7 +230,7 @@ nav ul li a:hover::after{
     height: 100%;
     object-fit: cover;
     transition: 0.5s ease;
-    opacity: 0.6;
+    opacity: 0.5;
 }
 
 .project:hover img {
