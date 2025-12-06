@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Port_Folio</title>
-    <link rel="stylesheet" href="../Static/CSS/style2.css">
-    <link rel="stylesheet" href="../Static/CSS/style.css">
+    <title>{% block title %}Port_Folio {% endblock %}</title>
+     {% block css_link %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    {% endblock %}
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
@@ -13,7 +15,8 @@
     <div id="header">
         <div class="container">
             <nav>
-                <img src="../Static/Images/logo2.png" class="logo">
+                <img src="{{ url_for('static', filename='Images/logo2.png') }}" class="logo">
+
                 <ul id="menu">    
                     <li><a href="#header">Home</a></li>
                     <li><a href="#about">About</a></li>
@@ -25,20 +28,20 @@
                 <i class="fa-solid fa-bars" onclick="openmenu()"></i>
             </nav>
             <div class="header_text">
-                <h1>Hi, I'm <span>Subham</span> Pathak from India.</h1>
-                <p>A Computer Science student passionate about Frontend + Backend Development, <br> AI / ML.</p>
+                <h1>{% block heading %}Hi, I'm <span>Subham</span> Pathak from India.{% endblock %}</h1>
+                <p>{% block paragraph %}A Computer Science student passionate about Frontend + Backend Development, <br> AI / ML. {% endblock %}</p>
                
             </div>
         </div>
     </div>
 
+    {% block content %}
     <!-- ----------about----------- -->
-
     <div id="about">
         <div class="container2">
             <div class="row">
                 <div class="col-1">
-                    <img src="../Static\Images\me.png">
+                    <img src="{{ url_for('static', filename = 'Images/me.png')}}">
                 </div>
                 <div class="col-2">
                     <h1 class="subtitle">About me</h1>
@@ -171,7 +174,7 @@
         <div class="goal-list">
 
             <div class="p1">
-                <img id = "image1" src="../Static\Images\AI_tools.jpeg" alt="">
+                <img id = "image1" src="{{ url_for('static', filename = 'Images/AI_tools.jpeg')}}" alt="">
                 
                 <div class="layer1">
                     <h3>To master AI</h3>
@@ -181,7 +184,7 @@
             </div>   
 
             <div class="p1">
-                <img id = "image1" src="../Static\Images\AI.jpeg" alt="">
+                <img id = "image1" src="{{ url_for('static', filename = 'Images/AI.jpeg')}}" alt="">
                 <div class="layer1">
                     <h3>Impactful projects</h3>
                     <p>To create real-life impactful projects that helps millions of people by saving time in various field..</p>
@@ -191,7 +194,7 @@
             </div> 
 
             <div class="p1">
-                <img id = "image1" src="../Static\Images\genai.jpeg" alt="">
+                <img id = "image1" src="{{ url_for('static', filename = 'Images/genai.jpeg')}}" alt="">
                 <div class="layer1">
                     <h3>To master AI</h3>
                     <p>To master Artificial Intelligence and Machine Learning focusing on building strong foundations in modern AI technologies.</p>
@@ -215,7 +218,7 @@
             <h1 class="project-heading">My Projects</h1>
             <div class="project-list">
                 <div class="project">
-                    <img src="../Static/Images/image.png" alt="">
+                    <img src="{{ url_for('static', filename = 'Images/image.png')}}" alt="">
                     <div class="layer">
                         <h3>Cancer Prediction System</h3>
                         <p>This is a Breast Cancer Prediction System, <br> which used Random Forest Classifier to <br>predict the labels.</p>
@@ -223,7 +226,7 @@
                     </div>
                 </div>
                 <div class="project">
-                    <img src="..\Static\Images\image copy 2.png" alt="">
+                    <img src="{{ url_for('static', filename = 'Images/image copy 2.png')}}" alt="">
                     <div class="layer">
                         <h3>Diabetes Prediction System</h3>
                         <p>This is a Diabetes Prediction System, <br> which used Random Forest Classifier to<br>predict the labels.</p>
@@ -231,7 +234,7 @@
                     </div>
                 </div>
                 <div class="project">
-                    <img src="../Static\Images\image copy 3.png" alt="">
+                    <img src="{{ url_for('static', filename = 'Images/image copy 3.png')}}" alt="">
                     <div class="layer">
                         <h3>Placements Prediction System</h3>
                         <p>This is a Placement Prediction System, <br> which used Random Forest Classifier to<br>predict the labels.</p>
@@ -263,30 +266,33 @@
                     Suggestions
                 </label>
             </div>
-
-            <label class="lbl">
+            <form action="/" method="post">
+            <label for="username" class="lbl">
                 Full name    
-                <input class="input" type="text" placeholder="Enter your name">
+                <input class="input" name="username" type="text" placeholder="Enter your name">
             </label>
 
-            <label class="email lbl">
+            <label for="email" class="email lbl">
                 Email   
-                <input class="input email-lvl" type="text" placeholder="Enter your email"> 
+                <input class="input email-lvl" name="email" type="text" placeholder="Enter your email"> 
             </label>
 
-            <label class="message lbl">
+            <label for="message" class="message lbl">
                 Message    
-               <textarea class="input message-lvl" placeholder="Write Message..."></textarea>
+               <textarea class="input message-lvl" name="message" placeholder="Write Message..."></textarea>
             </label>
 
             <div class="submit-container">
-                <button type="submit" class="input-submit">Submit</button>
+                <input type="submit" class="input-submit" value="Submit">
             </div>
+
+            </form>
 
             
         </div>
 
     </div>
+    {% endblock %}
 
 
                                                     <!-- --------------------------footer(contact)---------------------- -->
@@ -333,7 +339,9 @@
 </footer>
 
 
+
+
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-    <script src="../Static/JS/script.js"></script>
+    <script src="../static/script.js"></script>
 </body>
 </html>

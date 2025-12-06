@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+
+{% block css_link%}
+<link rel="stylesheet" href="{{ url_for('static', filename='style2.css') }}">
+{% endblock %}
+{% block title %}System Prediction{% endblock %}
+
+
+{% block heading%}
+<h1>Multiple Prediction System</h1>
+{% endblock %}
+
+
+
+{% block paragraph %}
+{% endblock %}
+
+
+
+
+{% block content %}
+ <div id ="project">
+        <div class="container">
+            <div class="project-list">
+                <div class="project">
+                    <img src="{{ url_for('static', filename = 'Images/image.png')}}" class="logo" alt="">
+                    <!-- <img src="../static/Images/image.png" class="logo"> -->
+
+                    <div class="layer">
+                        <h3>Cancer Prediction System</h3>
+                        <p>This is a Breast Cancer Prediction System, <br> which used Random Forest Classifier to <br>predict the labels.</p>
+                        <a href="#"><i class="fa-solid fa-link"></i>Click me</a>
+                    </div>
+                </div>
+                <div class="project">
+                    <img src="{{ url_for('static', filename = 'Images/image copy 2.png')}}" alt="">
+                    <!-- <img src="../static/Images/image copy 2.png"> -->
+
+                    <div class="layer">
+                        <h3>Diabetes Prediction System</h3>
+                        <p>This is a Diabetes Prediction System, <br> which used Random Forest Classifier to<br>predict the labels.</p>
+                        <a href="#"><i class="fa-solid fa-link"></i>Click me</a>
+                    </div>
+                </div>
+                <div class="project">
+                    <img src="{{ url_for('static', filename = 'Images/image copy 3.png')}}" alt="">
+                    <!-- <img src="../static/Images/image copy 3.png"> -->
+
+                    <div class="layer">
+                        <h3>Placements Prediction System</h3>
+                        <p>This is a Placement Prediction System, <br> which used Random Forest Classifier to<br>predict the labels.</p>
+                    <a href="#"><i class="fa-solid fa-link"></i>Click me</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+{% endblock %}
