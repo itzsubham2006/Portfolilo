@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Port_Folio {% endblock %}</title>
+     {% block css_link %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    {% endblock %}
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="header">
+        <div class="container">
+            <nav>
+                <img src="{{ url_for('static', filename='images/logo2.png') }}" class="logo">
+
+                <ul id="menu">    
+                    <li><a href="{{ url_for('home') }}">Home</a></li>
+                    <li><a href="{{ url_for('home') }}#about">About</a></li>
+                    <li><a href="{{ url_for('home') }}#project">Projects</a></li>
+                    <li><a href="{{ url_for('home') }}#feedback">Feedback</a></li>
+                    <li><a href="{{ url_for('home') }}#footer">Contact</a></li>    
+                    <i class="fa-solid fa-xmark" onclick="closemenu()"></i>    
+                </ul>
+                <i class="fa-solid fa-bars" onclick="openmenu()"></i>
+            </nav>
+            <div class="header_text">
+                <h1>{% block heading %}Hi, I'm <span>Subham</span> Pathak from India.{% endblock %}</h1>
+                <p>{% block paragraph %}A Computer Science student passionate about Frontend + Backend Development, <br> AI / ML. {% endblock %}</p>
+               
+            </div>
+        </div>
+    </div>
+
+    {% block content %}
+    <!-- ----------about----------- -->
+    <div id="about">
+        <div class="container2">
+            <div class="row">
+                <div class="col-1">
+                    <img src="{{ url_for('static', filename = 'images/me.png')}}">
+                </div>
+                <div class="col-2">
+                    <h1 class="subtitle">About me</h1>
+                    <div class="paragraph">
+                    <p>Hii, My name is Subham Pathak I'm a Computer Science Engineering student driven by a deep curiosity for Artificial Intelligence and Machine Learning. <br><br> My primary focus is understanding how machines interpret data, learn patterns, and make decisions. I enjoy studying algorithms, training models, and exploring how AI can be applied to create meaningful and practical solutions. <br><br>
+                    In addition to AI/ML, I also work on frontend + backend development and enjoy building structured, logic-oriented systems that power applications. I'm committed to continuous learning, improving my coding skills, and developing projects that help me grow as an AI-focused developer..</p>
+                    </div>
+                    <div class="about-skills">
+                        <p class="links skill1 active-link" onclick="opentab('skills', event)">Skills</p>
+                        <p class="links" onclick="opentab('experience', event)">Experiences</p>
+                        <p class="links" onclick="opentab('goal', event)">Goals</p> 
+                        <p class="links" onclick="opentab('Project', event)">My Projects</p> 
+                    </div>
+                    <div class="contents active-tab" id="skills">
+                        <ul>
+                            <li><span>AI/ML Student</span><br>Aspiring Machine Learning Engineer. <br></li>
+                            <li><span>Web Development</span><br>Designing Webpages.<br>
+                            </li>
+                            <li><span>Linux</span><br>Comfortable with terminals, commands, and system workflows.<br></li>
+                        </ul>
+                    </div>
+                    <div class="contents" id="experience">
+                        <ul>
+                            <li><span>ML Basics</span><br>Learning Python, ML concepts and small projects.<br></li>
+                            <li><span>Backend Development</span><br>Exploring Flask and API Building.<br>
+                            </li>
+                            <li><span>Coding Practices</span><br>Improving logic through daily coding.<br></li>
+                        </ul>
+                    </div>
+                    <div class="contents" id="goal">
+                        <ul>
+                            <li><span>AI/ML Engineer</span><br>Build real-world ML models.<br></li>
+                            <li><span>Master the ML Stack</span><br>From data preprocessing to model deployment.<br>
+                            </li>
+                            <li><span>Projects</span><br>Create impactful AI/ML projects.<br></li>
+                        </ul>
+                    </div>
+                    <div class="contents" id="Project">
+                        <ul>
+                            <li><span>Multiple Prediction System.</span><br><a href="#project">Click here.</a><br></li>
+                            <li><span>My Portfolio.</span><br><a href="#header">Click here.</a><br></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>    
+        </div>
+    </div>
+
+
+                                                                <!-- ---------------skills----------------- -->
+
+    <div class="skills">
+        <div class="skill-heading">
+            <h1>Skills and Interests</h1>
+        </div>
+        <div class="skill-list">
+            <div class="s1">
+                <i class="fa-solid fa-code"></i>
+                <h2>Programming Languages</h2>
+                <ul>
+                    <li>Python, C, JavaScript</li>
+                    <li>HTML & CSS</li>
+                    <li>SQL</li>
+                </ul>
+            </div>
+            <div class="s1">
+                <i class="fa-solid fa-crop"></i>
+                <h2>Web Development</h2>
+                <ul>
+                    <li>Frontend: HTML, CSS, JavaScript</li>
+                    <li>Backend: Flask (Beginner)</li>
+                    <li>Basic UI/UX Understanding</li>
+                </ul>
+                
+            </div>
+            <div class="s1">
+               <i class="fa-brands fa-app-store"></i>
+                <h2>Tools & Technologies</h2>
+                <ul>
+                    <li>Git & GitHub.</li>
+                    <li>Flask.</li>
+                    <li>Linux (Basic).</li>
+                </ul>  
+            </div>
+            
+        </div>
+    </div>
+    <div id="skill2">
+        <div class="skill-list list2">
+            <div class="s1">
+               <i class="fa-brands fa-centos"></i>
+                <h2>Machine Learning / AI <br>(Beginner)</h2>
+                <ul>
+                    <li>Numpy.</li>
+                    <li>Pandas.</li>
+                    <li>Scikit-learn basics.</li>
+                </ul>
+            </div>
+            <div class="s1">
+                <i class="fa-brands fa-cotton-bureau"></i>
+                <h2>Soft Skills</h2>
+                <ul>
+                    <li>Teamwork</li>
+                    <li>Time Management</li>
+                    <li>Quick Learner</li>
+                </ul>               
+            </div>
+            <div class="s1">
+                <i class="fa-brands fa-connectdevelop"></i>
+                <h2>Interests & Hobbies.</h2>
+                <ul>
+                    <li>Sketching & Art</li>
+                    <li>Fitness Training.</li>
+                    <li>Gaming.</li>
+                </ul>  
+            </div>   
+        </div>
+    </div>
+
+
+
+
+                                            <!-- -------------------------Goals-------------------------------------->
+
+    <div id="goals">
+        <div class="goal-heading">
+            <h1>My Goals</h1>
+        </div>
+        <div class="goal-list">
+
+            <div class="p1">
+                <img id = "image1" src="{{ url_for('static', filename = 'images/AI_tools.jpeg')}}" alt="">
+                
+                <div class="layer1">
+                    <h3>To master AI</h3>
+                    <p>To master Artificial Intelligence and Machine Learning focusing on building strong foundations in modern AI technologies.</p>
+                    <!-- <a href="">More</a> -->
+                </div>
+            </div>   
+
+            <div class="p1">
+                <img id = "image1" src="{{ url_for('static', filename = 'images/AI.jpeg')}}" alt="">
+                <div class="layer1">
+                    <h3>Impactful projects</h3>
+                    <p>To create real-life impactful projects that helps millions of people by saving time in various field..</p>
+                    <!-- <a href="">More</a> -->
+
+                </div>
+            </div> 
+
+            <div class="p1">
+                <img id = "image1" src="{{ url_for('static', filename = 'images/genai.jpeg')}}" alt="">
+                <div class="layer1">
+                    <h3>To master GenAI</h3>
+                    <p>To master Generative AI by building real-world projects, learning LLMs and deep learning, and becoming a skilled GenAI Engineer capable of creating smart, innovative AI solutions..</p>
+                    <!-- <a href="">More</a> -->
+
+                </div>
+            </div>       
+        </div>
+    </div>
+
+
+
+                                            <!------------------------------Projects--------------------------------->
+
+
+      <div id="project">
+        <div class="container">
+            <h1 class="project-heading">My Projects</h1>
+            <div class="project-list">
+                <div class="project">
+                    <img src="{{ url_for('static', filename = 'images/multiple.jpeg')}}" alt="">
+                    <div class="layer">
+                        <h3>Multi-Model Prediction Suite</h3>
+                        <p>Multiple Prediction System is an integrated machine learning platform designed to generate accurate predictions from multiple trained models.
+                        It allows users to enter data for different categories and receive instant results, all through a simple and user-friendly interface..</p>
+                        <a href="{{ url_for('system') }}"><i class="fa-solid fa-link"></i>Click me</a>
+                    </div>
+                </div>
+                <div class="project">
+                    <img src="{{ url_for('static', filename = 'images/portfolio.png')}}" alt="">
+                    <div class="layer">
+                        <h3>Portfolio</h3>
+                        <p>This is a personal portfolio website built using Flask and Jinja2 templates. The website showcases my skills, goals, projects, and provides a contact/feedback option for visitors. It also includes a SQL database to store feedback submitted by users. </p>
+                        <a href="{{ url_for('home') }}"><i class="fa-solid fa-link"></i>Click me</a>
+                    </div>
+                </div>
+                <div class="project coming" >
+                    <img src="{{ url_for('static', filename = 'images/image copy 3.png')}}" alt="">
+                    <div class="layer">
+                        <h3>Coming soon..</h3>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+                                                <!-- ------------------------------feedbackform------------------------------>
+
+    <div id="feedback">
+        <div class="feedback-heading">
+            <h1>Feedback Form</h1>
+        </div>
+        <div class="feedback-type">
+            <h2>Feedback type</h2>
+            <div class="feed">
+                <label class="radio-item">
+                    <input type="radio" name="feedback" value="comments">
+                    Comments
+                </label>
+    
+                <label class="radio-item">
+                    <input type="radio" name="feedback" value="suggestions">
+                    Suggestions
+                </label>
+            </div>
+
+            <form action="/" method="post">
+                
+            <label for="username" class="lbl">
+                Full name    
+                <input class="input" name="username" type="text" placeholder="Enter your name" required>
+            </label>
+
+            <label for="email" class="email lbl">
+                Email   
+                <input class="input email-lvl" name="email" type="text" placeholder="Enter your email" required> 
+            </label>
+
+            <label for="message" class="message lbl">
+                Message    
+               <textarea class="input message-lvl" name="message" placeholder="Write Message..." required></textarea>
+            </label>
+
+            <div class="submit-container">
+                <input type="submit" class="input-submit" value="Submit">
+            </div>
+
+            </form>
+        </div>
+    </div>
+    
+    {% endblock %}
+
+
+                                                    <!-- --------------------------footer(contact)---------------------- -->
+   {% block footer%}
+    <footer id="footer">
+    <div class="footer-container">
+
+        <div class="footer-section brand">
+            <h2>Shub</h2>
+            <p>Building modern web experiences with clean code & creativity.</p>
+        </div>
+
+        <div class="footer-section links">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('home') }}#project">Projects</a></li>
+                <li><a href="{{ url_for('home') }}#skills">Skills</a></li>
+                <li><a href="{{ url_for('home') }}#footer">Contact</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section contact">
+            <h3>Contact</h3>
+            <a href="https://www.lastw5232@gmail.com" class="email2">Email: lastw5232@gmail.com</a>
+            <p>Phone : +91938XXXXXXX</p>
+            <p>Location: India</p>
+            <p><a class="cv" href="{{ url_for('static', filename = 'images/cv.pdf')}}"download >Download CV</a></p>
+        </div>
+
+        <div class="footer-section social">
+            <h3>Follow Me</h3>
+            <div class="social-icons">
+                <a href="https://www.instagram.com/s_ubhqm/"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://www.linkedin.com/in/subhampathak/" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="https://github.com/itzsubham2006" target="_blank"><i class="fa-brands fa-github"></i></a>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        © 2025 Shubh — Made with ❤️ & Code
+    </div>
+</footer>
+
+{% endblock %}
+
+
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="../static/js/script.js"></script>
+</body>
+</html>

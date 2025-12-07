@@ -1,0 +1,83 @@
+{% extends 'index.html' %}
+
+
+{% block css_link%}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style2.css') }}">
+{% endblock %}
+{% block title %}Cancer Prediction System{% endblock %}
+
+
+{% block heading%}
+<h1>Cancer Prediction System</h1>
+{% endblock %}
+
+
+
+{% block paragraph %}
+{% endblock %}
+
+{% block content %}
+ 
+    <form method="POST" action="/predict2">
+        <div class="input-grid">
+            
+            <div class="input-group">
+                <label for="radius_mean">Radius_mean</label>
+                <input type="number" id="radius_mean" name="radius_mean" required>
+            </div>
+            <div class="input-group">
+                <label for="area_mean">Area_mean </label>
+                <input type="number" id="area_mean  " name="area_mean" required>
+            </div>
+            <div class="input-group">
+                <label for="concavity_mean">concavity_mean</label>
+                <input type="number" id="concavity_mean " name="concavity_mean" required>
+            </div>
+            
+            <div class="input-group">
+                <label for="concave_points_mean">concave points mean</label>
+                <input type="number" id="concave_points_mean" name="concave_points_mean" required>
+            </div>
+            <div class="input-group">
+                <label for="texture_se">texture_se</label>
+                <input type="number" id="texture_se" name="texture_se" required>
+            </div>
+           
+            <div class="input-group">
+                <label for="radius_worst">radius_worst</label>
+                <input type="number" id="radius_worst" name="radius_worst" required>
+            </div>
+            <div class="input-group">
+                <label for="texture_worst">texture_worst  </label>
+                <input type="number" id="texture_worst" name="texture_worst" required>
+            </div>
+            <div class="input-group">
+                <label for="perimeter_worst">perimeter_worst  </label>
+                <input type="number" id="perimeter_worst" name="perimeter_worst" required>
+            </div>
+            
+            <div class="input-group">
+                <label for="area_worst">Area_worst  </label>
+                <input type="text" id="area_worst" name="area_worst" required>
+            </div>
+            <div class="input-group">
+                <label for="compactness_worst">Compactness_worst  </label>
+                <input type="number" id="compactness_worst" name="compactness_worst" required>
+            </div>
+            <div class="input-group">
+                <label for="concavity_worst">concavity_worst</label>
+                <input type="number" id="concavity_worst" name="concavity_worst" required>
+            </div>
+            <div class="input-group">
+                <label for="concave_points_worst">concave points_worst</label>
+                <input type="number" id="concave_points_worst" name="concave_points_worst" required>
+            </div>
+
+        </div>
+        
+
+        <button type="submit" class="btn-predict">Predict</button>
+    </form>
+    
+{% endblock %}
+

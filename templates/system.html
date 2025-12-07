@@ -1,0 +1,59 @@
+{% extends 'index.html' %}
+
+
+{% block css_link%}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style1.css') }}">
+{% endblock %}
+{% block title %}System Prediction{% endblock %}
+
+
+{% block heading%}
+<h1>Multi-Model Prediction Suite</h1>
+{% endblock %}
+
+
+
+{% block paragraph %}
+{% endblock %}
+
+
+
+
+{% block content %}
+ <div id ="project">
+        <div class="container">
+            <div class="project-list">
+                <div class="project">
+                    <img src="{{ url_for('static', filename = 'Images/image.png')}}" class="logo" alt="">
+                    <!-- <img src="../static/Images/image.png" class="logo"> -->
+
+                    <div class="layer">
+                        <h3>Cancer Prediction System</h3>
+                        <p>This is a Breast Cancer Prediction System, <br> which used Random Forest Classifier to <br>predict the labels.</p>
+                        <a href="{{url_for('cancer')}}"><i class="fa-solid fa-link"></i>Click me</a>
+                    </div>
+                </div>
+                <div class="project">
+                    <img src="{{ url_for('static', filename = 'Images/heart.jpeg')}}" alt="">
+                    <!-- <img src="../static/Images/image copy 2.png"> -->
+
+                    <div class="layer">
+                        <h3>Heart Disease Prediction System</h3>
+                        <p>This is a Heart Disease Prediction System, <br> which used Random Forest Classifier to<br>predict the labels.</p>
+                        <a href="{{url_for('heart')}}"><i class="fa-solid fa-link"></i>Click me</a>
+                    </div>
+                </div>
+                <div class="project">
+                    <img src="{{ url_for('static', filename = 'Images/image copy 3.png')}}" alt="">
+                    <!-- <img src="../static/Images/image copy 3.png"> -->
+
+                    <div class="layer">
+                        <h3>Coming soon</h3> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+{% endblock %}

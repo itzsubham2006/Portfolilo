@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <title>Thank You</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #080808;
+            color: white;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 700px;
+        }
+
+        h1 {
+            font-size: 55px;
+            font-weight: 700;
+        }
+
+        h1 span {
+            color: #2e6fdd; 
+        }
+
+        p {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #b8b8b8;
+            line-height: 1.6;
+        }
+
+        a.btn {
+            display: inline-block;
+            margin-top: 40px;
+            padding: 12px 28px;
+            border: 1px solid #2e6fdd;
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: 0.3s ease;
+        }
+
+        a.btn:hover {
+            background-color: #2e6fdd;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Thank <span>You</span> {{name}}!</h1>
+        <p>Your message has been received successfully.<br>
+           I'll get back to you as soon as possible.</p>
+
+        <a href="{{ url_for('home') }}" class="btn">Go Back Home</a>
+    </div>
+
+</body>
+</html>
