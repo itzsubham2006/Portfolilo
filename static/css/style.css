@@ -3,7 +3,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: sans-serif;
+    font-family: 'Open Sans', sans-serif; 
 }
 
 
@@ -135,7 +135,7 @@ nav ul li a:hover::after{
     }
 
     .header_text h1{
-        font-size: 40px; 
+        font-size: 45px; 
         margin-top: 10%;
     }
 
@@ -154,7 +154,7 @@ nav ul li a:hover::after{
         font-size: 20px;
         position: absolute;
         top: 25px;
-        left: 10px;
+        right: 10px;
         cursor: pointer;
     }
     .fa-solid.fa-bars{
@@ -200,6 +200,7 @@ nav ul li a:hover::after{
 }
 
 
+/* -------------------about--------------------- */
 
 #about{
     padding: 80px 0px;
@@ -308,6 +309,10 @@ nav ul li a:hover::after{
 
 
 @media only screen and (max-width: 800px) {
+    .contents ul li{
+        font-size: 13px;
+    }
+
     .row {
         flex-direction: column;
     }
@@ -319,7 +324,7 @@ nav ul li a:hover::after{
         padding: 0 5%;
     }
     .col-2 h1 {
-        font-size: 35px;
+        font-size: 33px;
         text-align: center;
         margin: 5%;
     }
@@ -332,7 +337,7 @@ nav ul li a:hover::after{
     }
 
     .paragraph p{
-        font-size: 15px;
+        font-size: 13px;
     }
 
     #about{
@@ -434,8 +439,9 @@ color: #ababab;
 
 @media only screen and (max-width: 800px){
     .about-skills p{
-        font-size: 3.5vw;
-        margin-right: 5%;
+        font-size: 4vw;
+        margin-right: 4%;
+        ;
     }
 
     .skill-heading h1{
@@ -545,8 +551,8 @@ color: #ababab;
     height: 100%; 
     object-fit: cover; 
     display: block; 
-    padding: 0px 5%;
-    border-radius: 40px;
+    padding: 5% 10%;
+    border-radius: 50px;
 }
 
 .layer1{
@@ -581,6 +587,10 @@ color: #ababab;
     .goal-list{
         gap: 25px;
         margin-bottom: 20px;
+    }
+
+    .layer1 p{
+        font-size: 13px;
     }
 }
 
@@ -704,10 +714,11 @@ color: #ababab;
     }
     .layer1 p{
         margin-bottom: 25px;
+        font-size: 13px;
     }
 
     .layer p{
-        font-size: 10px;
+        font-size: 12px;
     }
     .layer h3{
         font-size: 15px;
@@ -839,14 +850,21 @@ textarea.input.message-lvl{
 }
 
 
+@media only screen and (max-width: 800px){
+    #feedback h1{
+        font-size: 32px;
+    }
 
+    .lbl{
+    padding: 10px 0;
+    font-size: 15px;
+}
+
+}
 
 
 @media only screen and (min-width: 600px) {
 
-    #feedback h1{
-        font-size: 40px;
-    }
     
     .feed {
         display: flex;
