@@ -27,25 +27,59 @@ This is a personal portfolio website built using **Flask** and **Jinja2 template
 ---
 
 ## Folder Structure
+PORT_FOLIO/
+│
+├── __pycache__/
+│
+├── data_sets/
+│   ├── breast_cancer_data.csv
+│   ├── diabetes.csv
+│   ├── heart.csv
+│   └── Placement_Dataset.csv
+│
+├── MODELS/
+│   ├── breast_cancer_sys.ipynb
+│   ├── heart_disease.ipynb
+│   ├── placement_sys.ipynb
+│   ├── model.pkl
+│   └── model2.pkl
+│
+├── static/
+│   ├── css/
+│   │   ├── style.css
+│   │   ├── style1.css
+│   │   └── style2.css
+│   │
+│   ├── images/
+│   │   ├── AI_tools.jpeg
+│   │   ├── AI.jpeg
+│   │   ├── cv.pdf
+│   │   ├── genai.jpeg
+│   │   ├── heart.jpeg
+│   │   ├── image copy 3.png
+│   │   ├── image.png
+│   │   ├── logo2.png
+│   │   ├── me.png
+│   │   ├── multiple.jpeg
+│   │   └── portfolio.png
+│   │
+│   └── js/
+│       └── script.js
+│
+├── templates/
+│   ├── cancer.html
+│   ├── heart_disease.html
+│   ├── index.html
+│   ├── result.html
+│   ├── system.html
+│   └── thankyou.html
+│
+├── venv/
+│
+├── .env
+└── .gitignore
 
-portfolio-website/
-│
-├─ app/
-│ ├─ templates/ # Jinja2 HTML templates
-│ │ ├─ base.html
-│ │ ├─ home.html
-│ │ ├─ projects.html
-│ │ ├─ contact.html
-│ │ └─ feedback.html
-│ ├─ static/ # CSS, JS, images
-│ │ ├─ style.css
-│ │ └─ images/
-│ ├─ init.py
-│ ├─ routes.py
-│ └─ models.py # SQL database models
-│
-├─ requirements.txt
-└─ README.md
+
 
 ---
 
