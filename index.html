@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shubh | ML Engineer & Developer</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <canvas id="neural-canvas"></canvas>
+    
+    <nav class="navbar">
+        <div class="nav-logo"><a href="index.html">SHUB<span class="accent">.AI</span></a></div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="glitch-wrapper">
+                <h1 class="glitch" data-text="Hello, I'm Subham">Hello, I'm Subham</h1>
+            </div>
+            <p class="typing-text">A Computer Science student passionate about <span class="highlight">Artificial Intelligence</span> & <span class="highlight">Machine Learning</span></p>
+            <div class="hero-buttons">
+                <a href="#about" class="btn btn-primary">Explore</a>
+                <a href="#projects" class="btn btn-outline">My Work</a>
+            </div>
+            <div class="scroll-indicator">
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title"><span class="accent">01.</span> About Me</h2>
+            <div class="about-grid">
+                <div class="about-image">
+                    <div class="image-frame">
+                        <div class="matrix-overlay"></div>
+                        <div class="placeholder-avatar">
+                            <i class="fa-solid fa-robot"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-content">
+                    <p>Hi, I'm <strong>Subham Pathak</strong>, a Computer Science Engineering student driven by a deep curiosity for Artificial Intelligence and Machine Learning.</p>
+                    <p>My primary focus is understanding how machines interpret data, learn patterns, and make decisions. I enjoy studying algorithms, training models, and exploring how AI can be applied to create meaningful solutions.</p>
+                    <div class="tabs">
+                        <button class="tab-btn active" data-tab="skills">Skills</button>
+                        <button class="tab-btn" data-tab="experience">Experience</button>
+                        <button class="tab-btn" data-tab="goals">Goals</button>
+                    </div>
+                    <div class="tab-content active" id="skills">
+                        <ul>
+                            <li><span>AI/ML</span> - Aspiring Machine Learning Engineer</li>
+                            <li><span>Web Development</span> - Frontend & Backend</li>
+                            <li><span>Python</span> - Data Science & ML Basics</li>
+                        </ul>
+                    </div>
+                    <div class="tab-content" id="experience">
+                        <ul>
+                            <li><span>ML Basics</span> - Learning algorithms & small projects</li>
+                            <li><span>Backend</span> - Flask & API Building</li>
+                            <li><span>Coding</span> - Daily practice & problem solving</li>
+                        </ul>
+                    </div>
+                    <div class="tab-content" id="goals">
+                        <ul>
+                            <li><span>ML Engineer</span> - Build real-world ML models</li>
+                            <li><span>GenAI Master</span> - LLMs & Deep Learning</li>
+                            <li><span>Projects</span> - Create impactful AI solutions</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="section dark-section">
+        <div class="container">
+            <h2 class="section-title"><span class="accent">02.</span> Skills & Tools</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-icon"><i class="fa-solid fa-brain"></i></div>
+                    <h3>AI/ML</h3>
+                    <p>NumPy, Pandas, Scikit-learn</p>
+                    <div class="skill-bar"><div class="skill-progress" style="width: 65%"></div></div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon"><i class="fa-solid fa-code"></i></div>
+                    <h3>Programming</h3>
+                    <p>Python, JavaScript, C, SQL</p>
+                    <div class="skill-bar"><div class="skill-progress" style="width: 75%"></div></div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon"><i class="fa-solid fa-globe"></i></div>
+                    <h3>Web Dev</h3>
+                    <p>HTML, CSS, JavaScript</p>
+                    <div class="skill-bar"><div class="skill-progress" style="width: 70%"></div></div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon"><i class="fa-solid fa-terminal"></i></div>
+                    <h3>Tools</h3>
+                    <p>Git, GitHub, Linux</p>
+                    <div class="skill-bar"><div class="skill-progress" style="width: 60%"></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="section">
+        <div class="container">
+            <h2 class="section-title"><span class="accent">03.</span> Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-visual"><div class="neural-dots"></div></div>
+                    <div class="project-info">
+                        <h3>Multi-Model Prediction Suite</h3>
+                        <p>An integrated ML platform with heart disease and cancer prediction models using Random Forest Classifier.</p>
+                        <div class="project-tags">
+                            <span>Python</span><span>ML</span><span>JavaScript</span>
+                        </div>
+                        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                            <a href="pages/heart-disease.html" class="project-link"><i class="fa-solid fa-heart-pulse"></i> Heart Disease</a>
+                            <a href="pages/cancer.html" class="project-link"><i class="fa-solid fa-dna"></i> Cancer</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-visual"><div class="neural-dots"></div></div>
+                    <div class="project-info">
+                        <h3>Portfolio Website</h3>
+                        <p>A personal portfolio showcasing skills, projects, and contact functionality.</p>
+                        <div class="project-tags">
+                            <span>HTML</span><span>CSS</span><span>JS</span>
+                        </div>
+                        <a href="#" class="project-link">View Project <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="project-card coming">
+                    <div class="project-visual"><i class="fa-solid fa-hourglass-half"></i></div>
+                    <div class="project-info">
+                        <h3>More Coming Soon</h3>
+                        <p>Working on new exciting ML projects...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section dark-section">
+        <div class="container">
+            <h2 class="section-title"><span class="accent">04.</span> Get In Touch</h2>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fa-solid fa-envelope"></i>
+                        <div><h4>Email</h4><p>lastw5232@gmail.com</p></div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <div><h4>Location</h4><p>India</p></div>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/s_ubhqm/" target="_blank" rel="noopener noreferrer" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/in/subhampathak/" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                        <a href="https://github.com/itzsubham2006" target="_blank" rel="noopener noreferrer" title="GitHub"><i class="fa-brands fa-github"></i></a>
+                    </div>
+                </div>
+                <form class="contact-form" id="feedbackForm">
+                    <div class="form-group">
+                        <input type="text" id="username" required>
+                        <label for="username">Your Name</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" required>
+                        <label for="email">Your Email</label>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" required></textarea>
+                        <label for="message">Your Message</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary"><span>Send Message</span><i class="fa-solid fa-paper-plane"></i></button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <p>Built with <span class="accent">&lt;3&gt;</span> and AI</p>
+            <p class="copyright">© 2025 Shubh. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

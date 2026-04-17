@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cancer Prediction | ML System</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .prediction-page { padding: 120px 5% 60px; min-height: 100vh; }
+        .prediction-header { text-align: center; margin-bottom: 3rem; }
+        .prediction-header h1 { font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 1rem; }
+        .prediction-header p { color: var(--text-secondary); max-width: 600px; margin: 0 auto; }
+        .prediction-form {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--bg-tertiary);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(0, 212, 255, 0.1);
+        }
+        .input-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .input-group { display: flex; flex-direction: column; gap: 0.5rem; }
+        .input-group label { font-size: 0.875rem; color: var(--text-secondary); font-weight: 500; }
+        .input-group input {
+            padding: 0.875rem 1rem;
+            background: var(--bg-secondary);
+            border: 1px solid transparent;
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            font-family: var(--font-mono);
+            transition: all 0.3s ease;
+        }
+        .input-group input:focus { outline: none; border-color: var(--accent); box-shadow: var(--glow); }
+        .input-group small { font-size: 0.75rem; color: var(--text-muted); }
+        .prediction-form h3 { margin-bottom: 1.5rem; color: var(--accent); }
+        .predict-btn {
+            width: 100%;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+        }
+        .result-display {
+            display: none;
+            text-align: center;
+            padding: 3rem;
+            margin-top: 2rem;
+            border-radius: 20px;
+            animation: fadeIn 0.5s ease;
+        }
+        .result-display.show { display: block; }
+        .result-display.malignant { background: rgba(255, 68, 68, 0.1); border: 2px solid #ff4444; }
+        .result-display.benign { background: rgba(0, 255, 136, 0.1); border: 2px solid #00ff88; }
+        .result-icon { font-size: 4rem; margin-bottom: 1rem; }
+        .result-display.malignant .result-icon { color: #ff4444; }
+        .result-display.benign .result-icon { color: #00ff88; }
+        .result-display h2 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .result-display p { color: var(--text-secondary); }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--accent);
+            text-decoration: none;
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+        .back-link:hover { gap: 0.75rem; }
+        .loading { display: none; text-align: center; padding: 2rem; }
+        .loading.show { display: block; }
+        .loading-spinner {
+            width: 50px; height: 50px;
+            border: 3px solid var(--bg-secondary);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+    <canvas id="neural-canvas"></canvas>
+    
+    <nav class="navbar">
+        <div class="nav-logo"><a href="../index.html">SHUB<span class="accent">.AI</span></a></div>
+        <ul class="nav-links">
+            <li><a href="../index.html#home">Home</a></li>
+            <li><a href="../index.html#about">About</a></li>
+            <li><a href="../index.html#skills">Skills</a></li>
+            <li><a href="../index.html#projects">Projects</a></li>
+            <li><a href="../index.html#contact">Contact</a></li>
+        </ul>
+        <div class="menu-toggle"><span></span><span></span><span></span></div>
+    </nav>
+
+    <section class="prediction-page">
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem;">
+            <a href="../index.html#projects" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back</a>
+            <a href="heart-disease.html" class="back-link"><i class="fa-solid fa-heart-pulse"></i> Heart Disease</a>
+        </div>
+        
+        <div class="prediction-header">
+            <h1>Breast Cancer Prediction</h1>
+            <p>Enter the tumor characteristics below to predict if the tumor is malignant or benign.</p>
+        </div>
+
+        <form class="prediction-form" id="cancerForm">
+            <h3>Mean Values</h3>
+            <div class="input-grid">
+                <div class="input-group">
+                    <label for="radius_mean">Radius Mean</label>
+                    <input type="number" id="radius_mean" required step="0.01" min="0">
+                </div>
+                <div class="input-group">
+                    <label for="area_mean">Area Mean</label>
+                    <input type="number" id="area_mean" required step="0.01" min="0">
+                </div>
+                <div class="input-group">
+                    <label for="concavity_mean">Concavity Mean</label>
+                    <input type="number" id="concavity_mean" required step="0.01" min="0">
+                </div>
+                <div class="input-group">
+                    <label for="concave_points_mean">Concave Points Mean</label>
+                    <input type="number" id="concave_points_mean" required step="0.01" min="0">
+                </div>
+            </div>
+            
+            <h3>Standard Error</h3>
+            <div class="input-grid">
+                <div class="input-group">
+                    <label for="texture_se">Texture SE</label>
+                    <input type="number" id="texture_se" required step="0.01" min="0">
+                </div>
+            </div>
+            
+            <h3>Worst Values</h3>
+            <div class="input-grid">
+                <div class="input-group">
+                    <label for="radius_worst">Radius Worst</label>
+                    <input type="number" id="radius_worst" required step="0.01" min="0">
+                </div>
+                <div class="input-group">
+                    <label for="texture_worst">Texture Worst</label>
+                    <input type="number" id="texture_worst" required step="0.01" min="0">
+                </div>
+                <div class="input-group">
+                    <label for="perimeter_worst">Perimeter Worst</label>
+                    <input type="number" id="perimeter_worst" required step="0.01" min="0">
+                </div>
+                <div class="input-group">
+                    <label for="area_worst">Area Worst</label>
+                    <input type="number" id="area_worst" required step="0.01" min="0">
+                </div>
+                <div class="input-group">
+                    <label for="compactness_worst">Compactness Worst</label>
+                    <input type="number" id="compactness_worst" required step="0.01" min="0">
+                </div>
+                <div class="input-group">
+                    <label for="concavity_worst">Concavity Worst</label>
+                    <input type="number" id="concavity_worst" required step="0.01" min="0">
+                </div>
+                <div class="input-group">
+                    <label for="concave_points_worst">Concave Points Worst</label>
+                    <input type="number" id="concave_points_worst" required step="0.01" min="0">
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary predict-btn">
+                <span>Analyze Tumor</span>
+                <i class="fa-solid fa-dna"></i>
+            </button>
+        </form>
+
+        <div class="loading" id="loading">
+            <div class="loading-spinner"></div>
+            <p>Running ML analysis...</p>
+        </div>
+
+        <div class="result-display" id="result">
+            <div class="result-icon"><i class="fa-solid fa-dna"></i></div>
+            <h2 id="resultTitle"></h2>
+            <p id="resultText"></p>
+        </div>
+    </section>
+
+    <script src="../js/script.js"></script>
+    <script>
+        const cancerForm = document.getElementById('cancerForm');
+        const loading = document.getElementById('loading');
+        const result = document.getElementById('result');
+        const resultTitle = document.getElementById('resultTitle');
+        const resultText = document.getElementById('resultText');
+
+        function getFormData() {
+            return {
+                radius_mean: parseFloat(document.getElementById('radius_mean').value),
+                area_mean: parseFloat(document.getElementById('area_mean').value),
+                concavity_mean: parseFloat(document.getElementById('concavity_mean').value),
+                concave_points_mean: parseFloat(document.getElementById('concave_points_mean').value),
+                texture_se: parseFloat(document.getElementById('texture_se').value),
+                radius_worst: parseFloat(document.getElementById('radius_worst').value),
+                texture_worst: parseFloat(document.getElementById('texture_worst').value),
+                perimeter_worst: parseFloat(document.getElementById('perimeter_worst').value),
+                area_worst: parseFloat(document.getElementById('area_worst').value),
+                compactness_worst: parseFloat(document.getElementById('compactness_worst').value),
+                concavity_worst: parseFloat(document.getElementById('concavity_worst').value),
+                concave_points_worst: parseFloat(document.getElementById('concave_points_worst').value)
+            };
+        }
+
+        function simulatePrediction(data) {
+            let riskScore = 0;
+            if (data.radius_mean > 15) riskScore += 2;
+            if (data.area_mean > 600) riskScore += 2;
+            if (data.concavity_mean > 0.1) riskScore += 2;
+            if (data.concave_points_mean > 0.05) riskScore += 2;
+            if (data.radius_worst > 20) riskScore += 2;
+            if (data.area_worst > 800) riskScore += 2;
+            if (data.concavity_worst > 0.2) riskScore += 2;
+            if (data.concave_points_worst > 0.1) riskScore += 1;
+            return riskScore > 6;
+        }
+
+        if (cancerForm) {
+            cancerForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                cancerForm.style.display = 'none';
+                loading.classList.add('show');
+                
+                const data = getFormData();
+                
+                setTimeout(() => {
+                    loading.classList.remove('show');
+                    const isMalignant = simulatePrediction(data);
+                    
+                    if (isMalignant) {
+                        result.className = 'result-display malignant';
+                        resultTitle.textContent = 'Malignant - Cancer Positive';
+                        resultText.textContent = 'The analysis suggests the tumor may be malignant. Please consult an oncologist.';
+                    } else {
+                        result.className = 'result-display benign';
+                        resultTitle.textContent = 'Benign - No Cancer Detected';
+                        resultText.textContent = 'The analysis suggests the tumor is likely benign. Continue regular checkups.';
+                    }
+                    result.classList.add('show');
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>
