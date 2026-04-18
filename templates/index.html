@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shubh | ML Engineer & Developer</title>
+    <!-- <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>"> -->
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/shub_logo.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <canvas id="neural-canvas"></canvas>
+    
+    <nav class="navbar">
+        <div class="nav-logo"><a href="/">SHUB<span class="accent">.AI</span></a></div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#achievements">Achievements</a></li>
+            <li><a href="#blog">Updates</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="menu-toggle"><span></span><span></span><span></span></div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="glitch-wrapper">
+                <h1 class="glitch" data-text="Hello, I'm Subham">Hello, I'm Subham</h1>
+            </div>
+            <p class="typing-text">A CS student passionate about <span class="highlight">AI/ML</span>, <span class="highlight">GenAI</span>, <span class="highlight">LLMs</span> & building <span class="highlight">AI Agents</span></p>
+            <div class="hero-buttons">
+                <a href="#about" class="btn btn-primary">Explore</a>
+                <a href="#projects" class="btn btn-outline">My Work</a>
+            </div>
+            <div class="scroll-indicator">
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title"><span class="accent">01.</span> About Me</h2>
+            <div class="about-grid">
+                <div class="about-image">
+                    <div class="image-frame">
+                        <div class="matrix-overlay"></div>
+                        <div class="placeholder-avatar">
+                            <i class="fa-solid fa-robot"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-content">
+                    <p>Hi, I'm <strong>Subham Pathak</strong>, a Computer Science Engineering student driven by curiosity for AI/ML.</p>
+                    <div class="tabs">
+                        <button class="tab-btn active" data-tab="skills">Skills</button>
+                        <button class="tab-btn" data-tab="experience">Experience</button>
+                        <button class="tab-btn" data-tab="goals">Goals</button>
+                    </div>
+                    <div class="tab-content active" id="skills">
+                        <ul>
+                            <li><span>AI/ML</span> - Machine Learning, Deep Learning</li>
+                            <li><span>Python</span> - Data Science, ML</li>
+                            <li><span>GenAI</span> - LLMs, AI Agents</li>
+                            <li><span>Web Dev</span> - HTML/CSS/JS</li>
+                        </ul>
+                    </div>
+                    <div class="tab-content" id="experience">
+                        <ul>
+                            <li><span>ML Projects</span> - Heart Disease & Cancer Prediction</li>
+                            <li><span>Web Dev</span> - Frontend Development</li>
+                            <li><span>Coding</span> - Daily practice</li>
+                        </ul>
+                    </div>
+                    <div class="tab-content" id="goals">
+                        <ul>
+                            <li><span>ML Engineer</span> - Build real ML models</li>
+                            <li><span>GenAI Master</span> - Work with LLMs</li>
+                            <li><span>AI Projects</span> - Create impactful AI solutions</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="section dark-section">
+        <div class="container">
+            <h2 class="section-title"><span class="accent">02.</span> Skills & Tools</h2>
+            <div class="skills-grid">
+                <div class="skill-card"><div class="skill-icon"><i class="fa-brands fa-python"></i></div><h3>Python</h3><p>NumPy, Pandas, TensorFlow, Scikit-learn, Pytorch</p><div class="skill-bar"><div class="skill-progress" style="width: 80%"></div></div></div>
+                <div class="skill-card"><div class="skill-icon"><i class="fa-solid fa-brain"></i></div><h3>Machine Learning</h3><p>Supervised & Unsupervised, Reinforcement Learning</p><div class="skill-bar"><div class="skill-progress" style="width: 70%"></div></div></div>
+                <div class="skill-card"><div class="skill-icon"><i class="fa-solid fa-network-wired"></i></div><h3>Deep Learning</h3><p>CNNs, Neural Networks, RNN, NLP</p><div class="skill-bar"><div class="skill-progress" style="width: 60%"></div></div></div>
+                <div class="skill-card"><div class="skill-icon"><i class="fa-solid fa-robot"></i></div><h3>GenAI & LLMs</h3><p>GPT, Prompt Engineering, AI Agents, Langchain, RAG</p><div class="skill-bar"><div class="skill-progress" style="width: 65%"></div></div></div>
+                <div class="skill-card"><div class="skill-icon"><i class="fa-brands fa-html5"></i></div><h3>HTML & CSS</h3><p>Responsive Design</p><div class="skill-bar"><div class="skill-progress" style="width: 85%"></div></div></div>
+                <div class="skill-card"><div class="skill-icon"><i class="fa-brands fa-js"></i></div><h3>JavaScript</h3><p>ES6+, DOM, Canvas</p><div class="skill-bar"><div class="skill-progress" style="width: 75%"></div></div></div>
+                <div class="skill-card"><div class="skill-icon"><i class="fa-brands fa-react"></i></div><h3>React</h3><p>Components, Hooks</p><div class="skill-bar"><div class="skill-progress" style="width: 55%"></div></div></div>
+                <div class="skill-card"><div class="skill-icon"><i class="fa-solid fa-code-branch"></i></div><h3>Tools</h3><p>Git, GitHub, Linux</p><div class="skill-bar"><div class="skill-progress" style="width: 75%"></div></div></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="section">
+        <div class="container">
+            <h2 class="section-title"><span class="accent">03.</span> Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-visual"><div class="neural-dots"></div><div class="project-overlay"><i class="fa-solid fa-heart-pulse"></i></div></div>
+                    <div class="project-info">
+                        <h3>Multi-Model Prediction Suite</h3>
+                        <p>An integrated ML platform with heart disease and cancer prediction using Random Forest.</p>
+                        <div class="project-tags"><span>Python</span><span>ML</span><span>Scikit-learn</span></div>
+                        <a href="/system" class="project-link"><i class="fa-solid fa-rocket"></i> Try Now <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-visual"><div class="neural-dots"></div><div class="project-overlay"><i class="fa-solid fa-globe"></i></div></div>
+                    <div class="project-info">
+                        <h3>Portfolio Website</h3>
+                        <p>A modern ML-themed portfolio with interactive design.</p>
+                        <div class="project-tags"><span>HTML</span><span>CSS</span><span>JS</span></div>
+                        <a href="#home" class="project-link"><i class="fa-solid fa-rocket"></i> Click me <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="project-card coming">
+                    <div class="project-visual"><i class="fa-solid fa-hourglass-half"></i></div>
+                    <div class="project-info">
+                        <h3>More Coming Soon</h3>
+                        <p>Working on new exciting ML projects...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="achievements" class="section dark-section">
+        <div class="container">
+            <h2 class="section-title"><span class="accent">04.</span> Achievements & Certifications</h2>
+            <div class="achievements-grid">
+                <div class="achievement-card">
+                    <i class="fa-solid fa-certificate"></i>
+                    <div>
+                        <h3>Machine Learning Foundations</h3>
+                        <p>ML fundamentals and practical applications</p>
+                    </div>
+                </div>
+                <div class="achievement-card">
+                    <i class="fa-solid fa-brain"></i>
+                    <div>
+                        <h3>Deep Learning Specialization</h3>
+                        <p>Neural networks and CNNs</p>
+                    </div>
+                </div>
+                <div class="achievement-card">
+                    <i class="fa-solid fa-robot"></i>
+                    <div>
+                        <h3>GenAI & LLM Workshop</h3>
+                        <p>Hands-on with GPT models</p>
+                    </div>
+                </div>
+                <div class="achievement-card">
+                    <i class="fa-solid fa-code"></i>
+                    <div>
+                        <h3>Web Development</h3>
+                        <p>Full-stack development</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="blog" class="section">
+        <div class="container">
+            <h2 class="section-title"><span class="accent">05.</span> Latest Updates</h2>
+            <div class="blog-grid">
+                <div class="blog-card">
+                    <div class="blog-date">2025</div>
+                    <div class="blog-content">
+                        <h3>Exploring AI Agents</h3>
+                        <p>Currently diving deep into autonomous AI agents and how they can automate real-world tasks using LLMs.</p>
+                        <div class="blog-tags"><span>AI Agents</span><span>LLM</span></div>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <div class="blog-date">2025</div>
+                    <div class="blog-content">
+                        <h3>Building RAG Systems</h3>
+                        <p>Learning Retrieval-Augmented Generation to build smarter, context-aware AI applications.</p>
+                        <div class="blog-tags"><span>RAG</span><span>GenAI</span></div>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <div class="blog-date">2025</div>
+                    <div class="blog-content">
+                        <h3>Deep Learning with PyTorch</h3>
+                        <p>Started learning PyTorch framework for building neural networks and deep learning models.</p>
+                        <div class="blog-tags"><span>PyTorch</span><span>Deep Learning</span></div>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <div class="blog-date">2025</div>
+                    <div class="blog-content">
+                        <h3>Prompt Engineering Mastery</h3>
+                        <p>Practicing advanced prompt engineering techniques to get better outputs from LLMs.</p>
+                        <div class="blog-tags"><span>Prompts</span><span>GenAI</span></div>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <div class="blog-date">2024</div>
+                    <div class="blog-content">
+                        <h3>ML Projects Portfolio</h3>
+                        <p>Built heart disease and cancer prediction models using Random Forest Classifier.</p>
+                        <div class="blog-tags"><span>Machine Learning</span><span>Python</span></div>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <div class="blog-date">2024</div>
+                    <div class="blog-content">
+                        <h3>First ML Model</h3>
+                        <p>Built my first machine learning model - a basic classifier for a dataset.</p>
+                        <div class="blog-tags"><span>Scikit-learn</span><span>Python</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section dark-section">
+        <div class="container">
+            <h2 class="section-title"><span class="accent">06.</span> Get In Touch</h2>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <div class="contact-item"><i class="fa-solid fa-envelope"></i><div><h4>Email</h4><p>lastw5232@gmail.com</p></div></div>
+                    <div class="contact-item"><i class="fa-solid fa-location-dot"></i><div><h4>Location</h4><p>India</p></div></div>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/s_ubhqm/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/in/subhampathak/" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+                        <a href="https://github.com/itzsubham2006" target="_blank"><i class="fa-brands fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer><div class="footer-content"><p>Built with <span class="accent">&lt;3&gt;</span></p><p class="copyright">© 2025 Shubh. All rights reserved.</p></div></footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

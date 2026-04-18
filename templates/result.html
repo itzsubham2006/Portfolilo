@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Result</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✨</text></svg>">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .result-page {
+            padding: 120px 5%;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .result-box {
+            background: var(--bg-tertiary);
+            padding: 3rem;
+            border-radius: 24px;
+            border: 2px solid var(--accent);
+            text-align: center;
+            max-width: 600px;
+            animation: result-glow 2s ease-in-out infinite;
+        }
+        @keyframes result-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(0, 212, 255, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(0, 212, 255, 0.6); }
+        }
+        .result-box h1 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+        .result-box p {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            border-radius: 12px;
+        }
+        .result-box p:contains("Healthy"), .result-box p:contains("Benign") {
+            background: rgba(0, 255, 136, 0.1);
+            border: 2px solid #00ff88;
+            color: #00ff88;
+        }
+        .result-box p:contains("Risk"), .result-box p:contains("Malignant"), .result-box p:contains("Cancer") {
+            background: rgba(255, 68, 68, 0.1);
+            border: 2px solid #ff4444;
+            color: #ff4444;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.875rem 2rem;
+            border: 2px solid var(--accent);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        .back-link:hover {
+            background: var(--accent);
+            color: var(--bg-primary);
+        }
+    </style>
+</head>
+<body>
+    <canvas id="neural-canvas"></canvas>
+    <nav class="navbar">
+        <div class="nav-logo"><a href="/">SHUB<span class="accent">.AI</span></a></div>
+    </nav>
+    
+    <section class="result-page">
+        <div class="result-box">
+            <h1>{{ model_name }} Prediction</h1>
+            <p>{{ prediction_text }}</p>
+            <a href="/system" class="back-link"><i class="fa-solid fa-arrow-left"></i> Try Again</a>
+        </div>
+    </section>
+</body>
+</html>
