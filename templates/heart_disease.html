@@ -3,68 +3,154 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Heart Disease Prediction</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>❤️</text></svg>">
+    <title>heart_predict.py</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/shub_logo.png') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        .prediction-page { padding: 120px 5% 60px; min-height: 100vh; }
-        .prediction-header { text-align: center; margin-bottom: 3rem; }
-        .prediction-header h1 { font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 1rem; }
-        .prediction-header p { color: var(--text-secondary); max-width: 600px; margin: 0 auto; }
-        .prediction-form { max-width: 900px; margin: 0 auto; background: var(--bg-tertiary); padding: 2rem; border-radius: 20px; border: 1px solid rgba(0, 212, 255, 0.1); }
-        .input-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
-        .input-group { display: flex; flex-direction: column; gap: 0.5rem; }
-        .input-group label { font-size: 0.875rem; color: var(--text-secondary); font-weight: 500; }
-        .input-group input, .input-group select { padding: 0.875rem 1rem; background: var(--bg-secondary); border: 1px solid transparent; border-radius: 8px; color: var(--text-primary); font-size: 1rem; font-family: var(--font-mono); transition: all 0.3s ease; }
-        .input-group input:focus, .input-group select:focus { outline: none; border-color: var(--accent); }
-        .predict-btn { width: 100%; padding: 1rem 2rem; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; gap: 0.75rem; }
-        .result-display { display: none; text-align: center; padding: 3rem; margin-top: 2rem; border-radius: 20px; animation: fadeIn 0.5s ease; }
-        .result-display.show { display: block; }
-        .result-display.safe { background: rgba(0, 255, 136, 0.1); border: 2px solid #00ff88; }
-        .result-display.danger { background: rgba(255, 68, 68, 0.1); border: 2px solid #ff4444; }
-        .result-icon { font-size: 4rem; margin-bottom: 1rem; }
-        .result-display h2 { font-size: 1.5rem; margin-bottom: 0.5rem; }
-        .result-display p { color: var(--text-secondary); }
-        .back-link { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--accent); text-decoration: none; margin-bottom: 2rem; font-weight: 500; }
-    </style>
 </head>
 <body>
     <canvas id="neural-canvas"></canvas>
+    <div class="matrix-rain" id="matrix"></div>
+
     <nav class="navbar">
-        <div class="nav-logo"><a href="/">SHUB<span class="accent">.AI</span></a></div>
+        <div class="nav-logo">
+            <span class="prompt">┌─[</span><span class="user">subham</span><span class="at">@</span><span class="host">portfolio</span><span class="prompt">]</span><span class="sep">─</span><span class="dir">~/ml-suite</span>
+        </div>
         <ul class="nav-links">
-            <li><a href="/">Home</a></li>
-            <li><a href="/system">Predictions</a></li>
+            <li><a href="/">home</a></li>
+            <li><a href="/system">predictions</a></li>
         </ul>
+        <div class="menu-toggle"><span></span><span></span><span></span></div>
     </nav>
 
     <section class="prediction-page">
-        <a href="/system" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back</a>
-        
-        <div class="prediction-header">
-            <h1>Heart Disease Prediction</h1>
-            <p>Enter the patient's medical details below to predict heart disease risk.</p>
+        <a href="/system" class="back-link">back</a>
+
+        <div class="terminal-prompt-line" style="margin-bottom: 1.5rem;">
+            <span class="prompt-user">subham</span><span class="at">@</span><span class="prompt-dir">ml-suite</span>
+            <span class="prompt-sym">$</span>
+            <span>python heart_predict.py --mode interactive</span>
+            <span class="cursor"></span>
         </div>
 
-        <form method="POST" action="/predict">
-            <div class="input-grid">
-                <div class="input-group"><label for="age">Age</label><input type="number" name="age" required min="1" max="120"></div>
-                <div class="input-group"><label for="sex">Sex</label><select name="sex" required><option value="">Select...</option><option value="1">Male</option><option value="0">Female</option></select></div>
-                <div class="input-group"><label for="cp">Chest Pain Type</label><select name="cp" required><option value="">Select...</option><option value="0">Typical</option><option value="1">Atypical</option><option value="2">Non-anginal</option><option value="3">Asymptomatic</option></select></div>
-                <div class="input-group"><label for="trestbps">Resting BP</label><input type="number" name="trestbps" required></div>
-                <div class="input-group"><label for="chol">Cholesterol</label><input type="number" name="chol" required></div>
-                <div class="input-group"><label for="fbs">Fasting Blood Sugar</label><select name="fbs" required><option value="">Select...</option><option value="1">True</option><option value="0">False</option></select></div>
-                <div class="input-group"><label for="restecg">Resting ECG</label><select name="restecg" required><option value="">Select...</option><option value="0">Normal</option><option value="1">Abnormal</option><option value="2">LV Hypertrophy</option></select></div>
-                <div class="input-group"><label for="thalach">Max Heart Rate</label><input type="number" name="thalach" required></div>
-                <div class="input-group"><label for="exang">Exercise Angina</label><select name="exang" required><option value="">Select...</option><option value="1">Yes</option><option value="0">No</option></select></div>
-                <div class="input-group"><label for="oldpeak">ST Depression</label><input type="number" name="oldpeak" required step="0.1"></div>
-                <div class="input-group"><label for="slope">ST Slope</label><select name="slope" required><option value="">Select...</option><option value="0">Upsloping</option><option value="1">Flat</option><option value="2">Downsloping</option></select></div>
-                <div class="input-group"><label for="ca">Vessels (0-3)</label><input type="number" name="ca" required min="0" max="3"></div>
-                <div class="input-group"><label for="thal">Thalassemia</label><select name="thal" required><option value="">Select...</option><option value="0">Normal</option><option value="1">Fixed</option><option value="2">Reversible</option></select></div>
+        <div class="prediction-form">
+            <div class="form-terminal-bar">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <span class="filename">heart_predict.py</span>
             </div>
-            <button type="submit" class="btn btn-primary predict-btn"><span>Predict</span><i class="fa-solid fa-heart-pulse"></i></button>
-        </form>
+
+            <div class="form-body">
+                <div class="form-section">
+                    <div class="form-section-label">patient_info</div>
+                    <div class="input-grid">
+                        <div class="input-group">
+                            <label for="age">age</label>
+                            <input type="number" name="age" required min="1" max="120" placeholder="29">
+                        </div>
+                        <div class="input-group">
+                            <label for="sex">sex</label>
+                            <select name="sex" required>
+                                <option value="">select...</option>
+                                <option value="1">male (1)</option>
+                                <option value="0">female (0)</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="cp">chest_pain_type</label>
+                            <select name="cp" required>
+                                <option value="">select...</option>
+                                <option value="0">typical (0)</option>
+                                <option value="1">atypical (1)</option>
+                                <option value="2">non-anginal (2)</option>
+                                <option value="3">asymptomatic (3)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <div class="form-section-label">vitals</div>
+                    <div class="input-grid">
+                        <div class="input-group">
+                            <label for="trestbps">resting_bp (mmHg)</label>
+                            <input type="number" name="trestbps" required placeholder="120">
+                        </div>
+                        <div class="input-group">
+                            <label for="chol">cholesterol (mg/dl)</label>
+                            <input type="number" name="chol" required placeholder="200">
+                        </div>
+                        <div class="input-group">
+                            <label for="fbs">fasting_bs &gt; 120</label>
+                            <select name="fbs" required>
+                                <option value="">select...</option>
+                                <option value="1">true (1)</option>
+                                <option value="0">false (0)</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="restecg">resting_ecg</label>
+                            <select name="restecg" required>
+                                <option value="">select...</option>
+                                <option value="0">normal (0)</option>
+                                <option value="1">abnormal (1)</option>
+                                <option value="2">lv_hypertrophy (2)</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="thalach">max_heart_rate</label>
+                            <input type="number" name="thalach" required placeholder="150">
+                        </div>
+                        <div class="input-group">
+                            <label for="exang">exercise_angina</label>
+                            <select name="exang" required>
+                                <option value="">select...</option>
+                                <option value="1">yes (1)</option>
+                                <option value="0">no (0)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <div class="form-section-label">stress_test</div>
+                    <div class="input-grid">
+                        <div class="input-group">
+                            <label for="oldpeak">st_depression</label>
+                            <input type="number" name="oldpeak" required step="0.1" placeholder="0.0">
+                        </div>
+                        <div class="input-group">
+                            <label for="slope">st_slope</label>
+                            <select name="slope" required>
+                                <option value="">select...</option>
+                                <option value="0">upsloping (0)</option>
+                                <option value="1">flat (1)</option>
+                                <option value="2">downsloping (2)</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="ca">num_vessels (0-3)</label>
+                            <input type="number" name="ca" required min="0" max="3" placeholder="0">
+                        </div>
+                        <div class="input-group">
+                            <label for="thal">thalassemia</label>
+                            <select name="thal" required>
+                                <option value="">select...</option>
+                                <option value="0">normal (0)</option>
+                                <option value="1">fixed (1)</option>
+                                <option value="2">reversible (2)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary predict-btn">
+                    <span>./predict --model heart_disease_rf</span>
+                    <i class="fa-solid fa-heart-pulse"></i>
+                </button>
+            </div>
+        </div>
     </section>
 
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>

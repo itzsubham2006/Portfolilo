@@ -3,85 +3,183 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shubh | ML Engineer & Developer</title>
-    <!-- <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>"> -->
+    <title>subham | systems</title>
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/shub_logo.png') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <canvas id="neural-canvas"></canvas>
-    
+    <div class="matrix-rain" id="matrix"></div>
+
+    <div class="status-bar">
+        <div class="status-left">
+            <span class="status-item"><span class="status-dot"></span>online</span>
+            <span class="status-sep">|</span>
+            <span class="status-item" id="statusTime"></span>
+            <span class="status-sep">|</span>
+            <span class="status-item" id="statusDate"></span>
+        </div>
+        <div class="status-right">
+            <span class="status-item">bash 5.2</span>
+            <span class="status-sep">|</span>
+            <span class="status-item">python 3.12</span>
+            <span class="status-sep">|</span>
+            <span class="status-item">subham@portfolio</span>
+        </div>
+    </div>
+
+    <div class="cmd-suggestion" id="cmdHint">
+        <span class="cmd-label">TAB</span>
+        <span class="cmd-text" id="cmdText">autocomplete</span>
+    </div>
+
     <nav class="navbar">
-        <div class="nav-logo"><a href="/">SHUB<span class="accent">.AI</span></a></div>
+        <div class="nav-logo">
+            <span class="prompt">┌─[</span><span class="user">subham</span><span class="at">@</span><span class="host">portfolio</span><span class="prompt">]</span><span class="sep">─</span><span class="dir">~</span>
+        </div>
         <ul class="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#achievements">Achievements</a></li>
-            <li><a href="#blog">Updates</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="#home" data-cmd="cd ~">home</a></li>
+            <li><a href="#about" data-cmd="cat about.md">about</a></li>
+            <li><a href="#skills" data-cmd="cat stack.json">skills</a></li>
+            <li><a href="#projects" data-cmd="ls projects">projects</a></li>
+            <li><a href="#updates" data-cmd="tail updates.log">updates</a></li>
+            <li><a href="#contact" data-cmd="mail subham">contact</a></li>
         </ul>
         <div class="menu-toggle"><span></span><span></span><span></span></div>
     </nav>
 
     <section id="home" class="hero">
         <div class="hero-content">
-            <div class="glitch-wrapper">
-                <h1 class="glitch" data-text="Hello, I'm Subham">Hello, I'm Subham</h1>
+            <div class="terminal-window">
+                <div class="terminal-bar">
+                    <div class="dot r"></div>
+                    <div class="dot y"></div>
+                    <div class="dot g"></div>
+                    <span class="title">subham@portfolio:~</span>
+                    <div class="bar-actions">
+                        <button class="bar-btn" id="clearBtn" title="clear (Ctrl+L)">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                        <button class="bar-btn" id="neofetchBtn" title="system info">
+                            <i class="fa-solid fa-server"></i>
+                        </button>
+                        <button class="bar-btn" id="helpBtn" title="help (?)">
+                            <i class="fa-solid fa-question"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="terminal-body">
+                    <div class="terminal-prompt-line">
+                        <span class="prompt-user">subham</span><span class="at">@</span><span class="prompt-dir">portfolio</span>
+                        <span class="prompt-sym">$</span>
+                        <input type="text" class="terminal-input" id="cmdInput" placeholder="_" autocomplete="off" spellcheck="false">
+                    </div>
+
+                    <div class="terminal-output" id="terminalOutput">
+                        <div class="output-line">
+                            <span class="num">01</span>
+                            <span class="content"><span class="key">name</span> : <span class="val">Subham Pathak</span></span>
+                        </div>
+                        <div class="output-line">
+                            <span class="num">02</span>
+                            <span class="content"><span class="key">role</span> : <span class="val">CS Student → ML Engineer</span></span>
+                        </div>
+                        <div class="output-line">
+                            <span class="num">03</span>
+                            <span class="content"><span class="key">stack</span> : <span class="highlight">AI/ML</span> <span class="yellow">|</span> <span class="highlight">GenAI</span> <span class="yellow">|</span> <span class="highlight">LLMs</span></span>
+                        </div>
+                        <div class="output-line">
+                            <span class="num">04</span>
+                            <span class="content"><span class="key">status</span> : <span class="highlight">building things</span></span>
+                        </div>
+                        <div class="output-line">
+                            <span class="num">05</span>
+                            <span class="content"><span class="key">location</span> : <span class="val">India</span></span>
+                        </div>
+                        <div class="output-line">
+                            <span class="num">06</span>
+                            <span class="content"><span class="key">email</span> : <span class="val">lastw5232@gmail.com</span></span>
+                        </div>
+                        <div class="output-line">
+                            <span class="num">07</span>
+                            <span class="content"><span class="muted">type 'help' or press '?' for commands</span></span>
+                        </div>
+                    </div>
+
+                    <div class="cmd-history" id="cmdHistory"></div>
+                </div>
             </div>
-            <p class="typing-text">A CS student passionate about <span class="highlight">AI/ML</span>, <span class="highlight">GenAI</span>, <span class="highlight">LLMs</span> & building <span class="highlight">AI Agents</span></p>
-            <div class="hero-buttons">
-                <a href="#about" class="btn btn-primary">Explore</a>
-                <a href="#projects" class="btn btn-outline">My Work</a>
+
+            <div class="hero-btns">
+                <a href="#about" class="btn btn-primary" data-cmd="cat about.md">./explore</a>
+                <a href="/system" class="btn btn-outline" data-cmd="python ml-suite.py">./run_models</a>
             </div>
-            <div class="scroll-indicator">
-                <span></span>
-                <span></span>
+
+            <div class="quick-commands">
+                <span class="qc-label">cmds:</span>
+                <button class="qc-btn" data-cmd="ls">ls</button>
+                <button class="qc-btn" data-cmd="cat skills.json">cat</button>
+                <button class="qc-btn" data-cmd="help">help</button>
+                <button class="qc-btn" data-cmd="whoami">whoami</button>
+                <button class="qc-btn" data-cmd="neofetch">neofetch</button>
+                <button class="qc-btn" data-cmd="history">history</button>
+                <button class="qc-btn" data-cmd="sudo su">sudo</button>
+                <button class="qc-btn" data-cmd="sudo su">Ctrl + L (Clear)</button>
             </div>
         </div>
     </section>
 
     <section id="about" class="section">
         <div class="container">
-            <h2 class="section-title"><span class="accent">01.</span> About Me</h2>
+            <div class="section-label">about.md</div>
             <div class="about-grid">
-                <div class="about-image">
-                    <div class="image-frame">
-                        <div class="matrix-overlay"></div>
-                        <div class="placeholder-avatar">
-                            <i class="fa-solid fa-robot"></i>
-                        </div>
+                <div class="robot-avatar">
+                    <div class="face">
+                        <i class="fa-solid fa-robot"></i>
+                    </div>
+                    <div class="status-text">online</div>
+                    <div class="robot-info">
+                        <div class="robot-stat"><span class="rkey">OS</span><span class="rval">PortfolioOS</span></div>
+                        <div class="robot-stat"><span class="rkey">Host</span><span class="rval">subham.dev</span></div>
+                        <div class="robot-stat"><span class="rkey">Kernel</span><span class="rval">5.15.0</span></div>
+                        <div class="robot-stat"><span class="rkey">Uptime</span><span class="rval">∞</span></div>
+                        <div class="robot-stat"><span class="rkey">Shell</span><span class="rval">bash 5.2</span></div>
+                        <div class="robot-stat"><span class="rkey">CPU</span><span class="rval">ML Brain</span></div>
+                        <div class="robot-stat"><span class="rkey">Memory</span><span class="rval">128GB</span></div>
                     </div>
                 </div>
                 <div class="about-content">
-                    <p>Hi, I'm <strong>Subham Pathak</strong>, a Computer Science Engineering student driven by curiosity for AI/ML.</p>
+                    <p class="bio">
+                        Computer Science student. <strong>AI/ML enthusiast.</strong>
+                        I build, break, and learn. Focused on machine learning, generative AI, and LLMs.
+                        Currently exploring autonomous AI agents and RAG systems.
+                    </p>
                     <div class="tabs">
-                        <button class="tab-btn active" data-tab="skills">Skills</button>
-                        <button class="tab-btn" data-tab="experience">Experience</button>
-                        <button class="tab-btn" data-tab="goals">Goals</button>
+                        <button class="tab-btn active" data-tab="skills" data-cmd="cat skills.json">skills.json</button>
+                        <button class="tab-btn" data-tab="exp" data-cmd="cat experience.log">experience.log</button>
+                        <button class="tab-btn" data-tab="goals" data-cmd="cat goals.md">goals.md</button>
                     </div>
                     <div class="tab-content active" id="skills">
                         <ul>
-                            <li><span>AI/ML</span> - Machine Learning, Deep Learning</li>
-                            <li><span>Python</span> - Data Science, ML</li>
-                            <li><span>GenAI</span> - LLMs, AI Agents</li>
-                            <li><span>Web Dev</span> - HTML/CSS/JS</li>
+                            <li><span>AI/ML</span> — Machine Learning, Deep Learning, NLP</li>
+                            <li><span>Python</span> — NumPy, Pandas, TensorFlow, Scikit-learn</li>
+                            <li><span>GenAI</span> — LLMs, Prompt Engineering, Langchain, RAG</li>
+                            <li><span>Web</span> — HTML, CSS, JavaScript, Flask</li>
                         </ul>
                     </div>
-                    <div class="tab-content" id="experience">
+                    <div class="tab-content" id="exp">
                         <ul>
-                            <li><span>ML Projects</span> - Heart Disease & Cancer Prediction</li>
-                            <li><span>Web Dev</span> - Frontend Development</li>
-                            <li><span>Coding</span> - Daily practice</li>
+                            <li><span>ML Projects</span> — Heart Disease & Cancer Prediction</li>
+                            <li><span>Web Dev</span> — Frontend Development, Flask Apps</li>
+                            <li><span>Open Source</span> — Learning & Contributing</li>
                         </ul>
                     </div>
                     <div class="tab-content" id="goals">
                         <ul>
-                            <li><span>ML Engineer</span> - Build real ML models</li>
-                            <li><span>GenAI Master</span> - Work with LLMs</li>
-                            <li><span>AI Projects</span> - Create impactful AI solutions</li>
+                            <li><span>ML Engineer</span> — Build production ML systems</li>
+                            <li><span>GenAI Master</span> — Master LLMs & AI Agents</li>
+                            <li><span>Contribute</span> — Open source projects</li>
                         </ul>
                     </div>
                 </div>
@@ -91,47 +189,116 @@
 
     <section id="skills" class="section dark-section">
         <div class="container">
-            <h2 class="section-title"><span class="accent">02.</span> Skills & Tools</h2>
+            <div class="section-label">stack.json</div>
             <div class="skills-grid">
-                <div class="skill-card"><div class="skill-icon"><i class="fa-brands fa-python"></i></div><h3>Python</h3><p>NumPy, Pandas, TensorFlow, Scikit-learn, Pytorch</p><div class="skill-bar"><div class="skill-progress" style="width: 80%"></div></div></div>
-                <div class="skill-card"><div class="skill-icon"><i class="fa-solid fa-brain"></i></div><h3>Machine Learning</h3><p>Supervised & Unsupervised, Reinforcement Learning</p><div class="skill-bar"><div class="skill-progress" style="width: 70%"></div></div></div>
-                <div class="skill-card"><div class="skill-icon"><i class="fa-solid fa-network-wired"></i></div><h3>Deep Learning</h3><p>CNNs, Neural Networks, RNN, NLP</p><div class="skill-bar"><div class="skill-progress" style="width: 60%"></div></div></div>
-                <div class="skill-card"><div class="skill-icon"><i class="fa-solid fa-robot"></i></div><h3>GenAI & LLMs</h3><p>GPT, Prompt Engineering, AI Agents, Langchain, RAG</p><div class="skill-bar"><div class="skill-progress" style="width: 65%"></div></div></div>
-                <div class="skill-card"><div class="skill-icon"><i class="fa-brands fa-html5"></i></div><h3>HTML & CSS</h3><p>Responsive Design</p><div class="skill-bar"><div class="skill-progress" style="width: 85%"></div></div></div>
-                <div class="skill-card"><div class="skill-icon"><i class="fa-brands fa-js"></i></div><h3>JavaScript</h3><p>ES6+, DOM, Canvas</p><div class="skill-bar"><div class="skill-progress" style="width: 75%"></div></div></div>
-                <div class="skill-card"><div class="skill-icon"><i class="fa-brands fa-react"></i></div><h3>React</h3><p>Components, Hooks</p><div class="skill-bar"><div class="skill-progress" style="width: 55%"></div></div></div>
-                <div class="skill-card"><div class="skill-icon"><i class="fa-solid fa-code-branch"></i></div><h3>Tools</h3><p>Git, GitHub, Linux</p><div class="skill-bar"><div class="skill-progress" style="width: 75%"></div></div></div>
+                <div class="skill-card" data-cmd="python3 --version">
+                    <div class="skill-top">
+                        <i class="fa-brands fa-python skill-icon"></i>
+                        <span class="skill-name">Python</span>
+                    </div>
+                    <div class="skill-desc">NumPy, Pandas, TensorFlow, Scikit-learn, PyTorch</div>
+                    <div class="skill-bar"><div class="skill-progress" style="width: 80%"></div></div>
+                </div>
+                <div class="skill-card" data-cmd="sklearn --version">
+                    <div class="skill-top">
+                        <i class="fa-solid fa-brain skill-icon"></i>
+                        <span class="skill-name">Machine Learning</span>
+                    </div>
+                    <div class="skill-desc">Supervised, Unsupervised, Reinforcement</div>
+                    <div class="skill-bar"><div class="skill-progress" style="width: 70%"></div></div>
+                </div>
+                <div class="skill-card" data-cmd="python -c 'import torch; print(torch.__version__)'">
+                    <div class="skill-top">
+                        <i class="fa-solid fa-network-wired skill-icon"></i>
+                        <span class="skill-name">Deep Learning</span>
+                    </div>
+                    <div class="skill-desc">CNNs, RNNs, Transformers, NLP</div>
+                    <div class="skill-bar"><div class="skill-progress" style="width: 60%"></div></div>
+                </div>
+                <div class="skill-card" data-cmd="curl -X POST /api/v1/generate">
+                    <div class="skill-top">
+                        <i class="fa-solid fa-robot skill-icon"></i>
+                        <span class="skill-name">GenAI & LLMs</span>
+                    </div>
+                    <div class="skill-desc">GPT, Prompt Engineering, AI Agents, RAG</div>
+                    <div class="skill-bar"><div class="skill-progress" style="width: 65%"></div></div>
+                </div>
+                <div class="skill-card" data-cmd="cat index.html | head -20">
+                    <div class="skill-top">
+                        <i class="fa-brands fa-html5 skill-icon"></i>
+                        <span class="skill-name">HTML & CSS</span>
+                    </div>
+                    <div class="skill-desc">Responsive Design, Flexbox, Grid</div>
+                    <div class="skill-bar"><div class="skill-progress" style="width: 85%"></div></div>
+                </div>
+                <div class="skill-card" data-cmd="node -v">
+                    <div class="skill-top">
+                        <i class="fa-brands fa-js skill-icon"></i>
+                        <span class="skill-name">JavaScript</span>
+                    </div>
+                    <div class="skill-desc">ES6+, DOM, Canvas API</div>
+                    <div class="skill-bar"><div class="skill-progress" style="width: 75%"></div></div>
+                </div>
+                <div class="skill-card" data-cmd="npm list react">
+                    <div class="skill-top">
+                        <i class="fa-brands fa-react skill-icon"></i>
+                        <span class="skill-name">React</span>
+                    </div>
+                    <div class="skill-desc">Components, Hooks, State</div>
+                    <div class="skill-bar"><div class="skill-progress" style="width: 55%"></div></div>
+                </div>
+                <div class="skill-card" data-cmd="git status && uname -a">
+                    <div class="skill-top">
+                        <i class="fa-solid fa-terminal skill-icon"></i>
+                        <span class="skill-name">Dev Tools</span>
+                    </div>
+                    <div class="skill-desc">Git, Linux, Docker, Vim</div>
+                    <div class="skill-bar"><div class="skill-progress" style="width: 75%"></div></div>
+                </div>
             </div>
         </div>
     </section>
 
     <section id="projects" class="section">
         <div class="container">
-            <h2 class="section-title"><span class="accent">03.</span> Projects</h2>
+            <div class="section-label">projects/</div>
             <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-visual"><div class="neural-dots"></div><div class="project-overlay"><i class="fa-solid fa-heart-pulse"></i></div></div>
+                <div class="project-card" data-cmd="cd projects && python ml-suite.py">
+                    <div class="project-visual"><i class="fa-solid fa-heart-pulse"></i></div>
                     <div class="project-info">
                         <h3>Multi-Model Prediction Suite</h3>
-                        <p>An integrated ML platform with heart disease and cancer prediction using Random Forest.</p>
-                        <div class="project-tags"><span>Python</span><span>ML</span><span>Scikit-learn</span></div>
-                        <a href="/system" class="project-link"><i class="fa-solid fa-rocket"></i> Try Now <i class="fa-solid fa-arrow-right"></i></a>
+                        <p>ML platform with heart disease & cancer prediction using Random Forest.</p>
+                        <div class="project-tags">
+                            <span>python</span>
+                            <span>ml</span>
+                            <span>scikit-learn</span>
+                        </div>
+                        <a href="/system" class="project-link">./run <i class="fa-solid fa-arrow-right"></i></a>
                     </div>
                 </div>
-                <div class="project-card">
-                    <div class="project-visual"><div class="neural-dots"></div><div class="project-overlay"><i class="fa-solid fa-globe"></i></div></div>
+                <div class="project-card" data-cmd="cd ~ && cat index.html">
+                    <div class="project-visual"><i class="fa-solid fa-globe"></i></div>
                     <div class="project-info">
-                        <h3>Portfolio Website</h3>
-                        <p>A modern ML-themed portfolio with interactive design.</p>
-                        <div class="project-tags"><span>HTML</span><span>CSS</span><span>JS</span></div>
-                        <a href="#home" class="project-link"><i class="fa-solid fa-rocket"></i> Click me <i class="fa-solid fa-arrow-right"></i></a>
+                        <h3>Portfolio</h3>
+                        <p>This website. Flask + ML. Terminal-inspired design.</p>
+                        <div class="project-tags">
+                            <span>html</span>
+                            <span>css</span>
+                            <span>flask</span>
+                        </div>
+                        <a href="#home" class="project-link">./here <i class="fa-solid fa-arrow-right"></i></a>
                     </div>
                 </div>
-                <div class="project-card coming">
-                    <div class="project-visual"><i class="fa-solid fa-hourglass-half"></i></div>
+                <div class="project-card" data-cmd="ls -la ~/models">
+                    <div class="project-visual"><i class="fa-solid fa-brain"></i></div>
                     <div class="project-info">
-                        <h3>More Coming Soon</h3>
-                        <p>Working on new exciting ML projects...</p>
+                        <h3>ML Models</h3>
+                        <p>Random Forest classifiers trained on medical datasets.</p>
+                        <div class="project-tags">
+                            <span>random-forest</span>
+                            <span>classification</span>
+                        </div>
+                        <a href="/system" class="project-link">./models <i class="fa-solid fa-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -140,90 +307,74 @@
 
     <section id="achievements" class="section dark-section">
         <div class="container">
-            <h2 class="section-title"><span class="accent">04.</span> Achievements & Certifications</h2>
+            <div class="section-label">certs/</div>
             <div class="achievements-grid">
-                <div class="achievement-card">
+                <div class="achievement-card" data-cmd="cat certs/ml-foundations.pdf">
                     <i class="fa-solid fa-certificate"></i>
                     <div>
-                        <h3>Machine Learning Foundations</h3>
-                        <p>ML fundamentals and practical applications</p>
+                        <h3>ML Foundations</h3>
+                        <p>Machine Learning fundamentals</p>
                     </div>
                 </div>
-                <div class="achievement-card">
+                <div class="achievement-card" data-cmd="cat certs/deep-learning.pdf">
                     <i class="fa-solid fa-brain"></i>
                     <div>
-                        <h3>Deep Learning Specialization</h3>
+                        <h3>Deep Learning</h3>
                         <p>Neural networks and CNNs</p>
                     </div>
                 </div>
-                <div class="achievement-card">
+                <div class="achievement-card" data-cmd="cat certs/genai-workshop.pdf">
                     <i class="fa-solid fa-robot"></i>
                     <div>
-                        <h3>GenAI & LLM Workshop</h3>
-                        <p>Hands-on with GPT models</p>
+                        <h3>GenAI Workshop</h3>
+                        <p>Hands-on with LLM models</p>
                     </div>
                 </div>
-                <div class="achievement-card">
+                <div class="achievement-card" data-cmd="cat certs/web-dev.pdf">
                     <i class="fa-solid fa-code"></i>
                     <div>
                         <h3>Web Development</h3>
-                        <p>Full-stack development</p>
+                        <p>Frontend development</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="blog" class="section">
+    <section id="updates" class="section">
         <div class="container">
-            <h2 class="section-title"><span class="accent">05.</span> Latest Updates</h2>
+            <div class="section-label">updates.log</div>
             <div class="blog-grid">
-                <div class="blog-card">
-                    <div class="blog-date">2025</div>
+                <div class="blog-card" data-cmd="tail -5 updates.log | grep AI">
+                    <div class="blog-date">// 2025.05</div>
                     <div class="blog-content">
                         <h3>Exploring AI Agents</h3>
-                        <p>Currently diving deep into autonomous AI agents and how they can automate real-world tasks using LLMs.</p>
+                        <p>Diving into autonomous AI agents and LLMs for automation.</p>
                         <div class="blog-tags"><span>AI Agents</span><span>LLM</span></div>
                     </div>
                 </div>
-                <div class="blog-card">
-                    <div class="blog-date">2025</div>
+                <div class="blog-card" data-cmd="grep RAG updates.log">
+                    <div class="blog-date">// 2025.04</div>
                     <div class="blog-content">
                         <h3>Building RAG Systems</h3>
-                        <p>Learning Retrieval-Augmented Generation to build smarter, context-aware AI applications.</p>
+                        <p>Learning RAG for context-aware AI applications.</p>
                         <div class="blog-tags"><span>RAG</span><span>GenAI</span></div>
                     </div>
                 </div>
-                <div class="blog-card">
-                    <div class="blog-date">2025</div>
+                <div class="blog-card" data-cmd="grep PyTorch updates.log">
+                    <div class="blog-date">// 2025.03</div>
                     <div class="blog-content">
-                        <h3>Deep Learning with PyTorch</h3>
-                        <p>Started learning PyTorch framework for building neural networks and deep learning models.</p>
-                        <div class="blog-tags"><span>PyTorch</span><span>Deep Learning</span></div>
+                        <h3>PyTorch Deep Dive</h3>
+                        <p>Building neural networks with PyTorch framework.</p>
+                        <div class="blog-tags"><span>PyTorch</span><span>DL</span></div>
                     </div>
                 </div>
-                <div class="blog-card">
-                    <div class="blog-date">2025</div>
+                <div class="blog-card" data-cmd="grep Flask updates.log">
+                    <div class="blog-date">// 2025.02</div>
                     <div class="blog-content">
-                        <h3>Prompt Engineering Mastery</h3>
-                        <p>Practicing advanced prompt engineering techniques to get better outputs from LLMs.</p>
-                        <div class="blog-tags"><span>Prompts</span><span>GenAI</span></div>
-                    </div>
-                </div>
-                <div class="blog-card">
-                    <div class="blog-date">2024</div>
-                    <div class="blog-content">
-                        <h3>ML Projects Portfolio</h3>
-                        <p>Built heart disease and cancer prediction models using Random Forest Classifier.</p>
-                        <div class="blog-tags"><span>Machine Learning</span><span>Python</span></div>
-                    </div>
-                </div>
-                <div class="blog-card">
-                    <div class="blog-date">2024</div>
-                    <div class="blog-content">
-                        <h3>First ML Model</h3>
-                        <p>Built my first machine learning model - a basic classifier for a dataset.</p>
-                        <div class="blog-tags"><span>Scikit-learn</span><span>Python</span></div>
+                        <h3>Flask Portfolio</h3>
+                        <p>Built this portfolio with Flask and ML models.</p>
+                        <div class="blog-tags"><span>Flask</span><span>Portfolio</span></div>
                     </div>
                 </div>
             </div>
@@ -232,22 +383,72 @@
 
     <section id="contact" class="section dark-section">
         <div class="container">
-            <h2 class="section-title"><span class="accent">06.</span> Get In Touch</h2>
+            <div class="section-label">contact.json</div>
             <div class="contact-grid">
-                <div class="contact-info">
-                    <div class="contact-item"><i class="fa-solid fa-envelope"></i><div><h4>Email</h4><p>lastw5232@gmail.com</p></div></div>
-                    <div class="contact-item"><i class="fa-solid fa-location-dot"></i><div><h4>Location</h4><p>India</p></div></div>
+                <div>
+                    <div class="contact-item" data-cmd="mail lastw5232@gmail.com -s 'Hello from portfolio'">
+                        <i class="fa-solid fa-envelope"></i>
+                        <div>
+                            <h4>email</h4>
+                            <p>lastw5232@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item" data-cmd="curl ipinfo.io/json | grep city">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <div>
+                            <h4>location</h4>
+                            <p>India</p>
+                        </div>
+                    </div>
+                    <div class="contact-item" data-cmd="wget https://github.com/itzsubham2006">
+                        <i class="fa-brands fa-github"></i>
+                        <div>
+                            <h4>github</h4>
+                            <p>itzsubham2006</p>
+                        </div>
+                    </div>
+                    <div class="contact-item" data-cmd="curl linkedin.com/in/subhampathak">
+                        <i class="fa-brands fa-linkedin"></i>
+                        <div>
+                            <h4>linkedin</h4>
+                            <p>subhampathak</p>
+                        </div>
+                    </div>
                     <div class="social-links">
-                        <a href="https://www.instagram.com/s_ubhqm/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="https://www.linkedin.com/in/subhampathak/" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
-                        <a href="https://github.com/itzsubham2006" target="_blank"><i class="fa-brands fa-github"></i></a>
+                        <a href="https://www.instagram.com/s_ubhqm/" target="_blank" data-cmd="firefox instagram.com/s_ubhqm"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/in/subhampathak/" target="_blank" data-cmd="open linkedin"><i class="fa-brands fa-linkedin"></i></a>
+                        <a href="https://github.com/itzsubham2006" target="_blank" data-cmd="git clone github.com/itzsubham2006"><i class="fa-brands fa-github"></i></a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer><div class="footer-content"><p>Built with <span class="accent">&lt;3&gt;</span></p><p class="copyright">© 2025 Shubh. All rights reserved.</p></div></footer>
+    <footer>
+        <p>built with <span class="accent">&lt;3&gt;</span> // subham.dev // 2025</p>
+        <p class="footer-cmd">press <span class="accent">?</span> for shortcuts · <span class="accent">Ctrl+L</span> to clear</p>
+    </footer>
+
+    <div class="keyboard-help" id="keyboardHelp">
+        <div class="help-header">
+            <span class="help-title">// keyboard shortcuts</span>
+            <button class="help-close" onclick="document.getElementById('keyboardHelp').classList.remove('show')">×</button>
+        </div>
+        <div class="help-list">
+            <div class="help-item"><span class="key">?</span><span>toggle help</span></div>
+            <div class="help-item"><span class="key">h</span><span>go home</span></div>
+            <div class="help-item"><span class="key">a</span><span>go about</span></div>
+            <div class="help-item"><span class="key">s</span><span>go skills</span></div>
+            <div class="help-item"><span class="key">p</span><span>go projects</span></div>
+            <div class="help-item"><span class="key">m</span><span>open ml-suite</span></div>
+            <div class="help-item"><span class="key">/</span><span>focus terminal</span></div>
+            <div class="help-item"><span class="key">Ctrl+L</span><span>clear terminal</span></div>
+            <div class="help-item"><span class="key">↑↓</span><span>command history</span></div>
+            <div class="help-item"><span class="key">Tab</span><span>autocomplete</span></div>
+            <div class="help-item"><span class="key">Esc</span><span>close dialogs</span></div>
+            <div class="help-item"><span class="key">n</span><span>run neofetch</span></div>
+        </div>
+    </div>
 
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>

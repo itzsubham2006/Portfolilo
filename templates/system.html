@@ -3,41 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prediction Suite | ML System</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>">
+    <title>ml-suite</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/shub_logo.png') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <canvas id="neural-canvas"></canvas>
+    <div class="matrix-rain" id="matrix"></div>
+
     <nav class="navbar">
-        <div class="nav-logo"><a href="/">SHUB<span class="accent">.AI</span></a></div>
+        <div class="nav-logo">
+            <span class="prompt">┌─[</span><span class="user">subham</span><span class="at">@</span><span class="host">portfolio</span><span class="prompt">]</span><span class="sep">─</span><span class="dir">~/ml-suite</span>
+        </div>
         <ul class="nav-links">
-            <li><a href="/">Home</a></li>
-            <li><a href="/#projects">Projects</a></li>
-            <li><a href="/#contact">Contact</a></li>
+            <li><a href="/">home</a></li>
+            <li><a href="/#projects">projects</a></li>
+            <li><a href="/#contact">contact</a></li>
         </ul>
         <div class="menu-toggle"><span></span><span></span><span></span></div>
     </nav>
 
     <section class="system-page">
+        <div class="terminal-prompt-center">
+            <span class="user">subham</span><span class="at">@</span><span class="prompt-dir">portfolio</span><span>$</span> ls -la models/
+        </div>
+
         <div class="system-header">
-            <h1>Multi-Model Prediction Suite</h1>
-            <p>Select a prediction system to get instant ML-based predictions.</p>
+            <h1>ML Prediction Suite</h1>
+            <p>Select a model for inference</p>
+        </div>
+
+        <div class="terminal-output" style="max-width: 600px; margin-bottom: 2rem;">
+            <div class="output-line">
+                <span class="num">1</span>
+                <span class="content"><span class="key">total</span> : <span class="val">2 models</span></span>
+            </div>
+            <div class="output-line">
+                <span class="num">2</span>
+                <span class="content"><span class="val">drwxr-xr-x</span> heart_model/ <span class="highlight">heart_disease_rf.pkl</span></span>
+            </div>
+            <div class="output-line">
+                <span class="num">3</span>
+                <span class="content"><span class="val">drwxr-xr-x</span> cancer_model/ <span class="highlight">cancer_detection_rf.pkl</span></span>
+            </div>
         </div>
 
         <div class="system-grid">
             <div class="system-card">
-                <div class="system-icon" style="color: #ff6b6b;"><i class="fa-solid fa-heart-pulse"></i></div>
-                <h2>Heart Disease Prediction</h2>
-                <p>Predict heart disease risk using Random Forest Classifier.</p>
-                <a href="/heart" class="btn"><span>Predict Now</span><i class="fa-solid fa-heart-pulse"></i></a>
+                <div class="system-icon" style="color: #ff6b6b;">
+                    <i class="fa-solid fa-heart-pulse"></i>
+                </div>
+                <h2>Heart Disease</h2>
+                <p>Random Forest classifier. 13 features.</p>
+                <a href="/heart" class="btn btn-primary">python heart_predict.py <i class="fa-solid fa-arrow-right"></i></a>
             </div>
             <div class="system-card">
-                <div class="system-icon" style="color: #00ff88;"><i class="fa-solid fa-dna"></i></div>
-                <h2>Cancer Prediction</h2>
-                <p>Analyze tumor for malignant/benign classification.</p>
-                <a href="/cancer" class="btn"><span>Analyze Now</span><i class="fa-solid fa-dna"></i></a>
+                <div class="system-icon" style="color: var(--green);">
+                    <i class="fa-solid fa-dna"></i>
+                </div>
+                <h2>Cancer Detection</h2>
+                <p>Random Forest classifier. 12 features.</p>
+                <a href="/cancer" class="btn btn-primary">python cancer_detect.py <i class="fa-solid fa-arrow-right"></i></a>
             </div>
         </div>
     </section>
