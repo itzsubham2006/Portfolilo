@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>heart_predict.py</title>
-    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/shub_logo.png') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="icon" type="image/png" href="/static/images/shub_logo.png">
+    <link rel="stylesheet" href="/static/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
@@ -33,7 +33,7 @@
             <span class="cursor"></span>
         </div>
 
-        <div class="prediction-form">
+        <form method="POST" action="/predict" class="prediction-form">
             <div class="form-terminal-bar">
                 <div class="dot"></div>
                 <div class="dot"></div>
@@ -150,9 +150,9 @@
                     <i class="fa-solid fa-heart-pulse"></i>
                 </button>
             </div>
-        </div>
+        </form>
     </section>
 
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script src="/static/js/script.js"></script>
 </body>
 </html>
