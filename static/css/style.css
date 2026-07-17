@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400&display=swap');
 
 :root {
-    --bg: #0b111e;
-    --bg-2: #111827;
-    --bg-3: #181c24;
-    --bg-4: #212529;
-    --bg-5: #2c3038;
+    --bg: #2b2d31;
+    --bg-2: #1e1f22;
+    --bg-3: #252629;
+    --bg-4: #333539;
+    --bg-5: #3b3d41;
     --fg: #ffffff;
     --fg-2: #b0b0b0;
     --fg-3: #6c757d;
@@ -19,7 +19,7 @@
     --font: 'Source Code Pro', 'Fira Code', 'Consolas', 'Courier New', monospace;
     --r: 6px;
     /* --tw-bg: #212529; */
-    --tw-bg: #08090a;
+    --tw-bg: #2d2e30;
     --tw-titlebar-bg: #181c20;
     --tw-menubar-bg: #1a1e24;
 }
@@ -49,8 +49,8 @@ button { font-family: var(--font); cursor: pointer; } */
     align-items: center;
     justify-content: space-between;
     padding: 0 2rem;
-    background: rgba(11,17,30,0.92);
-    /* backdrop-filter: blur(10px); */
+    background: rgba(43,45,49,0.92);
+    backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--border);
     z-index: 1000;
 }
@@ -93,6 +93,7 @@ button { font-family: var(--font); cursor: pointer; } */
     margin-bottom: 0.5rem;
     text-transform: uppercase;
     letter-spacing: 0.06em;
+    text-align: center;
 }
 .section-label .num { color: var(--accent); }
 .section-title {
@@ -100,6 +101,7 @@ button { font-family: var(--font); cursor: pointer; } */
     font-weight: 600;
     margin-bottom: 2rem;
     letter-spacing: -0.01em;
+    text-align: center;
 }
 
 /* HERO */
@@ -112,15 +114,16 @@ button { font-family: var(--font); cursor: pointer; } */
     margin: 0 auto;
     padding-top: calc(5rem + 50px);
 }
-.hero-content { width: 100%; }
+.hero-content {
+    width: 100%;
+    text-align: center;
+}
 
 .hero-prompt {
     font-size: 13px;
     color: var(--fg-3);
     margin-bottom: 1.5rem;
 }
-.hero-prompt .cyan { color: var(--cyan); }
-.hero-prompt .red { color: var(--red); font-weight: 700; }
 
 .hero h1 {
     font-size: clamp(2rem, 5vw, 3.2rem);
@@ -136,7 +139,7 @@ button { font-family: var(--font); cursor: pointer; } */
     color: var(--fg-2);
     line-height: 1.8;
     max-width: 600px;
-    margin-bottom: 2rem;
+    margin: 0 auto 2rem;
 }
 
 .hero-btns {
@@ -144,6 +147,7 @@ button { font-family: var(--font); cursor: pointer; } */
     gap: 0.75rem;
     flex-wrap: wrap;
     margin-bottom: 2.5rem;
+    justify-content: center;
 }
 
 .hero-links {
@@ -152,6 +156,7 @@ button { font-family: var(--font); cursor: pointer; } */
     gap: 0.5rem 1rem;
     margin-bottom: 2.5rem;
     font-size: 13px;
+    justify-content: center;
 }
 .hero-links .hl {
     color: var(--fg-2);
@@ -190,7 +195,7 @@ button { font-family: var(--font); cursor: pointer; } */
     border: 1px solid var(--border);
     overflow: hidden;
     max-width: 600px;
-    margin-bottom: 1rem;
+    margin: 0 auto 1rem;
 }
 
 .t-widget .tw-titlebar {
@@ -475,6 +480,7 @@ button { font-family: var(--font); cursor: pointer; } */
     box-shadow: 0 8px 32px rgba(0,0,0,0.5);
     border: 1px solid var(--border);
     overflow: hidden;
+    margin: 0 auto;
 }
 .t-widget-lg .tw-body {
     padding: 1.25rem 1.5rem;
@@ -483,7 +489,19 @@ button { font-family: var(--font); cursor: pointer; } */
     max-height: 60vh;
     min-height: 30vh;
     overflow-y: auto;
+    text-align: center;
 }
+.t-widget-lg .tw-body .tw-line,
+.t-widget-lg .tw-body .about-grid,
+.t-widget-lg .tw-body .skills-grid,
+.t-widget-lg .tw-body .projects-list,
+.t-widget-lg .tw-body .contact-list,
+.t-widget-lg .tw-body .system-grid,
+.t-widget-lg .tw-body .tab-content,
+.t-widget-lg .tw-body .about-text,
+.t-widget-lg .tw-body .quick-cmds,
+.t-widget-lg .tw-body .tw-output,
+.t-widget-lg .tw-body .tw-input-row { text-align: left; }
 .t-widget-lg .tw-body::-webkit-scrollbar { width: 6px; }
 .t-widget-lg .tw-body::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.06); border-radius: 3px; }
 .t-widget-lg .tw-body::-webkit-scrollbar-track { background: transparent; }
@@ -530,7 +548,7 @@ footer {
     text-align: center;
     border-top: 1px solid var(--border);
 }
-footer p { color: var(--fg-3); font-size: 12px; }
+footer p { color: var(--fg-3); font-size: 12px; text-align: center; }
 footer .accent { color: var(--accent); }
 
 /* SUB-PAGES */

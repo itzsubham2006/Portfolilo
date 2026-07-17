@@ -14,10 +14,10 @@
     var helpCloseBtn = document.getElementById('helpCloseBtn');
 
     function pH(dir) {
-        return '[root@localhost <span style="color:#89dceb">' + dir + '</span>]<span style="color:#ff6b6b;font-weight:700">#</span>';
+        return '[subham@hehe]';
     }
     function pT(dir) {
-        return '[root@localhost ' + dir + ']#';
+        return '[subham@hehe]';
     }
 
     function updatePrompt() {
@@ -54,7 +54,7 @@
         if (twBody) twBody.scrollTop = 0;
     }
 
-    function showNeofetch() {
+    function showHihifetch() {
         if (!twOutput) return;
 
         var art = '<span style="color:#d4d4d4">      _                                              </span>\n' +
@@ -74,14 +74,11 @@
 '  |  Python     3.12.0                       |\n' +
 '  |  ML Stack   TensorFlow, PyTorch, Scikit  |\n' +
 '  |  Location   India                        |\n' +
-'  +-----------------------------------------+\n\n' +
-'  <span style="color:#ffd93d">####</span>  <span style="color:#ffd93d">####</span>  <span style="color:#89dceb">##</span>  <span style="color:#89dceb">##</span>  <span style="color:#d4d4d4">####</span>  <span style="color:#ff6b6b">####</span>\n' +
-'  <span style="color:#ffd93d">##</span>    <span style="color:#ffd93d">#</span>    <span style="color:#89dceb">##</span>  <span style="color:#89dceb">##</span>  <span style="color:#d4d4d4">#</span>       <span style="color:#ff6b6b">#</span>\n' +
-'  <span style="color:#ffd93d">####</span>  <span style="color:#ffd93d">##</span>    <span style="color:#89dceb">##</span>  <span style="color:#89dceb">##</span>  <span style="color:#d4d4d4">###</span>     <span style="color:#ff6b6b">###</span>';
+'  +-----------------------------------------+';
 
         var cmdLine = document.createElement('div');
         cmdLine.className = 'tw-line fade-in';
-        cmdLine.innerHTML = '<span class="p">' + pH(currentDir) + '</span> <span class="t">neofetch</span>';
+        cmdLine.innerHTML = '<span class="p">' + pH(currentDir) + '</span> <span class="t">hihifetch</span>';
         twOutput.appendChild(cmdLine);
 
         var outLine = document.createElement('div');
@@ -108,7 +105,7 @@
                   'cat skills.json'.padEnd(22) + ' my skills<br>' +
                   'cd ~'.padEnd(22) + ' go home<br>' +
                   'whoami'.padEnd(22) + ' display user<br>' +
-                  'neofetch'.padEnd(22) + ' system info<br>' +
+                  'hihifetch'.padEnd(22) + ' system info<br>' +
                   'python ml-suite.py'.padEnd(22) + ' open ML suite<br>' +
                   'history'.padEnd(22) + ' command history<br>' +
                   'clear'.padEnd(22) + ' clear terminal<br>' +
@@ -194,8 +191,8 @@
         } else if (lower === 'python cancer_detect.py' || lower === 'python3 cancer_detect.py') {
             window.location.href = '/cancer'; return;
 
-        } else if (lower === 'neofetch') {
-            showNeofetch(); return;
+        } else if (lower === 'hihifetch') {
+            showHihifetch(); return;
 
         } else if (lower === 'uname -a') {
             out = 'PortfolioOS 5.15.0-sublime #1 SMP PREEMPT subham@portfolio x86_64 GNU/Linux';
@@ -237,7 +234,7 @@
         addLine(raw, out);
     }
 
-    var cmdKeys = ['help','whoami','date','ls','ls -la','ls projects','cat about.md','cat skills.json','cat updates.log','cat contact.json','cd ~','cd ..','cd /','cd projects','cd home','python ml-suite.py','python heart_predict.py','python cancer_detect.py','neofetch','pwd','clear','history','echo hello','echo $(whoami)','sudo','top','uname -a','uptime','exit','ls -l','cd about','cd skills'];
+    var cmdKeys = ['help','whoami','date','ls','ls -la','ls projects','cat about.md','cat skills.json','cat updates.log','cat contact.json','cd ~','cd ..','cd /','cd projects','cd home','python ml-suite.py','python heart_predict.py','python cancer_detect.py','hihifetch','pwd','clear','history','echo hello','echo $(whoami)','sudo','top','uname -a','uptime','exit','ls -l','cd about','cd skills'];
 
     if (cmdInput) {
         cmdInput.addEventListener('keydown', function(e) {
@@ -292,7 +289,7 @@
             case 'p': exec('ls'); break;
             case 'm': window.location.href = '/system'; break;
             case '/': e.preventDefault(); if (cmdInput) cmdInput.focus(); break;
-            case 'n': showNeofetch(); break;
+            case 'n': showHihifetch(); break;
             case 'Escape': if (keyboardHelp) keyboardHelp.classList.remove('show'); if (cmdHint) cmdHint.classList.remove('show'); break;
         }
     });
