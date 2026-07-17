@@ -61,7 +61,7 @@ def create_models():
 
     print("All models ready!")
 
-FORCE_RECREATE = False
+FORCE_RECREATE = True
 if FORCE_RECREATE or not os.path.exists("models/model.pkl") or not os.path.exists("models/model2.pkl"):
     create_models()
 
