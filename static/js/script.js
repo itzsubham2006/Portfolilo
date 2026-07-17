@@ -1,641 +1,378 @@
-const canvas = document.getElementById('neural-canvas');
-const ctx = canvas.getContext('2d');
+(function() {
+    'use strict';
 
-let w, h, nodes = [];
+    var currentDir = '~';
+    var cmdHistory = [];
+    var historyIndex = -1;
 
-function initCanvas() {
-    w = window.innerWidth;
-    h = window.innerHeight;
-    canvas.width = w;
-    canvas.height = h;
-    nodes = [];
-    const count = Math.floor((w * h) / 25000);
-    for (let i = 0; i < count; i++) {
-        nodes.push({
-            x: Math.random() * w,
-            y: Math.random() * h,
-            vx: (Math.random() - 0.5) * 0.25,
-            vy: (Math.random() - 0.5) * 0.25,
-            r: Math.random() * 1.2 + 0.5
-        });
+    var cmdInput = document.getElementById('cmdInput');
+    var twOutput = document.getElementById('twOutput');
+    var twBody = document.getElementById('twBody');
+    var cmdHint = document.getElementById('cmdHint');
+    var cmdText = document.getElementById('cmdText');
+    var keyboardHelp = document.getElementById('keyboardHelp');
+    var helpCloseBtn = document.getElementById('helpCloseBtn');
+
+    function pH(dir) {
+        return '[root@localhost <span style="color:#89dceb">' + dir + '</span>]<span style="color:#ff6b6b;font-weight:700">#</span>';
     }
-}
+    function pT(dir) {
+        return '[root@localhost ' + dir + ']#';
+    }
 
-function draw() {
-    ctx.clearRect(0, 0, w, h);
-    for (let i = 0; i < nodes.length; i++) {
-        const n = nodes[i];
-        n.x += n.vx;
-        n.y += n.vy;
-        if (n.x < 0 || n.x > w) n.vx *= -1;
-        if (n.y < 0 || n.y > h) n.vy *= -1;
+    function updatePrompt() {
+        var ips = document.querySelectorAll('.tw-input-row .ip');
+        for (var i = 0; i < ips.length; i++) {
+            ips[i].innerHTML = pH(currentDir);
+        }
+    }
 
-        ctx.beginPath();
-        ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(0, 255, 136, 0.35)';
-        ctx.fill();
+    function esc(str) {
+        return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    }
 
-        for (let j = i + 1; j < nodes.length; j++) {
-            const n2 = nodes[j];
-            const dx = n.x - n2.x;
-            const dy = n.y - n2.y;
-            const d = Math.sqrt(dx * dx + dy * dy);
-            if (d < 90) {
-                ctx.beginPath();
-                ctx.moveTo(n.x, n.y);
-                ctx.lineTo(n2.x, n2.y);
-                ctx.strokeStyle = `rgba(0, 255, 136, ${0.08 * (1 - d / 90)})`;
-                ctx.lineWidth = 0.5;
-                ctx.stroke();
+    function addLine(cmd, output) {
+        if (!twOutput) return;
+
+        var cmdLine = document.createElement('div');
+        cmdLine.className = 'tw-line fade-in';
+        cmdLine.innerHTML = '<span class="p">' + pH(currentDir) + '</span> <span class="t">' + esc(cmd) + '</span>';
+        twOutput.appendChild(cmdLine);
+
+        if (output) {
+            var outLine = document.createElement('div');
+            outLine.className = 'tw-line fade-in';
+            outLine.innerHTML = '<span class="s">  </span><span class="t">' + output + '</span>';
+            twOutput.appendChild(outLine);
+        }
+
+        if (twBody) twBody.scrollTop = twBody.scrollHeight;
+    }
+
+    function clearTerminal() {
+        if (twOutput) twOutput.innerHTML = '';
+        if (twBody) twBody.scrollTop = 0;
+    }
+
+    function showNeofetch() {
+        if (!twOutput) return;
+
+        var art = '<span style="color:#d4d4d4">      _                                              </span>\n' +
+'<span style="color:#d4d4d4">     | |                                             </span>\n' +
+'<span style="color:#d4d4d4">     | |__   __ _  _ __  _   _  ___  ___            </span>\n' +
+'<span style="color:#d4d4d4">     | \'_ \\ / _` || \'_ \\| | | |/ _ \\/ __|           </span>\n' +
+'<span style="color:#d4d4d4">     | | | | (_| || |_) | |_| |  __/\\__ \\           </span>\n' +
+'<span style="color:#d4d4d4">     |_| |_|\\__,_|| .__/ \\__, |\\___||___/           </span>\n' +
+'<span style="color:#d4d4d4">                | |     __/ |                      </span>\n' +
+'<span style="color:#d4d4d4">                |_|    |___/                       </span>\n\n' +
+'  +-----------------------------------------+\n' +
+'  |  <span style="color:#89dceb">subham</span>@<span style="color:#d4d4d4">portfolio</span>                        |\n' +
+'  +-----------------------------------------+\n' +
+'  |  OS         PortfolioOS 5.15.0 LTS       |\n' +
+'  |  Host       subham.dev                   |\n' +
+'  |  Kernel     x86_64 ML Neural Network      |\n' +
+'  |  Python     3.12.0                       |\n' +
+'  |  ML Stack   TensorFlow, PyTorch, Scikit  |\n' +
+'  |  Location   India                        |\n' +
+'  +-----------------------------------------+\n\n' +
+'  <span style="color:#ffd93d">####</span>  <span style="color:#ffd93d">####</span>  <span style="color:#89dceb">##</span>  <span style="color:#89dceb">##</span>  <span style="color:#d4d4d4">####</span>  <span style="color:#ff6b6b">####</span>\n' +
+'  <span style="color:#ffd93d">##</span>    <span style="color:#ffd93d">#</span>    <span style="color:#89dceb">##</span>  <span style="color:#89dceb">##</span>  <span style="color:#d4d4d4">#</span>       <span style="color:#ff6b6b">#</span>\n' +
+'  <span style="color:#ffd93d">####</span>  <span style="color:#ffd93d">##</span>    <span style="color:#89dceb">##</span>  <span style="color:#89dceb">##</span>  <span style="color:#d4d4d4">###</span>     <span style="color:#ff6b6b">###</span>';
+
+        var cmdLine = document.createElement('div');
+        cmdLine.className = 'tw-line fade-in';
+        cmdLine.innerHTML = '<span class="p">' + pH(currentDir) + '</span> <span class="t">neofetch</span>';
+        twOutput.appendChild(cmdLine);
+
+        var outLine = document.createElement('div');
+        outLine.className = 'tw-line fade-in';
+        outLine.innerHTML = '<span class="s">  </span><pre style="margin:0;padding:0;font-size:12px;line-height:1.4;white-space:pre;color:#b0b0b0;font-family:inherit">' + art + '</pre>';
+        twOutput.appendChild(outLine);
+
+        if (twBody) twBody.scrollTop = twBody.scrollHeight;
+    }
+
+    function exec(cmd) {
+        var raw = cmd.trim();
+        if (!raw) return;
+
+        cmdHistory.push(raw);
+        historyIndex = cmdHistory.length;
+        var lower = raw.toLowerCase().trim();
+        var out = '';
+
+        if (lower === 'help') {
+            out = 'help'.padEnd(22) + ' show this help<br>' +
+                  'ls'.padEnd(22) + ' list directory<br>' +
+                  'cat about.md'.padEnd(22) + ' about me<br>' +
+                  'cat skills.json'.padEnd(22) + ' my skills<br>' +
+                  'cd ~'.padEnd(22) + ' go home<br>' +
+                  'whoami'.padEnd(22) + ' display user<br>' +
+                  'neofetch'.padEnd(22) + ' system info<br>' +
+                  'python ml-suite.py'.padEnd(22) + ' open ML suite<br>' +
+                  'history'.padEnd(22) + ' command history<br>' +
+                  'clear'.padEnd(22) + ' clear terminal<br>' +
+                  'date'.padEnd(22) + ' current date<br>' +
+                  'pwd'.padEnd(22) + ' print directory<br>' +
+                  'exit'.padEnd(22) + ' logout';
+
+        } else if (lower === 'whoami') {
+            out = 'subham - CS Student, ML Enthusiast, Python Developer';
+
+        } else if (lower === 'date') {
+            out = new Date().toLocaleString('en-US', { weekday:'long', year:'numeric', month:'long', day:'numeric', hour:'2-digit', minute:'2-digit', second:'2-digit' });
+
+        } else if (lower === 'pwd') {
+            out = '/home/subham/' + (currentDir === '~' ? 'portfolio' : currentDir);
+
+        } else if (lower === 'ls' || lower === 'ls -l' || lower === 'ls -la') {
+            out = 'total 8<br>' +
+                  'drwxr-xr-x  root root  <span style="color:#89dceb">.</span><br>' +
+                  'drwxr-xr-x  root root  <span style="color:#89dceb">..</span><br>' +
+                  '-rw-r--r--  root root  <span style="color:#c8f7a6">about.md</span><br>' +
+                  '-rw-r--r--  root root  <span style="color:#c8f7a6">contact.json</span><br>' +
+                  'drwxr-xr-x  root root  <span style="color:#89dceb">projects/</span><br>' +
+                  '-rw-r--r--  root root  <span style="color:#c8f7a6">skills.json</span><br>' +
+                  '-rw-r--r--  root root  <span style="color:#c8f7a6">updates.log</span><br>' +
+                  'drwxr-xr-x  root root  <span style="color:#89dceb">certs/</span>';
+
+        } else if (lower === 'ls projects') {
+            out = 'drwxr-xr-x  root root  <span style="color:#89dceb">ml-suite/</span><br>' +
+                  '-rwxr-xr-x  root root  <span style="color:#c8f7a6">heart_predict.py</span><br>' +
+                  '-rwxr-xr-x  root root  <span style="color:#c8f7a6">cancer_detect.py</span><br>' +
+                  '-rw-r--r--  root root  <span style="color:#c8f7a6">portfolio/</span>';
+
+        } else if (lower === 'cat about.md') {
+            out = '<span style="color:#c8f7a6">name</span>:   Subham Pathak<br>' +
+                  '<span style="color:#c8f7a6">role</span>:   CS Student - ML Engineer<br>' +
+                  '<span style="color:#c8f7a6">stack</span>:  AI/ML | GenAI | LLMs<br>' +
+                  '<span style="color:#c8f7a6">status</span>: building things<br>' +
+                  '<span style="color:#c8f7a6">loc</span>:    India<br>' +
+                  '<span style="color:#c8f7a6">email</span>:  lastw5232@gmail.com';
+
+        } else if (lower === 'cat skills.json') {
+            out = '{<br>' +
+                  '  <span style="color:#c8f7a6">"python"</span>:        "NumPy, Pandas, TensorFlow, Scikit-learn"<br>' +
+                  '  <span style="color:#c8f7a6">"ml"</span>:            "Supervised, Unsupervised, Reinforcement"<br>' +
+                  '  <span style="color:#c8f7a6">"deep_learning"</span>: "CNNs, RNNs, Transformers, NLP"<br>' +
+                  '  <span style="color:#c8f7a6">"genai"</span>:         "GPT, Prompt Engineering, AI Agents, RAG"<br>' +
+                  '  <span style="color:#c8f7a6">"web"</span>:           "HTML, CSS, JavaScript, FastAPI"<br>' +
+                  '  <span style="color:#c8f7a6">"tools"</span>:         "Git, Linux, Docker, Vim"<br>' +
+                  '}';
+
+        } else if (lower === 'cat updates.log') {
+            out = '2025.05  Exploring AI Agents<br>' +
+                  '2025.04  Building RAG Systems<br>' +
+                  '2025.03  PyTorch Deep Dive<br>' +
+                  '2025.02  FastAPI Portfolio';
+
+        } else if (lower === 'cat contact.json') {
+            out = '{<br>' +
+                  '  <span style="color:#c8f7a6">"email"</span>:    "lastw5232@gmail.com"<br>' +
+                  '  <span style="color:#c8f7a6">"location"</span>: "India"<br>' +
+                  '  <span style="color:#c8f7a6">"github"</span>:   "itzsubham2006"<br>' +
+                  '  <span style="color:#c8f7a6">"linkedin"</span>: "subhampathak"<br>' +
+                  '}';
+
+        } else if (lower === 'cd ~' || lower === 'cd home') {
+            currentDir = '~';
+            updatePrompt();
+        } else if (lower === 'cd ..') {
+            if (currentDir !== '~') { currentDir = '~'; updatePrompt(); }
+        } else if (lower === 'cd /') {
+            currentDir = '/';
+            updatePrompt();
+        } else if (lower === 'cd projects') {
+            currentDir = 'projects';
+            updatePrompt();
+        } else if (lower === 'cd about' || lower === 'cd skills') {
+            updatePrompt();
+        } else if (lower === 'python ml-suite.py' || lower === 'python3 ml-suite.py') {
+            window.location.href = '/system'; return;
+        } else if (lower === 'python heart_predict.py' || lower === 'python3 heart_predict.py') {
+            window.location.href = '/heart'; return;
+        } else if (lower === 'python cancer_detect.py' || lower === 'python3 cancer_detect.py') {
+            window.location.href = '/cancer'; return;
+
+        } else if (lower === 'neofetch') {
+            showNeofetch(); return;
+
+        } else if (lower === 'uname -a') {
+            out = 'PortfolioOS 5.15.0-sublime #1 SMP PREEMPT subham@portfolio x86_64 GNU/Linux';
+        } else if (lower === 'uptime') {
+            out = ' 12:34:56 up 999 days,  load average: 0.42, 0.37, 0.28';
+
+        } else if (lower === 'clear' || lower === 'cls') {
+            clearTerminal(); return;
+
+        } else if (lower === 'history') {
+            var lines = [];
+            for (var i = 0; i < cmdHistory.length; i++) {
+                lines.push('  ' + String(i + 1).padStart(3) + '  ' + cmdHistory[i]);
             }
-        }
-    }
-    requestAnimationFrame(draw);
-}
-initCanvas();
-draw();
-window.addEventListener('resize', initCanvas);
+            out = lines.join('<br>');
 
-const matrix = document.getElementById('matrix');
-if (matrix) {
-    const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
-    let columns = Math.floor(window.innerWidth / 20);
-    let drops = Array(columns).fill(1);
-
-    function drawMatrix() {
-        const height = window.innerHeight;
-        matrix.style.height = height + 'px';
-        matrix.style.background = `linear-gradient(transparent 0%, var(--bg) 90%)`;
-        let html = '';
-        for (let i = 0; i < drops.length; i++) {
-            const char = chars[Math.floor(Math.random() * chars.length)];
-            const top = drops[i] * 20;
-            html += `<span style="position:absolute;left:${i * 20}px;top:${top}px;color:var(--green);font-size:14px;opacity:${Math.random() * 0.5 + 0.3}">${char}</span>`;
-            if (top > height && Math.random() > 0.975) drops[i] = 0;
-            drops[i]++;
-        }
-        matrix.innerHTML = html;
-        requestAnimationFrame(drawMatrix);
-    }
-    drawMatrix();
-}
-
-function updateTime() {
-    const now = new Date();
-    const timeStr = now.toLocaleTimeString('en-US', { hour12: false });
-    const dateStr = now.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-    const timeEl = document.getElementById('statusTime');
-    const dateEl = document.getElementById('statusDate');
-    if (timeEl) timeEl.textContent = timeStr;
-    if (dateEl) dateEl.textContent = dateStr;
-}
-updateTime();
-setInterval(updateTime, 1000);
-
-const COMMANDS = {
-    'help': 'show all commands',
-    'whoami': 'display user info',
-    'date': 'show current date/time',
-    'ls': 'list sections',
-    'ls -la': 'list all with details',
-    'ls projects': 'list projects',
-    'cat about.md': 'show about info',
-    'cat skills.json': 'show skills',
-    'cat experience.log': 'show experience',
-    'cat goals.md': 'show goals',
-    'cat updates.log': 'show recent updates',
-    'cat contact.json': 'show contact info',
-    'cd ~': 'go to home',
-    'cd home': 'go to home',
-    'cd about': 'go to about',
-    'cd skills': 'go to skills',
-    'cd projects': 'go to projects',
-    'cd updates': 'go to updates',
-    'cd contact': 'go to contact',
-    'python ml-suite.py': 'open ML suite',
-    'python heart_predict.py': 'open heart prediction',
-    'python cancer_detect.py': 'open cancer prediction',
-    'neofetch': 'system information',
-    'uname -a': 'kernel info',
-    'uptime': 'system uptime',
-    'pwd': 'print working directory',
-    'ls -la ~/projects': 'list all projects with details',
-    'mail lastw5232@gmail.com': 'open mail client',
-    'github itzsubham2006': 'open github profile',
-    'linkedin subhampathak': 'open linkedin profile',
-    'clear': 'clear terminal output',
-    'history': 'show command history',
-    'echo hello': 'print hello',
-    'echo $(whoami)': 'print current user',
-    'sudo': 'elevated privileges (just kidding)',
-    'man help': 'show manual',
-    'top': 'show running processes',
-    'ps aux': 'list all processes',
-    'df -h': 'disk usage',
-    'free -h': 'memory usage',
-    'env': 'show environment',
-    'exit': 'exit session'
-};
-
-let cmdHistory = [];
-let historyIndex = -1;
-
-const cmdInput = document.getElementById('cmdInput');
-const cmdHint = document.getElementById('cmdHint');
-const cmdText = document.getElementById('cmdText');
-const cmdHistoryEl = document.getElementById('cmdHistory');
-const terminalOutput = document.getElementById('terminalOutput');
-
-function showCmdHint(cmd) {
-    if (cmd && cmd.length > 0) {
-        const match = Object.keys(COMMANDS).find(c => c.startsWith(cmd) && c !== cmd);
-        if (match) {
-            cmdHint.classList.add('show');
-            cmdText.textContent = match;
+        } else if (lower === 'echo hello') {
+            out = 'hello';
+        } else if (lower === 'echo $(whoami)') {
+            out = 'subham';
+        } else if (lower === 'sudo') {
+            out = '<span style="color:#ff6b6b">nice try.</span><br><span style="color:#ffd93d">you are already root here :)</span>';
+        } else if (lower === 'top') {
+            out = 'top - 12:34:56 up 999 days<br><br>' +
+                  '  PID  COMMAND           CPU%  MEM%<br>' +
+                  '    1  bash               0.0   0.1<br>' +
+                  '    2  python (ml)       45.2  12.3<br>' +
+                  '    3  thinking          99.9  89.7<br>' +
+                  '    4  learning          87.3  67.4<br>' +
+                  '    5  coffee            23.1   2.1';
+        } else if (lower === 'exit') {
+            out = '<span style="color:#ffd93d">logout</span><br><br>Session closed. Reconnect anytime.';
+            setTimeout(function() { if (twOutput) twOutput.innerHTML = ''; }, 2000);
         } else {
-            cmdHint.classList.remove('show');
+            out = '<span style="color:#ff6b6b">bash: ' + esc(raw) + ': command not found</span><br>' +
+                  "Type '<span style=\"color:#c8f7a6\">help</span>' for available commands.";
         }
-    } else {
-        cmdHint.classList.remove('show');
-    }
-}
 
-function appendOutput(cmd, output, type = 'normal') {
-    const histLine = document.createElement('div');
-    histLine.className = 'hist-line';
-
-    if (type === 'neofetch') {
-        histLine.innerHTML = `<pre class="neofetch-output">${output}</pre>`;
-        cmdHistoryEl.appendChild(histLine);
-        return;
+        addLine(raw, out);
     }
 
-    histLine.innerHTML = `
-        <span class="prompt">$</span>
-        <span class="cmd">${cmd}</span>
-        ${output ? `<span class="output">${output}</span>` : ''}
-    `;
-    cmdHistoryEl.appendChild(histLine);
-    cmdHistoryEl.scrollIntoView({ behavior: 'smooth', block: 'end' });
-}
+    var cmdKeys = ['help','whoami','date','ls','ls -la','ls projects','cat about.md','cat skills.json','cat updates.log','cat contact.json','cd ~','cd ..','cd /','cd projects','cd home','python ml-suite.py','python heart_predict.py','python cancer_detect.py','neofetch','pwd','clear','history','echo hello','echo $(whoami)','sudo','top','uname -a','uptime','exit','ls -l','cd about','cd skills'];
 
-function clearTerminal() {
-    if (cmdHistoryEl) cmdHistoryEl.innerHTML = '';
-    if (terminalOutput) terminalOutput.style.display = 'none';
-}
-
-function toggleNeofetch() {
-    const neofetchArt = `
-<span class="n-green">      _                                              </span>
-<span class="n-green">     | |                                             </span>
-<span class="n-green">     | |__   __ _  _ __  _   _  ___  ___            </span>
-<span class="n-green">     | '_ \\ / _\` || '_ \\| | | |/ _ \\/ __|           </span>
-<span class="n-green">     | | | | (_| || |_) | |_| |  __/\\__ \\           </span>
-<span class="n-green">     |_| |_|\\__,_|| .__/ \\__, |\\___||___/           </span>
-<span class="n-green">                | |     __/ |                      </span>
-<span class="n-green">                |_|    |___/                       </span>
-
-<span class="n-white">  ┌─────────────────────────────────────────────┐</span>
-<span class="n-white">  │</span>  <span class="n-cyan">subham</span><span class="n-white">@</span><span class="n-green">portfolio</span>                        <span class="n-white">│</span>
-<span class="n-white">  ├─────────────────────────────────────────────┤</span>
-<span class="n-white">  │</span>  <span class="n-label">OS</span>         <span class="n-val">PortfolioOS 5.15.0 LTS</span>              <span class="n-white">│</span>
-<span class="n-white">  │</span>  <span class="n-label">Host</span>       <span class="n-val">subham.dev</span>                        <span class="n-white">│</span>
-<span class="n-white">  │</span>  <span class="n-label">Kernel</span>     <span class="n-val">x86_64 ML Neural Network</span>           <span class="n-white">│</span>
-<span class="n-white">  │</span>  <span class="n-label">Uptime</span>     <span class="n-val">since birth</span>                       <span class="n-white">│</span>
-<span class="n-white">  │</span>  <span class="n-label">Shell</span>     <span class="n-val">bash 5.2 + custom prompts</span>         <span class="n-white">│</span>
-<span class="n-white">  │</span>  <span class="n-label">Terminal</span>  <span class="n-val">Custom Portfolio Terminal</span>        <span class="n-white">│</span>
-<span class="n-white">  │</span>  <span class="n-label">CPU</span>        <span class="n-val">ML Brain @ 99.9% utilization</span>      <span class="n-white">│</span>
-<span class="n-white">  │</span>  <span class="n-label">Memory</span>    <span class="n-val">128GB / 128GB (thinking)</span>          <span class="n-white">│</span>
-<span class="n-white">  │</span>  <span class="n-label">Python</span>    <span class="n-val">3.12.0</span>                              <span class="n-white">│</span>
-<span class="n-white">  │</span>  <span class="n-label">ML Stack</span>  <span class="n-val">TensorFlow, PyTorch, Scikit</span>       <span class="n-white">│</span>
-<span class="n-white">  │</span>  <span class="n-label">Location</span>  <span class="n-val">India</span>                              <span class="n-white">│</span>
-<span class="n-white">  │</span>  <span class="n-label">Packages</span>  <span class="n-val">pip install everything</span>             <span class="n-white">│</span>
-<span class="n-white">  └─────────────────────────────────────────────┘</span>
-
-<span class="n-yellow">  ████</span>  <span class="n-yellow">████</span>  <span class="n-cyan">██</span>  <span class="n-cyan">██</span>  <span class="n-green">████</span>  <span class="n-white">██</span>    <span class="n-red">████</span>
-<span class="n-yellow">  ██</span>    <span class="n-yellow">█</span>    <span class="n-cyan">██</span>  <span class="n-cyan">██</span>  <span class="n-green">█</span>     <span class="n-white">██</span>      <span class="n-red">█</span>
-<span class="n-yellow">  ████</span>  <span class="n-yellow">██</span>    <span class="n-cyan">██</span>  <span class="n-cyan">██</span>  <span class="n-green">███</span>   <span class="n-white">██</span>      <span class="n-red">███</span>
-`;
-
-    const histLine = document.createElement('div');
-    histLine.className = 'hist-line';
-    histLine.innerHTML = `<pre class="neofetch-output">${neofetchArt}</pre>`;
-    cmdHistoryEl.appendChild(histLine);
-    cmdHistoryEl.scrollIntoView({ behavior: 'smooth', block: 'end' });
-}
-
-function executeCommand(cmd) {
-    if (!cmd.trim()) return;
-
-    cmdHistory.push(cmd);
-    historyIndex = cmdHistory.length;
-
-    const cmdLower = cmd.toLowerCase().trim();
-
-    let output = '';
-
-    switch (cmdLower) {
-        case 'help':
-            output = Object.entries(COMMANDS).map(([c, d]) => 
-                `  <span class="cmd-match">${c.padEnd(35)}</span><span class="cmd-desc">- ${d}</span>`
-            ).join('\n');
-            appendOutput(cmd, output);
-            return;
-
-        case 'whoami':
-            output = '<span class="n-cyan">subham</span> — CS Student, ML Enthusiast, Python Developer';
-            break;
-
-        case 'date':
-            output = new Date().toLocaleString('en-US', { 
-                weekday: 'long', year: 'numeric', month: 'long', 
-                day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit'
-            });
-            break;
-
-        case 'ls':
-        case 'ls -la':
-            output = `
-  about.md        skills.json     projects/
-  experience.log  goals.md        updates.log
-  contact.json    certs/          README.md
-            `.trim();
-            break;
-
-        case 'ls projects':
-            output = `
-  drwxr-xr-x  ml-suite/         Multi-Model Prediction Suite
-  drwxr-xr-x  heart_predict.py  Heart Disease Prediction
-  drwxr-xr-x  cancer_detect.py   Cancer Detection
-  drwxr-xr-x  portfolio/        This website
-            `.trim();
-            break;
-
-        case 'cat about.md':
-        case 'cat skills.json':
-        case 'cat experience.log':
-        case 'cat goals.md':
-            window.location.href = '#about';
-            const tabMap = {
-                'cat about.md': 'skills',
-                'cat skills.json': 'skills',
-                'cat experience.log': 'exp',
-                'cat goals.md': 'goals'
-            };
-            const tab = tabMap[cmdLower];
-            setTimeout(() => {
-                const btn = document.querySelector(`[data-tab="${tab}"]`);
-                if (btn) btn.click();
-            }, 300);
-            output = `[viewing ${cmdLower.replace('cat ', '')}...]`;
-            break;
-
-        case 'cat updates.log':
-            window.location.href = '#updates';
-            output = '[viewing updates.log...]';
-            break;
-
-        case 'cat contact.json':
-            window.location.href = '#contact';
-            output = '[viewing contact.json...]';
-            break;
-
-        case 'cd ~':
-        case 'cd home':
-            window.location.href = '#home';
-            output = '[navigating to home...]';
-            break;
-
-        case 'cd about':
-            window.location.href = '#about';
-            output = '[navigating to about...]';
-            break;
-
-        case 'cd skills':
-            window.location.href = '#skills';
-            output = '[navigating to skills...]';
-            break;
-
-        case 'cd projects':
-            window.location.href = '#projects';
-            output = '[navigating to projects...]';
-            break;
-
-        case 'cd updates':
-            window.location.href = '#updates';
-            output = '[navigating to updates...]';
-            break;
-
-        case 'cd contact':
-            window.location.href = '#contact';
-            output = '[navigating to contact...]';
-            break;
-
-        case 'python ml-suite.py':
-        case 'python3 ml-suite.py':
-            window.location.href = '/system';
-            output = '[opening ml-suite.py...]';
-            break;
-
-        case 'python heart_predict.py':
-        case 'python3 heart_predict.py':
-            window.location.href = '/heart';
-            output = '[opening heart_predict.py...]';
-            break;
-
-        case 'python cancer_detect.py':
-        case 'python3 cancer_detect.py':
-            window.location.href = '/cancer';
-            output = '[opening cancer_detect.py...]';
-            break;
-
-        case 'neofetch':
-            toggleNeofetch();
-            return;
-
-        case 'uname -a':
-            output = 'PortfolioOS 5.15.0-sublime #1 SMP PREEMPT subham@portfolio x86_64 GNU/Linux';
-            break;
-
-        case 'uptime':
-            output = 'System uptime: ∞ (since birth)';
-            break;
-
-        case 'pwd':
-            output = '/home/subham/portfolio';
-            break;
-
-        case 'ls -la ~/projects':
-            output = `
-  total 42
-  drwxr-xr-x  ml-suite/         Multi-Model Prediction Suite
-  drwxr-xr-x  heart_predict.py  Heart Disease Prediction
-  drwxr-xr-x  cancer_detect.py   Cancer Detection
-  drwxr-xr-x  portfolio/        This website
-            `.trim();
-            break;
-
-        case 'mail lastw5232@gmail.com':
-            window.location.href = 'mailto:lastw5232@gmail.com';
-            output = '[opening mail client...]';
-            break;
-
-        case 'github itzsubham2006':
-        case 'gh itzsubham2006':
-            window.open('https://github.com/itzsubham2006', '_blank');
-            output = '[opening github.com/itzsubham2006...]';
-            break;
-
-        case 'linkedin subhampathak':
-            window.open('https://linkedin.com/in/subhampathak', '_blank');
-            output = '[opening linkedin...]';
-            break;
-
-        case 'clear':
-        case 'cls':
-            clearTerminal();
-            return;
-
-        case 'history':
-            output = cmdHistory.map((c, i) => `  ${String(i + 1).padStart(3)}  ${c}`).join('\n');
-            break;
-
-        case 'echo hello':
-            output = 'hello';
-            break;
-
-        case 'echo $(whoami)':
-            output = 'subham';
-            break;
-
-        case 'sudo':
-            output = '[sudo] password for subham: \n<span class="n-red">sudo: authentication failure</span>\n<span class="n-yellow">just kidding, you are already root here :)</span>';
-            break;
-
-        case 'man help':
-            output = 'No manual entry for help. But here you are!';
-            break;
-
-        case 'top':
-            output = `
-  PID   COMMAND          CPU%   MEM%
-  1     bash             0.0    0.1
-  2     python           45.2   12.3
-  3     thinking         99.9   89.7
-  4     learning         87.3   67.4
-  5     coffee           23.1   2.1
-            `.trim();
-            break;
-
-        case 'ps aux':
-            output = `
-  USER    PID   COMMAND
-  subham  1     bash - interactive
-  subham  2     python - ML/AI
-  subham  3     neofetch - display
-  subham  4     git - version control
-  subham  5     sleep - zzz
-            `.trim();
-            break;
-
-        case 'df -h':
-            output = `
-  Filesystem      Size  Used  Avail  Use%
-  /dev/brain      128G   64G    64G   50%
-  /dev/coding      50G    30G    20G   60%
-  /dev/creativity  99G    99G     0G  100%
-  /dev/coffee     1.5L  0.5L   1.0L   33%
-            `.trim();
-            break;
-
-        case 'free -h':
-            output = `
-                total        used        free      shared   buff/cache   available
-  Memory:        128Gi       96Gi       32Gi       2Gi        64Gi        30Gi
-  Swap:           0B          0B         0B
-            `.trim();
-            break;
-
-        case 'env':
-            output = `
-  USER=subham
-  HOME=/home/subham
-  SHELL=/bin/bash
-  PORTFOLIO=true
-  ML_ENGINEER=true
-  GENAI_MASTER=true
-  STATUS=building
-  COFFEE_LEVEL=low
-            `.trim();
-            break;
-
-        case 'exit':
-            output = '<span class="n-yellow">logout\nSession ended. Thanks for visiting!</span>';
-            setTimeout(() => {
-                cmdHistoryEl.innerHTML = '';
-                if (terminalOutput) terminalOutput.style.display = 'block';
-            }, 1500);
-            break;
-
-        default:
-            output = `<span class="n-red">bash: ${cmd}: command not found</span>\nType <span class="n-green">'help'</span> for available commands.`;
-    }
-
-    appendOutput(cmd, output);
-}
-
-if (cmdInput) {
-    cmdInput.addEventListener('input', (e) => {
-        showCmdHint(e.target.value);
-    });
-
-    cmdInput.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
-            executeCommand(cmdInput.value);
-            cmdInput.value = '';
-            cmdHint.classList.remove('show');
-        } else if (e.key === 'Tab') {
-            e.preventDefault();
-            const partial = cmdInput.value;
-            const match = Object.keys(COMMANDS).find(c => c.startsWith(partial));
-            if (match) cmdInput.value = match;
-            showCmdHint(cmdInput.value);
-        } else if (e.key === 'ArrowUp') {
-            e.preventDefault();
-            if (historyIndex > 0) {
-                historyIndex--;
-                cmdInput.value = cmdHistory[historyIndex] || '';
-            }
-        } else if (e.key === 'ArrowDown') {
-            e.preventDefault();
-            if (historyIndex < cmdHistory.length - 1) {
-                historyIndex++;
-                cmdInput.value = cmdHistory[historyIndex] || '';
-            } else {
-                historyIndex = cmdHistory.length;
+    if (cmdInput) {
+        cmdInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                exec(cmdInput.value);
                 cmdInput.value = '';
+                if (cmdHint) cmdHint.classList.remove('show');
+            } else if (e.key === 'Tab') {
+                e.preventDefault();
+                var p = cmdInput.value;
+                for (var i = 0; i < cmdKeys.length; i++) {
+                    if (cmdKeys[i].startsWith(p) && cmdKeys[i] !== p) {
+                        cmdInput.value = cmdKeys[i]; break;
+                    }
+                }
+                if (cmdHint) cmdHint.classList.remove('show');
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                if (historyIndex > 0) { historyIndex--; cmdInput.value = cmdHistory[historyIndex] || ''; }
+            } else if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                if (historyIndex < cmdHistory.length - 1) { historyIndex++; cmdInput.value = cmdHistory[historyIndex] || ''; }
+                else { historyIndex = cmdHistory.length; cmdInput.value = ''; }
+            } else if (e.key === 'Escape') {
+                if (keyboardHelp) keyboardHelp.classList.remove('show');
+                if (cmdHint) cmdHint.classList.remove('show');
             }
-        } else if (e.key === 'Escape') {
-            document.getElementById('keyboardHelp').classList.remove('show');
-            cmdHint.classList.remove('show');
-        }
-    });
-
-    cmdInput.focus();
-}
-
-document.addEventListener('keydown', (e) => {
-    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
-
-    const help = document.getElementById('keyboardHelp');
-
-    if (e.ctrlKey && e.key === 'l') {
-        e.preventDefault();
-        clearTerminal();
-        return;
-    }
-
-    switch (e.key) {
-        case '?':
-            help.classList.toggle('show');
-            break;
-        case 'h':
-            window.location.href = '#home';
-            break;
-        case 'a':
-            window.location.href = '#about';
-            break;
-        case 's':
-            window.location.href = '#skills';
-            break;
-        case 'p':
-            window.location.href = '#projects';
-            break;
-        case 'm':
-            window.location.href = '/system';
-            break;
-        case '/':
-            e.preventDefault();
-            cmdInput?.focus();
-            break;
-        case 'n':
-            toggleNeofetch();
-            break;
-        case 'Escape':
-            help.classList.remove('show');
-            cmdHint.classList.remove('show');
-            break;
-    }
-});
-
-document.getElementById('clearBtn')?.addEventListener('click', clearTerminal);
-document.getElementById('neofetchBtn')?.addEventListener('click', toggleNeofetch);
-document.getElementById('helpBtn')?.addEventListener('click', () => {
-    document.getElementById('keyboardHelp').classList.toggle('show');
-});
-
-document.querySelectorAll('[data-cmd]').forEach(el => {
-    el.addEventListener('mouseenter', () => {
-        if (cmdHint) {
-            cmdHint.classList.add('show');
-            cmdText.textContent = el.dataset.cmd;
-        }
-    });
-    el.addEventListener('mouseleave', () => {
-        if (cmdHint) cmdHint.classList.remove('show');
-    });
-});
-
-document.querySelectorAll('.qc-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-        if (cmdInput) {
-            cmdInput.value = btn.dataset.cmd;
-            cmdInput.focus();
-        }
-    });
-});
-
-const menuToggle = document.querySelector('.menu-toggle');
-const navLinks = document.querySelector('.nav-links');
-if (menuToggle && navLinks) {
-    menuToggle.addEventListener('click', () => {
-        menuToggle.classList.toggle('active');
-        navLinks.classList.toggle('active');
-    });
-    navLinks.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => {
-            menuToggle.classList.remove('active');
-            navLinks.classList.remove('active');
         });
-    });
-}
 
-document.querySelectorAll('.tab-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-        btn.classList.add('active');
-        const tab = document.getElementById(btn.dataset.tab);
-        if (tab) tab.classList.add('active');
-    });
-});
+        cmdInput.addEventListener('input', function() {
+            var v = cmdInput.value;
+            if (v && v.length > 0 && cmdHint && cmdText) {
+                var m = null;
+                for (var i = 0; i < cmdKeys.length; i++) {
+                    if (cmdKeys[i].startsWith(v) && cmdKeys[i] !== v) { m = cmdKeys[i]; break; }
+                }
+                if (m) { cmdHint.classList.add('show'); cmdText.textContent = m; }
+                else { cmdHint.classList.remove('show'); }
+            } else { if (cmdHint) cmdHint.classList.remove('show'); }
+        });
+    }
 
-document.querySelectorAll('.skill-card, .project-card, .blog-card, .achievement-card').forEach((card, i) => {
-    card.style.opacity = '0';
-    card.style.transform = 'translateY(8px)';
-    setTimeout(() => {
-        card.style.transition = 'opacity 0.3s, transform 0.3s, border-color 0.15s';
-        card.style.opacity = '1';
-        card.style.transform = 'translateY(0)';
-    }, 200 + (i * 50));
-});
+    document.addEventListener('keydown', function(e) {
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
 
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-        const t = document.querySelector(a.getAttribute('href'));
-        if (t) {
-            e.preventDefault();
-            t.scrollIntoView({ behavior: 'smooth' });
+        if (e.ctrlKey && e.key === 'l') { e.preventDefault(); clearTerminal(); return; }
+
+        switch (e.key) {
+            case '?': if (keyboardHelp) keyboardHelp.classList.toggle('show'); break;
+            case 'a': exec('cat about.md'); break;
+            case 's': exec('cat skills.json'); break;
+            case 'p': exec('ls'); break;
+            case 'm': window.location.href = '/system'; break;
+            case '/': e.preventDefault(); if (cmdInput) cmdInput.focus(); break;
+            case 'n': showNeofetch(); break;
+            case 'Escape': if (keyboardHelp) keyboardHelp.classList.remove('show'); if (cmdHint) cmdHint.classList.remove('show'); break;
         }
     });
-});
+
+    if (helpCloseBtn) {
+        helpCloseBtn.addEventListener('click', function() { if (keyboardHelp) keyboardHelp.classList.remove('show'); });
+    }
+
+    var hintEls = document.querySelectorAll('[data-cmd]');
+    for (var i = 0; i < hintEls.length; i++) {
+        (function(el) {
+            el.addEventListener('mouseenter', function() {
+                if (cmdHint && cmdText) { cmdHint.classList.add('show'); cmdText.textContent = el.getAttribute('data-cmd'); }
+            });
+            el.addEventListener('mouseleave', function() { if (cmdHint) cmdHint.classList.remove('show'); });
+        })(hintEls[i]);
+    }
+
+    var qcBtns = document.querySelectorAll('.qc-btn');
+    for (var i = 0; i < qcBtns.length; i++) {
+        (function(btn) {
+            btn.addEventListener('click', function() {
+                if (cmdInput) { cmdInput.value = btn.getAttribute('data-cmd'); cmdInput.focus(); }
+            });
+        })(qcBtns[i]);
+    }
+
+    var menuToggle = document.getElementById('menuToggle');
+    var navLinks = document.getElementById('navLinks');
+    if (menuToggle && navLinks) {
+        menuToggle.addEventListener('click', function() {
+            menuToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+        var nla = navLinks.querySelectorAll('a');
+        for (var i = 0; i < nla.length; i++) {
+            nla[i].addEventListener('click', function() {
+                menuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        }
+    }
+
+    var tabBtns = document.querySelectorAll('.tab-btn');
+    for (var i = 0; i < tabBtns.length; i++) {
+        (function(btn) {
+            btn.addEventListener('click', function() {
+                var all = document.querySelectorAll('.tab-btn');
+                for (var j = 0; j < all.length; j++) all[j].classList.remove('active');
+                var allC = document.querySelectorAll('.tab-content');
+                for (var j = 0; j < allC.length; j++) allC[j].classList.remove('active');
+                btn.classList.add('active');
+                var target = document.getElementById(btn.getAttribute('data-tab'));
+                if (target) target.classList.add('active');
+            });
+        })(tabBtns[i]);
+    }
+
+    var scrollLinks = document.querySelectorAll('a[href^="#"]');
+    for (var i = 0; i < scrollLinks.length; i++) {
+        (function(a) {
+            a.addEventListener('click', function(e) {
+                var t = document.querySelector(a.getAttribute('href'));
+                if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
+            });
+        })(scrollLinks[i]);
+    }
+
+    var animEls = document.querySelectorAll('.skill-card, .p-row');
+    for (var i = 0; i < animEls.length; i++) {
+        (function(el, idx) {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(6px)';
+            setTimeout(function() {
+                el.style.transition = 'opacity 0.25s, transform 0.25s';
+                el.style.opacity = '1';
+                el.style.transform = 'translateY(0)';
+            }, 150 + idx * 40);
+        })(animEls[i], i);
+    }
+
+    updatePrompt();
+})();

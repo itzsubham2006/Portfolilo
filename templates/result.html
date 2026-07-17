@@ -3,52 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>result</title>
+    <title>subham | result</title>
     <link rel="icon" type="image/png" href="/static/images/shub_logo.png">
     <link rel="stylesheet" href="/static/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <canvas id="neural-canvas"></canvas>
-    <div class="matrix-rain" id="matrix"></div>
 
     <nav class="navbar">
         <div class="nav-logo">
-            <span class="prompt">┌─[</span><span class="user">subham</span><span class="at">@</span><span class="host">portfolio</span><span class="prompt">]</span><span class="sep">─</span><span class="dir">~/ml-suite</span>
+            <span class="accent">subham</span>@portfolio:~/ml-suite
         </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="/">home</a></li>
+        </ul>
+        <div class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></div>
     </nav>
 
-    <section class="result-page">
-        <div class="result-box">
-            <div class="terminal-prompt-line" style="justify-content: center; margin-bottom: 1rem;">
-                <span class="prompt-user">subham</span><span class="at">@</span><span class="prompt-dir">ml-suite</span>
-                <span class="prompt-sym">$</span>
-                <span>./predict --model {{ model_name.lower().replace(' ', '_') }}</span>
-            </div>
-
-            <div class="terminal-output" style="margin-bottom: 1.5rem;">
-                <div class="output-line">
-                    <span class="num">></span>
-                    <span class="content"><span class="key">model</span> : <span class="val">{{ model_name }}</span></span>
+    <div class="sub-page" style="display:flex;align-items:center;justify-content:center;">
+        <div class="t-widget-lg" style="max-width:500px;">
+            <div class="tw-titlebar">
+                <div class="tw-dots">
+                    <div class="tw-dot r"></div>
+                    <div class="tw-dot y"></div>
+                    <div class="tw-dot g"></div>
                 </div>
-                <div class="output-line">
-                    <span class="num">></span>
-                    <span class="content"><span class="key">status</span> : <span class="highlight">COMPLETE</span></span>
-                </div>
-                <div class="output-line">
-                    <span class="num">></span>
-                    <span class="content"><span class="key">result</span> : </span>
+                <span class="ttl">subham@portfolio: ~/inference</span>
+            </div>
+            <div class="tw-menubar">
+                <span>File</span>
+                <span>Edit</span>
+                <span>View</span>
+                <span>Search</span>
+                <span>Terminal</span>
+                <span>Help</span>
+            </div>
+            <div class="tw-body">
+                <div class="result-box">
+                    <div class="tw-line" style="justify-content:center;margin-bottom:0.5rem;">
+                        <span class="p">[root@localhost <span style="color:#89dceb">ml-suite</span>]<span style="color:#ff6b6b;font-weight:700">#</span></span>
+                        <span class="t">./predict --model {{ model_name.lower().replace(' ', '_') }}</span>
+                    </div>
+                    <div class="tw-line"><span class="s">  </span><span class="t"><span style="color:#6c757d">loading model... ok</span></span></div>
+                    <div class="tw-line"><span class="s">  </span><span class="t"><span style="color:#c8f7a6">model</span>:  {{ model_name }}</span></div>
+                    <div class="tw-line"><span class="s">  </span><span class="t"><span style="color:#c8f7a6">status</span>: COMPLETE</span></div>
+                    <div class="tw-line" style="margin-bottom:1rem;"><span class="s">  </span><span class="t"><span style="color:#c8f7a6">result</span>:</span></div>
+
+                    <div class="result-text {{ 'safe' if 'Healthy' in prediction_text or 'Benign' in prediction_text else 'risk' }}">
+                        {{ prediction_text }}
+                    </div>
+
+                    <a href="/system" class="result-link">&lt; cd ../</a>
                 </div>
             </div>
-
-            <div class="result-text {{ 'safe' if 'Healthy' in prediction_text or 'Benign' in prediction_text else 'risk' }}">
-                {{ prediction_text }}
-            </div>
-
-            <a href="/system" class="btn btn-outline">
-                <span>&lt; cd ../</span>
-            </a>
         </div>
-    </section>
+    </div>
+
+    <script src="/static/js/script.js"></script>
 </body>
 </html>

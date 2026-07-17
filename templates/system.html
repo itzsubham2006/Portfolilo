@@ -3,71 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ml-suite</title>
+    <title>subham | ml-suite</title>
     <link rel="icon" type="image/png" href="/static/images/shub_logo.png">
     <link rel="stylesheet" href="/static/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <canvas id="neural-canvas"></canvas>
-    <div class="matrix-rain" id="matrix"></div>
 
     <nav class="navbar">
         <div class="nav-logo">
-            <span class="prompt">┌─[</span><span class="user">subham</span><span class="at">@</span><span class="host">portfolio</span><span class="prompt">]</span><span class="sep">─</span><span class="dir">~/ml-suite</span>
+            <span class="accent">subham</span>@portfolio:~/ml-suite
         </div>
-        <ul class="nav-links">
+        <ul class="nav-links" id="navLinks">
             <li><a href="/">home</a></li>
             <li><a href="/#projects">projects</a></li>
             <li><a href="/#contact">contact</a></li>
         </ul>
-        <div class="menu-toggle"><span></span><span></span><span></span></div>
+        <div class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></div>
     </nav>
 
-    <section class="system-page">
-        <div class="terminal-prompt-center">
-            <span class="user">subham</span><span class="at">@</span><span class="prompt-dir">portfolio</span><span>$</span> ls -la models/
-        </div>
-
-        <div class="system-header">
-            <h1>ML Prediction Suite</h1>
-            <p>Select a model for inference</p>
-        </div>
-
-        <div class="terminal-output" style="max-width: 600px; margin-bottom: 2rem;">
-            <div class="output-line">
-                <span class="num">1</span>
-                <span class="content"><span class="key">total</span> : <span class="val">2 models</span></span>
-            </div>
-            <div class="output-line">
-                <span class="num">2</span>
-                <span class="content"><span class="val">drwxr-xr-x</span> heart_model/ <span class="highlight">heart_disease_rf.pkl</span></span>
-            </div>
-            <div class="output-line">
-                <span class="num">3</span>
-                <span class="content"><span class="val">drwxr-xr-x</span> cancer_model/ <span class="highlight">cancer_detection_rf.pkl</span></span>
-            </div>
-        </div>
-
-        <div class="system-grid">
-            <div class="system-card">
-                <div class="system-icon" style="color: #ff6b6b;">
-                    <i class="fa-solid fa-heart-pulse"></i>
+    <div class="sub-page">
+        <div class="t-widget-lg">
+            <div class="tw-titlebar">
+                <div class="tw-dots">
+                    <div class="tw-dot r"></div>
+                    <div class="tw-dot y"></div>
+                    <div class="tw-dot g"></div>
                 </div>
-                <h2>Heart Disease</h2>
-                <p>Random Forest classifier. 13 features.</p>
-                <a href="/heart" class="btn btn-primary">python heart_predict.py <i class="fa-solid fa-arrow-right"></i></a>
+                <span class="ttl">subham@portfolio: ~/ml-suite</span>
             </div>
-            <div class="system-card">
-                <div class="system-icon" style="color: var(--green);">
-                    <i class="fa-solid fa-dna"></i>
+            <div class="tw-menubar">
+                <span>File</span>
+                <span>Edit</span>
+                <span>View</span>
+                <span>Search</span>
+                <span>Terminal</span>
+                <span>Help</span>
+            </div>
+            <div class="tw-body">
+                <div class="tw-line"><span class="p">[root@localhost <span style="color:#89dceb">ml-suite</span>]<span style="color:#ff6b6b;font-weight:700">#</span></span> <span class="t">ls -la models/</span></div>
+                <div class="tw-line" style="margin-bottom:1.25rem;"><span class="s">  </span><span class="t">
+total 2<br>
+drwxr-xr-x  root root  <span style="color:#89dceb">heart_model/</span>      <span style="color:#c8f7a6">heart_disease_rf.pkl</span><br>
+drwxr-xr-x  root root  <span style="color:#89dceb">cancer_model/</span>     <span style="color:#c8f7a6">cancer_detection_rf.pkl</span>
+                </span></div>
+
+                <div class="sub-page-header">
+                    <h1>ML Prediction Suite</h1>
+                    <p>Select a model for inference</p>
                 </div>
-                <h2>Cancer Detection</h2>
-                <p>Random Forest classifier. 12 features.</p>
-                <a href="/cancer" class="btn btn-primary">python cancer_detect.py <i class="fa-solid fa-arrow-right"></i></a>
+
+                <div class="system-grid">
+                    <div class="sys-card">
+                        <h2>Heart Disease</h2>
+                        <p>Random Forest classifier. 13 features.</p>
+                        <a href="/heart" class="sys-btn">python heart_predict.py &rarr;</a>
+                    </div>
+                    <div class="sys-card">
+                        <h2>Cancer Detection</h2>
+                        <p>Random Forest classifier. 12 features.</p>
+                        <a href="/cancer" class="sys-btn">python cancer_detect.py &rarr;</a>
+                    </div>
+                </div>
+
+                <div class="quick-cmds" style="margin-top:1.25rem;">
+                    <a href="/" class="qc-btn" style="text-decoration:none;">cd ../</a>
+                </div>
             </div>
         </div>
-    </section>
+    </div>
 
     <script src="/static/js/script.js"></script>
 </body>
