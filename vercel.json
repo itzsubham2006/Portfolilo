@@ -1,4 +1,14 @@
 {
+  "rewrites": [
+    { "source": "/about", "destination": "/about.html" },
+    { "source": "/skills", "destination": "/skills.html" },
+    { "source": "/projects", "destination": "/projects.html" },
+    { "source": "/terminal", "destination": "/terminal.html" },
+    { "source": "/contact", "destination": "/contact.html" },
+    { "source": "/system", "destination": "/system.html" },
+    { "source": "/heart", "destination": "/heart_disease.html" },
+    { "source": "/cancer", "destination": "/cancer.html" }
+  ],
   "headers": [
     {
       "source": "/(.*)",
