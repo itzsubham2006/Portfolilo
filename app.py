@@ -85,6 +85,26 @@ else:
 async def home():
     return render("index.html")
 
+@app.get("/about", response_class=HTMLResponse)
+async def about():
+    return render("about.html")
+
+@app.get("/skills", response_class=HTMLResponse)
+async def skills():
+    return render("skills.html")
+
+@app.get("/projects", response_class=HTMLResponse)
+async def projects():
+    return render("projects.html")
+
+@app.get("/terminal", response_class=HTMLResponse)
+async def terminal():
+    return render("terminal.html")
+
+@app.get("/contact", response_class=HTMLResponse)
+async def contact():
+    return render("contact.html")
+
 @app.get("/system", response_class=HTMLResponse)
 async def system():
     return render("system.html")

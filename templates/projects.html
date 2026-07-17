@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>subham | projects</title>
+    <link rel="icon" type="image/png" href="/static/images/shub_logo.png">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-logo">
+            <span class="accent">subham</span>@portfolio:~/projects
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="/">home</a></li>
+            <li><a href="/about">about</a></li>
+            <li><a href="/skills">skills</a></li>
+            <li><a href="/projects" class="active">projects</a></li>
+            <li><a href="/terminal">terminal</a></li>
+            <li><a href="/contact">contact</a></li>
+        </ul>
+        <div class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></div>
+    </nav>
+
+    <div class="sub-page">
+        <div class="t-widget-lg">
+            <div class="tw-titlebar">
+                <div class="tw-dots">
+                    <div class="tw-dot r"></div>
+                    <div class="tw-dot y"></div>
+                    <div class="tw-dot g"></div>
+                </div>
+                <span class="ttl">subham@portfolio: ~/projects</span>
+            </div>
+            <div class="tw-menubar">
+                <span>File</span><span>Edit</span><span>View</span><span>Search</span><span>Terminal</span><span>Help</span>
+            </div>
+            <div class="tw-body">
+                <div class="tw-line"><span class="p">[root@localhost <span style="color:#89dceb">projects</span>]<span style="color:#ff6b6b;font-weight:700">#</span></span> <span class="t">ls -la</span></div>
+                <div class="tw-line" style="margin-bottom:1rem;"><span class="s">  </span><span class="t">
+drwxr-xr-x  root root  <span style="color:#89dceb">.</span>
+drwxr-xr-x  root root  <span style="color:#89dceb">..</span>
+drwxr-xr-x  root root  <span style="color:#89dceb">ml-suite/</span>
+drwxr-xr-x  root root  <span style="color:#89dceb">portfolio/</span>
+drwxr-xr-x  root root  <span style="color:#89dceb">more/</span>
+                </span></div>
+
+                <div class="section-label"><span class="num">03.</span> projects/</div>
+                <h2 class="section-title">Projects</h2>
+
+                <div class="projects-list">
+                    <div class="p-row">
+                        <span class="marker">|--></span>
+                        <a href="/system" class="name">Multi-Model Prediction Suite</a>
+                        <span class="desc">ML platform with heart disease & cancer prediction models built with Scikit-learn and FastAPI.</span>
+                        <div class="tags"><span>python</span><span>ml</span><span>scikit-learn</span></div>
+                    </div>
+                    <div class="p-row">
+                        <span class="marker">|--></span>
+                        <a href="/" class="name">Portfolio Website</a>
+                        <span class="desc">Terminal-inspired portfolio built with FastAPI, raw Jinja2, and vanilla CSS/JS.</span>
+                        <div class="tags"><span>html</span><span>css</span><span>fastapi</span></div>
+                    </div>
+                    <div class="p-row">
+                        <span class="marker">|--></span>
+                        <span class="name" style="cursor:default;">More Projects</span>
+                        <span class="desc">Coming soon...</span>
+                        <div class="tags"><span>tbd</span></div>
+                    </div>
+                </div>
+
+                <h3 style="margin-top:2rem;font-size:14px;color:var(--fg-2);">ML Suite - Quick Access</h3>
+                <div class="system-grid" style="margin-top:1rem;">
+                    <div class="sys-card">
+                        <h2>Heart Disease</h2>
+                        <p>Random Forest classifier. 13 features.</p>
+                        <a href="/heart" class="sys-btn">python heart_predict.py &rarr;</a>
+                    </div>
+                    <div class="sys-card">
+                        <h2>Cancer Detection</h2>
+                        <p>Random Forest classifier. 12 features.</p>
+                        <a href="/cancer" class="sys-btn">python cancer_detect.py &rarr;</a>
+                    </div>
+                </div>
+
+                <div class="quick-cmds" style="margin-top:1.5rem;">
+                    <a href="/skills" class="qc-btn" style="text-decoration:none;">cd ../</a>
+                    <a href="/terminal" class="qc-btn" style="text-decoration:none;">cd terminal</a>
+                    <a href="/contact" class="qc-btn" style="text-decoration:none;">cd contact</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/script.js"></script>
+</body>
+</html>

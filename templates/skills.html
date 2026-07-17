@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>subham | skills</title>
+    <link rel="icon" type="image/png" href="/static/images/shub_logo.png">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-logo">
+            <span class="accent">subham</span>@portfolio:~/skills
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="/">home</a></li>
+            <li><a href="/about">about</a></li>
+            <li><a href="/skills" class="active">skills</a></li>
+            <li><a href="/projects">projects</a></li>
+            <li><a href="/terminal">terminal</a></li>
+            <li><a href="/contact">contact</a></li>
+        </ul>
+        <div class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></div>
+    </nav>
+
+    <div class="sub-page">
+        <div class="t-widget-lg">
+            <div class="tw-titlebar">
+                <div class="tw-dots">
+                    <div class="tw-dot r"></div>
+                    <div class="tw-dot y"></div>
+                    <div class="tw-dot g"></div>
+                </div>
+                <span class="ttl">subham@portfolio: ~/skills</span>
+            </div>
+            <div class="tw-menubar">
+                <span>File</span><span>Edit</span><span>View</span><span>Search</span><span>Terminal</span><span>Help</span>
+            </div>
+            <div class="tw-body">
+                <div class="tw-line"><span class="p">[root@localhost <span style="color:#89dceb">skills</span>]<span style="color:#ff6b6b;font-weight:700">#</span></span> <span class="t">cat stack.json</span></div>
+                <div class="tw-line" style="margin-bottom:1rem;"><span class="s">  </span><span class="t">{
+  "languages": ["Python", "JavaScript", "HTML", "CSS"],
+  "frameworks": ["TensorFlow", "PyTorch", "Scikit-learn", "FastAPI"],
+  "tools": ["Git", "Docker", "Linux", "Vim"]
+}</span></div>
+
+                <div class="section-label"><span class="num">02.</span> stack.json</div>
+                <h2 class="section-title">Skills & Tools</h2>
+
+                <div class="skills-grid">
+                    <div class="skill-card">
+                        <div class="skill-top">
+                            <i class="fa-brands fa-python skill-icon"></i>
+                            <span class="skill-name">Python</span>
+                        </div>
+                        <div class="skill-desc">NumPy, Pandas, TensorFlow, Scikit-learn</div>
+                        <div class="skill-bar"><div class="skill-progress" style="width:80%"></div></div>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-top">
+                            <span class="skill-icon">[*]</span>
+                            <span class="skill-name">Machine Learning</span>
+                        </div>
+                        <div class="skill-desc">Supervised, Unsupervised, Reinforcement</div>
+                        <div class="skill-bar"><div class="skill-progress" style="width:70%"></div></div>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-top">
+                            <span class="skill-icon">[~]</span>
+                            <span class="skill-name">Deep Learning</span>
+                        </div>
+                        <div class="skill-desc">CNNs, RNNs, Transformers, NLP</div>
+                        <div class="skill-bar"><div class="skill-progress" style="width:60%"></div></div>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-top">
+                            <span class="skill-icon">[#]</span>
+                            <span class="skill-name">GenAI & LLMs</span>
+                        </div>
+                        <div class="skill-desc">GPT, Prompt Engineering, AI Agents, RAG</div>
+                        <div class="skill-bar"><div class="skill-progress" style="width:65%"></div></div>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-top">
+                            <i class="fa-brands fa-html5 skill-icon"></i>
+                            <span class="skill-name">HTML & CSS</span>
+                        </div>
+                        <div class="skill-desc">Responsive Design, Flexbox, Grid</div>
+                        <div class="skill-bar"><div class="skill-progress" style="width:85%"></div></div>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-top">
+                            <i class="fa-brands fa-js skill-icon"></i>
+                            <span class="skill-name">JavaScript</span>
+                        </div>
+                        <div class="skill-desc">ES6+, DOM, Canvas API</div>
+                        <div class="skill-bar"><div class="skill-progress" style="width:75%"></div></div>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-top">
+                            <i class="fa-brands fa-react skill-icon"></i>
+                            <span class="skill-name">React</span>
+                        </div>
+                        <div class="skill-desc">Components, Hooks, State</div>
+                        <div class="skill-bar"><div class="skill-progress" style="width:55%"></div></div>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-top">
+                            <i class="fa-solid fa-terminal skill-icon"></i>
+                            <span class="skill-name">Dev Tools</span>
+                        </div>
+                        <div class="skill-desc">Git, Linux, Docker, Vim</div>
+                        <div class="skill-bar"><div class="skill-progress" style="width:75%"></div></div>
+                    </div>
+                </div>
+
+                <div class="quick-cmds" style="margin-top:1.5rem;">
+                    <a href="/about" class="qc-btn" style="text-decoration:none;">cd ../</a>
+                    <a href="/projects" class="qc-btn" style="text-decoration:none;">cd projects</a>
+                    <a href="/terminal" class="qc-btn" style="text-decoration:none;">cd terminal</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/script.js"></script>
+</body>
+</html>

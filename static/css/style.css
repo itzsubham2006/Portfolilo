@@ -16,7 +16,7 @@
     --cyan: #89dceb;
     --border: rgba(255,255,255,0.06);
     --border-2: rgba(255,255,255,0.1);
-    --font: sans-serif;
+    --font: 'Source Code Pro', 'Fira Code', 'Consolas', 'Courier New', monospace;
     --r: 6px;
     /* --tw-bg: #212529; */
     --tw-bg: #08090a;
@@ -37,8 +37,8 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
-a { color: inherit; text-decoration: none; }
-button { font-family: var(--font); cursor: pointer; }
+/* a { color: inherit; text-decoration: none; }
+button { font-family: var(--font); cursor: pointer; } */
 
 .navbar {
     position: fixed;
@@ -145,6 +145,23 @@ button { font-family: var(--font); cursor: pointer; }
     flex-wrap: wrap;
     margin-bottom: 2.5rem;
 }
+
+.hero-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+    margin-bottom: 2.5rem;
+    font-size: 13px;
+}
+.hero-links .hl {
+    color: var(--fg-2);
+    transition: color 0.12s;
+    padding: 0.2rem 0;
+}
+.hero-links .hl:hover { color: var(--accent); }
+.hero-links .hl::before { content: "> "; color: var(--accent); }
+.hero-links .hl-accent { color: var(--accent); }
+.hero-links .hl-accent:hover { color: var(--fg); }
 
 .btn {
     padding: 0.6rem 1.3rem;
