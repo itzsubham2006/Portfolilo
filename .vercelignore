@@ -1,0 +1,12 @@
+app.py
+requirements.txt
+runtime.txt
+data_sets/
+models/
+templates/
+static/
+venv/
+__pycache__/
+*.pyc
+*.pkl
+README.md
