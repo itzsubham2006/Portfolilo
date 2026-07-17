@@ -1,4 +1,4 @@
-const API_URL = 'https://YOUR_RENDER_URL.onrender.com';
+const API_URL = 'https://portfolilo-6.onrender.com';
 
 function submitForm(formId, endpoint, resultId) {
     var form = document.getElementById(formId);
