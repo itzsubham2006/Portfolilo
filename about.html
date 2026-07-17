@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>subham | about</title>
+    <link rel="icon" type="image/png" href="images/shub_logo.png">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-logo">
+            <span class="accent">me</span>@portfolio:~/about
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">home</a></li>
+            <li><a href="about.html" class="active">about</a></li>
+            <li><a href="skills.html">skills</a></li>
+            <li><a href="projects.html">projects</a></li>
+            <li><a href="terminal.html">terminal</a></li>
+            <li><a href="contact.html">contact</a></li>
+        </ul>
+        <div class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></div>
+    </nav>
+
+    <div class="sub-page">
+        <div class="t-widget-lg">
+            <div class="tw-titlebar">
+                <div class="tw-dots">
+                    <div class="tw-dot r"></div>
+                    <div class="tw-dot y"></div>
+                    <div class="tw-dot g"></div>
+                </div>
+                <span class="ttl">subham@portfolio: ~/about</span>
+            </div>
+            <div class="tw-menubar">
+                <!-- <span>File</span><span>Edit</span><span>View</span><span>Search</span><span>Terminal</span><span>Help</span> -->
+            </div>
+            <div class="tw-body">
+                <div class="section-label"><span class="num">01.</span> about.md</div>
+                <h2 class="section-title">About Me</h2>
+
+                <div class="about-grid">
+                    <div class="info-card">
+                        <div class="ic-title">system info</div>
+                        <div class="ic-row"><span class="ic-key">os</span><span class="ic-val">PortfolioOS</span></div>
+                        <div class="ic-row"><span class="ic-key">host</span><span class="ic-val">subham.dev</span></div>
+                        <div class="ic-row"><span class="ic-key">kernel</span><span class="ic-val">5.15.0</span></div>
+                        <div class="ic-row"><span class="ic-key">uptime</span><span class="ic-val">infinite</span></div>
+                        <div class="ic-row"><span class="ic-key">shell</span><span class="ic-val">bash 5.2</span></div>
+                    </div>
+                    <div>
+                        <p class="about-text">
+                            Computer Science student. <strong>AI/ML enthusiast.</strong>
+                            I build, break, and learn. Focused on machine learning, generative AI, and LLMs.
+                            Currently exploring autonomous AI agents and RAG systems.
+                        </p>
+                        <p class="about-text">
+                            Passionate about turning data into intelligent systems. I work with
+                            Python, TensorFlow, Scikit-learn, and FastAPI to build end-to-end
+                            ML solutions. Always exploring new frontiers in AI.
+                        </p>
+
+                        <div class="tabs">
+                            <button class="tab-btn active" data-tab="tab-skills">skills</button>
+                            <button class="tab-btn" data-tab="tab-exp">experience</button>
+                            <button class="tab-btn" data-tab="tab-goals">goals</button>
+                        </div>
+                        <div class="tab-content active" id="tab-skills">
+                            <ul>
+                                <li><span>AI/ML</span> Machine Learning, Deep Learning, NLP</li>
+                                <li><span>Python</span> NumPy, Pandas, TensorFlow, Scikit-learn</li>
+                                <li><span>GenAI</span> LLMs, Prompt Engineering, Langchain, RAG</li>
+                                <li><span>Web</span> HTML, CSS, JavaScript, FastAPI</li>
+                            </ul>
+                        </div>
+                        <div class="tab-content" id="tab-exp">
+                            <ul>
+                                <li><span>ML Projects</span> Heart Disease & Cancer Prediction</li>
+                                <li><span>Web Dev</span> Frontend Development, FastAPI Apps</li>
+                                <li><span>Open Source</span> Learning & Contributing</li>
+                            </ul>
+                        </div>
+                        <div class="tab-content" id="tab-goals">
+                            <ul>
+                                <li><span>ML Engineer</span> Build production ML systems</li>
+                                <li><span>GenAI Master</span> Master LLMs & AI Agents</li>
+                                <li><span>Contribute</span> Open source projects</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quick-cmds" style="margin-top:1.5rem;">
+                    <a href="index.html" class="qc-btn" style="text-decoration:none;">cd ../</a>
+                    <a href="skills.html" class="qc-btn" style="text-decoration:none;">cd skills</a>
+                    <a href="projects.html" class="qc-btn" style="text-decoration:none;">cd projects</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

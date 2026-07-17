@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>subham | terminal</title>
+    <link rel="icon" type="image/png" href="images/shub_logo.png">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-logo">
+            <span class="accent">me</span>@portfolio:~/terminal
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">home</a></li>
+            <li><a href="about.html">about</a></li>
+            <li><a href="skills.html">skills</a></li>
+            <li><a href="projects.html">projects</a></li>
+            <li><a href="terminal.html" class="active">terminal</a></li>
+            <li><a href="contact.html">contact</a></li>
+        </ul>
+        <div class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></div>
+    </nav>
+
+    <div class="sub-page">
+        <div class="t-widget-lg" id="termWidget">
+            <div class="tw-titlebar">
+                <div class="tw-dots">
+                    <div class="tw-dot r"></div>
+                    <div class="tw-dot y"></div>
+                    <div class="tw-dot g"></div>
+                </div>
+                <span class="ttl">me@portfolio: ~/terminal</span>
+            </div>
+            <div class="tw-menubar">
+                <!-- <span>File</span><span>Edit</span><span>View</span><span>Search</span><span>Terminal</span><span>Help</span> -->
+            </div>
+            <div class="tw-body" id="twBody">
+                <!-- <div class="section-label"><span class="num">04.</span> terminal</div> -->
+                <h2 class="section-title">Interactive Terminal</h2>
+                <p style="color:var(--fg-3);font-size:13px;margin-bottom:1rem;">Try: ls, cat about.md, help, whoami, hihifetch, clear</p>
+
+                <div class="tw-output" id="twOutput">
+                    <div class="tw-line"><span class="p">[subham@hehe]</span> <span class="t">type '<span class="green">help</span>' or press '<span class="yellow">?</span>' for commands</span></div>
+                </div>
+
+                <div class="tw-input-row">
+                    <span class="ip">[subham@hehe]</span>
+                    <input type="text" class="tw-input" id="cmdInput" placeholder="" autocomplete="off" spellcheck="false">
+                </div>
+
+                <div class="quick-cmds">
+                    <button class="qc-btn" data-cmd="ls">ls</button>
+                    <button class="qc-btn" data-cmd="cat about.md">cat about</button>
+                    <button class="qc-btn" data-cmd="help">help</button>
+                    <button class="qc-btn" data-cmd="whoami">whoami</button>
+                    <button class="qc-btn" data-cmd="hihifetch">hihifetch</button>
+                    <button class="qc-btn" data-cmd="clear">clear</button>
+                    <button class="qc-btn" data-cmd="history">history</button>
+                </div>
+
+                <div class="quick-cmds" style="margin-top:1rem;">
+                    <a href="projects.html" class="qc-btn" style="text-decoration:none;">cd ../</a>
+                    <a href="contact.html" class="qc-btn" style="text-decoration:none;">cd contact</a>
+                    <a href="index.html" class="qc-btn" style="text-decoration:none;">cd ~</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="cmd-suggestion" id="cmdHint">
+        <span class="cmd-label">TAB</span>
+        <span class="cmd-text" id="cmdText">autocomplete</span>
+    </div>
+
+    <div class="keyboard-help" id="keyboardHelp">
+        <div class="help-header">
+            <span class="help-title">keyboard shortcuts</span>
+            <button class="help-close" id="helpCloseBtn">x</button>
+        </div>
+        <div class="help-items">
+            <div class="help-item"><span class="hkey">?</span><span>toggle help</span></div>
+            <div class="help-item"><span class="hkey">a</span><span>cat about.md</span></div>
+            <div class="help-item"><span class="hkey">s</span><span>cat skills.json</span></div>
+            <div class="help-item"><span class="hkey">p</span><span>ls projects</span></div>
+            <div class="help-item"><span class="hkey">m</span><span>open ml-suite</span></div>
+            <div class="help-item"><span class="hkey">/</span><span>focus terminal</span></div>
+            <div class="help-item"><span class="hkey">Ctrl+L</span><span>clear terminal</span></div>
+            <div class="help-item"><span class="hkey">up/down</span><span>command history</span></div>
+            <div class="help-item"><span class="hkey">Tab</span><span>autocomplete</span></div>
+            <div class="help-item"><span class="hkey">Esc</span><span>close dialogs</span></div>
+            <div class="help-item"><span class="hkey">n</span><span>hihifetch</span></div>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

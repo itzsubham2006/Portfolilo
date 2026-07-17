@@ -1,21 +1,20 @@
-from fastapi import FastAPI, Form, Request
-from fastapi.responses import HTMLResponse
-from fastapi.staticfiles import StaticFiles
-from jinja2 import Environment, FileSystemLoader
+from fastapi import FastAPI, Form
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 import pickle
 import os
 import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
 
-app = FastAPI(title="Subham Portfolio")
+app = FastAPI(title="Subham Portfolio API")
 
-app.mount("/static", StaticFiles(directory="static"), name="static")
-
-jinja_env = Environment(loader=FileSystemLoader("templates"), cache_size=0)
-
-def render(template_name: str, **kwargs):
-    template = jinja_env.get_template(template_name)
-    return HTMLResponse(template.render(**kwargs))
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 if not os.path.exists("models"):
     os.makedirs("models")
@@ -62,7 +61,7 @@ def create_models():
 
     print("All models ready!")
 
-FORCE_RECREATE = True
+FORCE_RECREATE = False
 if FORCE_RECREATE or not os.path.exists("models/model.pkl") or not os.path.exists("models/model2.pkl"):
     create_models()
 
@@ -81,43 +80,7 @@ else:
                        'texture_se', 'radius_worst', 'texture_worst', 'perimeter_worst',
                        'area_worst', 'compactness_worst', 'concavity_worst', 'concave_points_worst']
 
-@app.get("/", response_class=HTMLResponse)
-async def home():
-    return render("index.html")
-
-@app.get("/about", response_class=HTMLResponse)
-async def about():
-    return render("about.html")
-
-@app.get("/skills", response_class=HTMLResponse)
-async def skills():
-    return render("skills.html")
-
-@app.get("/projects", response_class=HTMLResponse)
-async def projects():
-    return render("projects.html")
-
-@app.get("/terminal", response_class=HTMLResponse)
-async def terminal():
-    return render("terminal.html")
-
-@app.get("/contact", response_class=HTMLResponse)
-async def contact():
-    return render("contact.html")
-
-@app.get("/system", response_class=HTMLResponse)
-async def system():
-    return render("system.html")
-
-@app.get("/heart", response_class=HTMLResponse)
-async def heart():
-    return render("heart_disease.html")
-
-@app.get("/cancer", response_class=HTMLResponse)
-async def cancer():
-    return render("cancer.html")
-
-@app.post("/predict", response_class=HTMLResponse)
+@app.post("/predict")
 async def predict(
     age: float = Form(...),
     sex: float = Form(...),
@@ -138,12 +101,12 @@ async def predict(
 
     prediction = model.predict(user_input)[0]
     prob = model.predict_proba(user_input)[0]
-    confidence = max(prob) * 100
+    confidence = round(max(prob) * 100, 1)
 
-    result = f"Heart Disease Risk Detected! ({confidence:.1f}% confidence)" if prediction == 1 else f"Heart is Healthy ({confidence:.1f}% confidence)"
-    return render("result.html", prediction_text=result, model_name="Heart Disease")
+    result = "Heart Disease Risk Detected" if prediction == 1 else "Heart is Healthy"
+    return JSONResponse({"result": result, "confidence": confidence, "model_name": "Heart Disease"})
 
-@app.post("/predict2", response_class=HTMLResponse)
+@app.post("/predict2")
 async def predict2(
     radius_mean: float = Form(...),
     area_mean: float = Form(...),
@@ -165,10 +128,10 @@ async def predict2(
 
     prediction = model2.predict(user_input)[0]
     prob = model2.predict_proba(user_input)[0]
-    confidence = max(prob) * 100
+    confidence = round(max(prob) * 100, 1)
 
-    result = f"Malignant - Cancer Positive! ({confidence:.1f}% confidence)" if prediction == 1 else f"Benign - No Cancer ({confidence:.1f}% confidence)"
-    return render("result.html", prediction_text=result, model_name="Cancer")
+    result = "Malignant - Cancer Positive" if prediction == 1 else "Benign - No Cancer"
+    return JSONResponse({"result": result, "confidence": confidence, "model_name": "Cancer"})
 
 if __name__ == "__main__":
     import uvicorn

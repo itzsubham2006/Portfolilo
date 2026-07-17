@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>subham | heart_predict</title>
+    <link rel="icon" type="image/png" href="images/shub_logo.png">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-logo">
+            <span class="accent">me</span>@portfolio:~/ml-suite
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">home</a></li>
+            <li><a href="system.html">back</a></li>
+        </ul>
+        <div class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></div>
+    </nav>
+
+    <div class="sub-page">
+        <div class="t-widget-lg">
+            <div class="tw-titlebar">
+                <div class="tw-dots">
+                    <div class="tw-dot r"></div>
+                    <div class="tw-dot y"></div>
+                    <div class="tw-dot g"></div>
+                </div>
+                <span class="ttl">me@portfolio: ~/heart_predict.py</span>
+            </div>
+            <!-- <div class="tw-menubar">
+                <span>File</span>
+                <span>Edit</span>
+                <span>View</span>
+                <span>Search</span>
+                <span>Terminal</span>
+                <span>Help</span>
+            </div> -->
+            <div class="tw-body">
+                <!-- <div class="tw-line"><span class="p">[subham@hehe]</span> <span class="t">python heart_predict.py</span></div> -->
+                <!-- <div class="tw-line" style="margin-bottom:1rem;"><span class="s">  </span><span class="t"><span style="color:#6c757d">loading model heart_disease_rf.pkl... done</span></span></div> -->
+
+                <form id="heartForm" class="prediction-form">
+                    <div class="form-section">
+                        <div class="form-section-label">patient_info</div>
+                        <div class="input-grid">
+                            <div class="input-group">
+                                <label for="age">age</label>
+                                <input type="number" name="age" required min="1" max="120" placeholder="29">
+                            </div>
+                            <div class="input-group">
+                                <label for="sex">sex</label>
+                                <select name="sex" required>
+                                    <option value="">select...</option>
+                                    <option value="1">male (1)</option>
+                                    <option value="0">female (0)</option>
+                                </select>
+                            </div>
+                            <div class="input-group">
+                                <label for="cp">chest_pain_type</label>
+                                <select name="cp" required>
+                                    <option value="">select...</option>
+                                    <option value="0">typical (0)</option>
+                                    <option value="1">atypical (1)</option>
+                                    <option value="2">non-anginal (2)</option>
+                                    <option value="3">asymptomatic (3)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <div class="form-section-label">vitals</div>
+                        <div class="input-grid">
+                            <div class="input-group">
+                                <label for="trestbps">resting_bp (mmHg)</label>
+                                <input type="number" name="trestbps" required placeholder="120">
+                            </div>
+                            <div class="input-group">
+                                <label for="chol">cholesterol (mg/dl)</label>
+                                <input type="number" name="chol" required placeholder="200">
+                            </div>
+                            <div class="input-group">
+                                <label for="fbs">fasting_bs > 120</label>
+                                <select name="fbs" required>
+                                    <option value="">select...</option>
+                                    <option value="1">true (1)</option>
+                                    <option value="0">false (0)</option>
+                                </select>
+                            </div>
+                            <div class="input-group">
+                                <label for="restecg">resting_ecg</label>
+                                <select name="restecg" required>
+                                    <option value="">select...</option>
+                                    <option value="0">normal (0)</option>
+                                    <option value="1">abnormal (1)</option>
+                                    <option value="2">lv_hypertrophy (2)</option>
+                                </select>
+                            </div>
+                            <div class="input-group">
+                                <label for="thalach">max_heart_rate</label>
+                                <input type="number" name="thalach" required placeholder="150">
+                            </div>
+                            <div class="input-group">
+                                <label for="exang">exercise_angina</label>
+                                <select name="exang" required>
+                                    <option value="">select...</option>
+                                    <option value="1">yes (1)</option>
+                                    <option value="0">no (0)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <div class="form-section-label">stress_test</div>
+                        <div class="input-grid">
+                            <div class="input-group">
+                                <label for="oldpeak">st_depression</label>
+                                <input type="number" name="oldpeak" required step="0.1" placeholder="0.0">
+                            </div>
+                            <div class="input-group">
+                                <label for="slope">st_slope</label>
+                                <select name="slope" required>
+                                    <option value="">select...</option>
+                                    <option value="0">upsloping (0)</option>
+                                    <option value="1">flat (1)</option>
+                                    <option value="2">downsloping (2)</option>
+                                </select>
+                            </div>
+                            <div class="input-group">
+                                <label for="ca">num_vessels (0-3)</label>
+                                <input type="number" name="ca" required min="0" max="3" placeholder="0">
+                            </div>
+                            <div class="input-group">
+                                <label for="thal">thalassemia</label>
+                                <select name="thal" required>
+                                    <option value="">select...</option>
+                                    <option value="0">normal (0)</option>
+                                    <option value="1">fixed (1)</option>
+                                    <option value="2">reversible (2)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="predict-btn">./predict --model heart_disease_rf.pkl</button>
+                </form>
+                <div id="heartResult"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script>submitForm('heartForm', '/predict', 'heartResult');</script>
+    <script src="js/script.js"></script>
+</body>
+</html>

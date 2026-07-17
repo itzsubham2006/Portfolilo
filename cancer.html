@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>subham | cancer_detect</title>
+    <link rel="icon" type="image/png" href="images/shub_logo.png">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-logo">
+            <span class="accent">me</span>@portfolio:~/ml-suite
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">home</a></li>
+            <li><a href="system.html">back</a></li>
+        </ul>
+        <div class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></div>
+    </nav>
+
+    <div class="sub-page">
+        <div class="t-widget-lg">
+            <div class="tw-titlebar">
+                <div class="tw-dots">
+                    <div class="tw-dot r"></div>
+                    <div class="tw-dot y"></div>
+                    <div class="tw-dot g"></div>
+                </div>
+                <span class="ttl">subham@portfolio: ~/cancer_detect.py</span>
+            </div>
+            <!-- <div class="tw-menubar">
+                <span>File</span>
+                <span>Edit</span>
+                <span>View</span>
+                <span>Search</span>
+                <span>Terminal</span>
+                <span>Help</span>
+            </div> -->
+            <div class="tw-body">
+                <div class="tw-line"><span class="p">[subham@hehe]</span> <span class="t">python cancer_detect.py --mode interactive</span></div>
+                <div class="tw-line" style="margin-bottom:1rem;"><span class="s">  </span><span class="t"><span style="color:#6c757d">loading model cancer_detection_rf.pkl... done</span></span></div>
+
+                <form id="cancerForm" class="prediction-form">
+                    <div class="form-section">
+                        <div class="form-section-label">mean_values</div>
+                        <div class="input-grid">
+                            <div class="input-group">
+                                <label for="radius_mean">radius_mean</label>
+                                <input type="number" name="radius_mean" required placeholder="14.0" step="any">
+                            </div>
+                            <div class="input-group">
+                                <label for="area_mean">area_mean</label>
+                                <input type="number" name="area_mean" required placeholder="500" step="any">
+                            </div>
+                            <div class="input-group">
+                                <label for="concavity_mean">concavity_mean</label>
+                                <input type="number" name="concavity_mean" required placeholder="0.1" step="any">
+                            </div>
+                            <div class="input-group">
+                                <label for="concave_points_mean">concave_points_mean</label>
+                                <input type="number" name="concave_points_mean" required placeholder="0.05" step="any">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <div class="form-section-label">standard_error</div>
+                        <div class="input-grid">
+                            <div class="input-group">
+                                <label for="texture_se">texture_se</label>
+                                <input type="number" name="texture_se" required placeholder="1.0" step="any">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <div class="form-section-label">worst_values</div>
+                        <div class="input-grid">
+                            <div class="input-group">
+                                <label for="radius_worst">radius_worst</label>
+                                <input type="number" name="radius_worst" required placeholder="15.0" step="any">
+                            </div>
+                            <div class="input-group">
+                                <label for="texture_worst">texture_worst</label>
+                                <input type="number" name="texture_worst" required placeholder="20.0" step="any">
+                            </div>
+                            <div class="input-group">
+                                <label for="perimeter_worst">perimeter_worst</label>
+                                <input type="number" name="perimeter_worst" required placeholder="100" step="any">
+                            </div>
+                            <div class="input-group">
+                                <label for="area_worst">area_worst</label>
+                                <input type="number" name="area_worst" required placeholder="600" step="any">
+                            </div>
+                            <div class="input-group">
+                                <label for="compactness_worst">compactness_worst</label>
+                                <input type="number" name="compactness_worst" required placeholder="0.2" step="any">
+                            </div>
+                            <div class="input-group">
+                                <label for="concavity_worst">concavity_worst</label>
+                                <input type="number" name="concavity_worst" required placeholder="0.3" step="any">
+                            </div>
+                            <div class="input-group">
+                                <label for="concave_points_worst">concave_points_worst</label>
+                                <input type="number" name="concave_points_worst" required placeholder="0.1" step="any">
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="predict-btn">./predict --model cancer_detection_rf.pkl</button>
+                </form>
+                <div id="cancerResult"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script>submitForm('cancerForm', '/predict2', 'cancerResult');</script>
+    <script src="js/script.js"></script>
+</body>
+</html>
