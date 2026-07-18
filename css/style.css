@@ -291,6 +291,7 @@ button { font-family: var(--font); cursor: pointer; } */
 
 /* widget output */
 .tw-output { margin-bottom: 2px; }
+.tw-output pre { font-size: clamp(8px, calc(0.4rem + 0.6vw), 13px); overflow-x: auto; }
 .tw-output .green { color: var(--accent); }
 .tw-output .cyan { color: var(--cyan); }
 .tw-output .red { color: var(--red); }
@@ -834,4 +835,10 @@ footer .accent { color: var(--accent); }
     .sys-btn { font-size: 13px; padding: 0.4rem 0.8rem; }
     .input-group input, .input-group select { font-size: 14px; }
     .predict-btn { font-size: 14px; padding: 0.5rem 1rem; }
+}
+
+@media (max-width: 464px) {
+    .t-widget-lg .tw-body { padding: 0.4rem; }
+    .tw-line .s { min-width: 0.5em; }
+    .tw-line { gap: 0.25rem; }
 }

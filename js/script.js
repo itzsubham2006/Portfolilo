@@ -57,7 +57,27 @@
     function showHihifetch() {
         if (!twOutput) return;
 
-        var art = '<span style="color:#d4d4d4">      _                                              </span>\n' +
+        var compact = window.innerWidth < 465;
+        var art = compact
+? '<span style="color:#d4d4d4">      _                       </span>\n' +
+'<span style="color:#d4d4d4">     | |                      </span>\n' +
+'<span style="color:#d4d4d4">     | |__   __ _  _ __  _   _ </span>\n' +
+'<span style="color:#d4d4d4">     | \'_ \\ / _` || \'_ \\| | | |</span>\n' +
+'<span style="color:#d4d4d4">     | | | | (_| || |_) | |_| |</span>\n' +
+'<span style="color:#d4d4d4">     |_| |_|\\__,_|| .__/ \\__, |</span>\n' +
+'<span style="color:#d4d4d4">                | |     __/ | </span>\n' +
+'<span style="color:#d4d4d4">                |_|    |___/  </span>\n\n' +
+' +---------------------------+\n' +
+' | <span style="color:#89dceb">subham</span>@<span style="color:#d4d4d4">portfolio</span>           |\n' +
+' +---------------------------+\n' +
+' | OS   PortfolioOS 5.15.0   |\n' +
+' | Host subham.dev           |\n' +
+' | Kern x86_64 ML Neural Net |\n' +
+' | Py   3.12.0               |\n' +
+' | ML   TF, PyTorch, Scikit  |\n' +
+' | Loc  India                |\n' +
+' +---------------------------+'
+: '<span style="color:#d4d4d4">      _                                              </span>\n' +
 '<span style="color:#d4d4d4">     | |                                             </span>\n' +
 '<span style="color:#d4d4d4">     | |__   __ _  _ __  _   _  ___  ___            </span>\n' +
 '<span style="color:#d4d4d4">     | \'_ \\ / _` || \'_ \\| | | |/ _ \\/ __|           </span>\n' +
@@ -83,7 +103,7 @@
 
         var outLine = document.createElement('div');
         outLine.className = 'tw-line fade-in';
-        outLine.innerHTML = '<span class="s">  </span><pre style="margin:0;padding:0;font-size:12px;line-height:1.4;white-space:pre;color:#b0b0b0;font-family:inherit">' + art + '</pre>';
+        outLine.innerHTML = '<span class="s">  </span><pre style="margin:0;padding:0;line-height:1.4;white-space:pre;color:#b0b0b0;font-family:inherit">' + art + '</pre>';
         twOutput.appendChild(outLine);
 
         if (twBody) twBody.scrollTop = twBody.scrollHeight;
