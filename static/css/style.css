@@ -292,6 +292,11 @@ button { font-family: var(--font); cursor: pointer; } */
 /* widget output */
 .tw-output { margin-bottom: 2px; }
 .tw-output pre { font-size: clamp(8px, calc(0.4rem + 0.6vw), 13px); overflow-x: auto; }
+.hihifetch-compact { display: none; }
+@media (max-width: 464px) {
+    .hihifetch-full { display: none; }
+    .hihifetch-compact { display: inline; }
+}
 .tw-output .green { color: var(--accent); }
 .tw-output .cyan { color: var(--cyan); }
 .tw-output .red { color: var(--red); }
