@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap');
 
 :root {
     --bg: #2b2d31;
@@ -16,7 +16,7 @@
     --cyan: #89dceb;
     --border: rgba(255,255,255,0.06);
     --border-2: rgba(255,255,255,0.1);
-    --font: 'Source Code Pro', 'Fira Code', 'Consolas', 'Courier New', monospace;
+    --font: 'DejaVu Sans Mono', 'JetBrains Mono', monospace;
     --r: 6px;
     /* --tw-bg: #212529; */
     --tw-bg: #2d2e30;
@@ -447,13 +447,14 @@ button { font-family: var(--font); cursor: pointer; } */
 .p-row .name {
     font-size: 14px;
     font-weight: 500;
+    color: var(--cyan);
     text-decoration: underline;
     text-decoration-color: transparent;
     text-underline-offset: 3px;
     transition: all 0.15s;
     flex-shrink: 0;
 }
-.p-row .name:hover { color: var(--accent); text-decoration-color: var(--accent); }
+.p-row .name:hover { color: var(--fg); text-decoration-color: var(--fg); }
 .p-row .desc {
     color: var(--fg-3);
     font-size: 13px;
@@ -765,22 +766,72 @@ footer .accent { color: var(--accent); }
     .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
 
     .t-widget { max-width: 100%; }
-    .p-row { flex-wrap: wrap; }
-    .p-row .desc { white-space: normal; }
-    .p-row .tags { margin-left: 2.5rem; }
+    .p-row { flex-wrap: wrap; gap: 0.3rem; }
+    .p-row .desc { white-space: normal; font-size: 14px; width: 100%; }
+    .p-row .tags { margin-left: 0; }
+    .p-row .name { font-size: 15px; }
+    .hero-links { font-size: 14px; gap: 0.3rem 0.8rem; }
+    .hero-desc { font-size: 15px; }
+    .hero-prompt { font-size: 13px; }
+    .t-widget-lg .tw-body { font-size: 15px; }
+    .t-widget-lg .tw-titlebar .ttl { font-size: 12px; }
+    .skill-card .skill-name { font-size: 14px; }
+    .skill-desc { font-size: 13px; }
+    .info-card { font-size: 14px; }
+    .about-text { font-size: 15px; }
+    .contact-item p { font-size: 14px; }
+    .section-title { font-size: 1.3rem; }
+    .tabs { flex-wrap: wrap; }
+    .tab-btn { font-size: 13px; padding: 0.4rem 0.6rem; }
 }
 
 @media (max-width: 480px) {
     .hero h1 { font-size: 1.6rem; }
     .hero-btns { flex-direction: column; }
-    .btn { width: 100%; justify-content: center; }
+    .btn { width: 100%; justify-content: center; font-size: 14px; }
+    .hero { padding: 2rem 0.75rem; padding-top: calc(2rem + 50px); }
+    .s-wrap { padding: 0.5rem; }
+    .nav-logo { font-size: 13px; }
+    .nav-links a { font-size: 13px; }
     .quick-cmds { display: none; }
-    .skills-grid { grid-template-columns: 1fr; }
-    .sub-page { padding: calc(3rem + 50px) 1rem 2rem; }
+    .skills-grid { grid-template-columns: 1fr; gap: 0.5rem; }
+    .sub-page { padding: calc(2rem + 50px) 0.5rem 1.5rem; }
     .keyboard-help { min-width: 220px; }
-    .t-widget-lg .tw-body { max-height: none; min-height: auto; }
+    .t-widget-lg .tw-body { max-height: none; min-height: auto; padding: 0.75rem; }
     .t-widget-lg .tw-menubar { display: none; }
+    .t-widget-lg .tw-titlebar { height: 28px; padding: 0 8px; }
+    .t-widget-lg .tw-titlebar .ttl { font-size: 11px; }
     .tw-input { font-size: 16px; }
+    .tw-input-row { flex-wrap: nowrap; }
+    .tw-input-row .ip { font-size: 13px; white-space: nowrap; }
+    .skill-card { padding: 0.6rem; }
+    .skill-bar { height: 3px; }
+    .contact-list { max-width: 100%; }
+    .contact-item .ci-icon { width: 28px; height: 28px; font-size: 11px; }
+    .hero-links { font-size: 13px; gap: 0.2rem 0.6rem; }
+    .hero-links .hl { font-size: 13px; }
+    .hero-desc { font-size: 14px; }
+    .hero-prompt { font-size: 12px; }
+    .t-widget { max-width: 100%; }
+    .t-widget .tw-titlebar { height: 26px; }
+    .t-widget .tw-titlebar .ttl { font-size: 11px; }
+    .t-widget .tw-body { padding: 0.5rem; font-size: 13px; }
+    .p-row { padding: 0.5rem 0; }
+    .p-row .name { font-size: 14px; }
+    .p-row .desc { font-size: 13px; }
+    .p-row .marker { font-size: 13px; }
+    .p-row .tags span { font-size: 11px; }
+    .section-title { font-size: 1.2rem; margin-bottom: 1rem; }
     .tabs { flex-wrap: wrap; }
-    .tab-btn { font-size: 11px; padding: 0.4rem 0.6rem; }
+    .tab-btn { font-size: 12px; padding: 0.3rem 0.5rem; }
+    footer p { font-size: 12px; }
+    .t-widget-lg .tw-body { padding: 0.5rem; }
+    .tw-line { font-size: 14px; }
+    .skills-grid { grid-template-columns: 1fr; gap: 0.4rem; }
+    .sys-card { padding: 0.75rem; }
+    .sys-card h2 { font-size: 15px; }
+    .sys-card p { font-size: 13px; }
+    .sys-btn { font-size: 13px; padding: 0.4rem 0.8rem; }
+    .input-group input, .input-group select { font-size: 14px; }
+    .predict-btn { font-size: 14px; padding: 0.5rem 1rem; }
 }

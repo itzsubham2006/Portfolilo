@@ -23,7 +23,7 @@
     function updatePrompt() {
         var ips = document.querySelectorAll('.tw-input-row .ip');
         for (var i = 0; i < ips.length; i++) {
-            ips[i].innerHTML = pH(currentDir);
+            ips[i].innerHTML = pH(currentDir) + ' ';
         }
     }
 
