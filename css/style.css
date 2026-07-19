@@ -160,13 +160,13 @@ button { font-family: var(--font); cursor: pointer; } */
 }
 .hero-links .hl {
     color: var(--fg-2);
-    transition: color 0.12s;
+    transition: all 0.15s;
     padding: 0.2rem 0;
 }
-.hero-links .hl:hover { color: var(--accent); }
-.hero-links .hl::before { content: "> "; color: var(--accent); }
-.hero-links .hl-accent { color: var(--accent); }
-.hero-links .hl-accent:hover { color: var(--fg); }
+.hero-links .hl:hover { color: var(--accent); text-shadow: 0 0 12px rgba(200,247,166,0.15); }
+.hero-links .hl::before { content: "> "; color: var(--accent); transition: transform 0.15s; display: inline-block; }
+.hero-links .hl:hover::before { transform: scale(1.15); }
+.hero-links .hl-accent { }
 
 .btn {
     padding: 0.6rem 1.3rem;
@@ -776,7 +776,8 @@ footer .accent { color: var(--accent); }
     .p-row .desc { white-space: normal; font-size: 14px; width: 100%; }
     .p-row .tags { margin-left: 0; }
     .p-row .name { font-size: 15px; }
-    .hero-links { font-size: 14px; gap: 0.3rem 0.8rem; }
+    .hero-links { font-size: 16px; gap: 0.3rem 0.8rem; }
+    .hero-links .hl { font-size: 16px; }
     .hero-desc { font-size: 15px; }
     .hero-prompt { font-size: 13px; }
     .t-widget-lg .tw-body { font-size: 15px; }
@@ -814,8 +815,8 @@ footer .accent { color: var(--accent); }
     .skill-bar { height: 3px; }
     .contact-list { max-width: 100%; }
     .contact-item .ci-icon { width: 28px; height: 28px; font-size: 11px; }
-    .hero-links { font-size: 13px; gap: 0.2rem 0.6rem; }
-    .hero-links .hl { font-size: 13px; }
+    .hero-links { font-size: 16px; gap: 0.2rem 0.6rem; }
+    .hero-links .hl { font-size: 16px; }
     .hero-desc { font-size: 14px; }
     .hero-prompt { font-size: 12px; }
     .t-widget { max-width: 100%; }
